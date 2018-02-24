@@ -1,19 +1,19 @@
 # Site settings
 baseurl = "https://edugonzalm.netlify.com/"
 languageCode = "en"
-title = "site title"
+title = "Edu Gonzalo Almorox"
 theme = "hugo-theme-cactus-plus"
 googleAnalytics = "your_google_analytics_id"
 # Set the value to true if your site include CJK (Chinese, Japanese, and Korean languages) characters
 hasCJKLanguage = false
 
 [params]
-	author = "site_author"
-	description = "Site Description"
-	bio = "author biography"
+	author = "Edu Gonzalo Almorox"
+	description = ""
+	bio = "Economics | R"
 
 	twitter = "your_twitter_id"
-	facebook = "your_facebook_id"
+
 
 	enableRSS = true
 	enableToc = true
@@ -45,9 +45,9 @@ hasCJKLanguage = false
 
 	# Navigation links
 	home = ""
+	posts = ""
 	about = ""
 	archive = ""
-	subscribe = ""
 
 	olderPosts = ""
 	newerPosts = ""
@@ -63,7 +63,7 @@ hasCJKLanguage = false
 	share = ""
 
 	# 404 page
-	title404 = ""
+	title404 = "Sorry, the wrong place"
 	subtitle404 = ""
 
 	# Choose a font for the social icons in the footer. Either "mono-social" or "font-awesome"
@@ -74,6 +74,6 @@ hasCJKLanguage = false
 
 # Add additional social link entries underneath
 [social]
-	facebook-square = "https://www.facebook.com/nodejh"
-	twitter-square = "https://www.twitter.com/nodejh"
-	github-square = "https://www.github.com/nodejh"
+	linkedin-square = "https://www.linkedin.com/in/eduardo-gonzalo-almorox-5b8b4955/"
+	twitter-square = "https://twitter.com/EdudinGonzalo"
+	github-square = "https://github.com/edugonzaloalmorox"
