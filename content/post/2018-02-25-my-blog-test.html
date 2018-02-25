@@ -11,5 +11,18 @@ tags: []
 
 <div id="intro" class="section level1">
 <h1>Intro</h1>
-<p>This is a test</p>
+<p>This is a test where I am going to load a dataset with <code>import()</code> and explore it with <code>glimpse()</code></p>
+<pre class="r"><code>library(rio)
+social = import(&quot;data/adult_socialcare.csv&quot;)</code></pre>
+<p>I can summarise my data with summarise</p>
+<pre class="r"><code>library(tidyverse)
+
+social %&gt;% 
+  group_by(year) %&gt;%
+  mutate_at(vars(adult_sc), funs(as.numeric)) %&gt;%
+  summarise(min  =min(adult_sc),
+            max  = max(adult_sc)) %&gt;%
+  filter(!is.na(min)) %&gt;%
+  ggplot(., aes(year, min)) + geom_bar(stat = &quot;identity&quot;)</code></pre>
+<p><img src="/post/2018-02-25-my-blog-test_files/figure-html/unnamed-chunk-2-1.png" width="1152" /></p>
 </div>

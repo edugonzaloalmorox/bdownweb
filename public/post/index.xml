@@ -17,17 +17,9 @@
       <pubDate>Sun, 25 Feb 2018 00:00:00 +0000</pubDate>
       
       <guid>https://edugonzalm.netlify.com/post/my-blog-test/</guid>
-      <description>Intro This is a test
- </description>
-    </item>
-    
-    <item>
-      <title>my blog test</title>
-      <link>https://edugonzalm.netlify.com/post/my-blog-test/</link>
-      <pubDate>Sun, 25 Feb 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://edugonzalm.netlify.com/post/my-blog-test/</guid>
-      <description></description>
+      <description>Intro This is a test where I am going to load a dataset with import() and explore it with glimpse()
+library(rio) social = import(&amp;quot;data/adult_socialcare.csv&amp;quot;) I can summarise my data with summarise
+library(tidyverse) social %&amp;gt;% group_by(year) %&amp;gt;% mutate_at(vars(adult_sc), funs(as.numeric)) %&amp;gt;% summarise(min =min(adult_sc), max = max(adult_sc)) %&amp;gt;% filter(!is.na(min)) %&amp;gt;% ggplot(., aes(year, min)) + geom_bar(stat = &amp;quot;identity&amp;quot;)  </description>
     </item>
     
   </channel>

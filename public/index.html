@@ -81,23 +81,9 @@
                     my blog test
                     
                         
-                            <h2>Intro This is a test
- </h2>
-                        
-                    
-                </a>
-            </li>
-        
-    
-    
-        
-            <li>
-                <aside class="dates">Feb 25</aside>
-                <a href='https://edugonzalm.netlify.com/post/my-blog-test/'>
-                    my blog test
-                    
-                        
-                            <h2></h2>
+                            <h2>Intro This is a test where I am going to load a dataset with import() and explore it with glimpse()
+library(rio) social = import(&#34;data/adult_socialcare.csv&#34;) I can summarise my data with summarise
+library(tidyverse) social %&gt;% group_by(year) %&gt;% mutate_at(vars(adult_sc), funs(as.numeric)) %&gt;% summarise(min =min(adult_sc), max = max(adult_sc)) %&gt;% filter(!is.na(min)) %&gt;% ggplot(., aes(year, min)) &#43; geom_bar(stat = &#34;identity&#34;)  </h2>
                         
                     
                 </a>
