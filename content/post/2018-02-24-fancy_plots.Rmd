@@ -1,6 +1,6 @@
 ---
 title: "Plotly"
-author: "Frida Gomam"
+author: "Edu Gonzalo"
 date: 2018-02-25
 categories: ["R"]
 tags: ["R Markdown", "plotly", "regression"]
