@@ -7,7 +7,38 @@ categories: []
 tags: []
 ---
 
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(fig.width=12, fig.height=8,
+                      echo=FALSE, warning=FALSE, message=FALSE)
+```
+
 # Intro 
 
-This is a test 
+This is a test where I am going to load a dataset with `import()` and explore it with `glimpse()`
+
+```{r, echo = TRUE, include  =TRUE}
+library(rio)
+social = import("data/adult_socialcare.csv")
+```
+
+I can summarise my data with summarise 
+
+
+```{r, echo = TRUE, include  =TRUE}
+library(tidyverse)
+
+social %>% 
+  group_by(year) %>%
+  mutate_at(vars(adult_sc), funs(as.numeric)) %>%
+  summarise(min  =min(adult_sc),
+            max  = max(adult_sc)) %>%
+  filter(!is.na(min)) %>%
+  ggplot(., aes(year, min)) + geom_bar(stat = "identity")
+  
+
+```
+
+
+
+
 
