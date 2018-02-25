@@ -23,7 +23,7 @@ social_care = import("adult_socialcare.csv")
 glimpse(social_care)
 ```
 
-```{r, echo = TRUE, include = TRUE, message = FALSE}
+```{r, echo = TRUE, include = TRUE, message = FALSE, warning = FALSE}
 library(rio)
 library(tidyverse)
 library(knitr)
