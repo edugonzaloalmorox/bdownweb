@@ -27,3 +27,9 @@ The first [working paper](https://mpra.ub.uni-muenchen.de/81987/1/MPRA_paper_819
  
  Food and unhealthy environments: The case of England (with Heather Brown)
 
+#### _Other Projects_
+
+Course for introduction to R for social scientists: 
+
+- [Introduction](../images/s1.html)
+
