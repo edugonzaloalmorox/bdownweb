@@ -1,7 +1,7 @@
 ---
 title: "Hello Blogdown(land)"
 author: "Edu Gonzalo"
-date: 2018-02-15T21:13:14-05:00
+date: 2018-02-15
 categories: ["R"]
 tags: ["Hello world", "blogdown", "regression"]
 ---
@@ -12,7 +12,7 @@ knitr::opts_chunk$set(collapse = TRUE)
 
 # This blog
 
-It is intended to present interesting issues
+It is intended to present interesting issues. This is as data set
 
 
 ```{r, echo = TRUE, include = TRUE, message = FALSE}
@@ -21,5 +21,20 @@ library(tidyverse)
 
 social_care = import("adult_socialcare.csv")
 glimpse(social_care)
+```
+
+```{r, echo = TRUE, include = TRUE, message = FALSE}
+library(rio)
+library(tidyverse)
+library(knitr)
+
+social_care %>%
+  group_by(year) %>%
+  mutate_at(vars(adult_sc), funs(as.numeric)) %>%
+  summarise(mean = mean(adult_sc), 
+            min = min(adult_sc), 
+            max = max(adult_sc)) %>%
+  filter(!is.na(mean)) %>%
+  ggplot(., aes(year, mean)) + geom_bar(stat ="identity")
 ```
 
