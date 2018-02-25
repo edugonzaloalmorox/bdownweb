@@ -15,7 +15,7 @@ knitr::opts_chunk$set(collapse = TRUE)
 It is intended to present interesting issues
 
 
-```{r, echo = FALSE, include = TRUE, message = FALSE}
+```{r, echo = TRUE, include = TRUE, message = FALSE}
 library(rio)
 library(tidyverse)
 
