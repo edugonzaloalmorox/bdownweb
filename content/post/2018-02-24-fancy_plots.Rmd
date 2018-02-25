@@ -1,7 +1,7 @@
 ---
 title: "Plotly"
 author: "Edu Gonzalo"
-date: 2018-02-25
+date: 2018-02-15T21:13:14-05:00
 categories: ["R"]
 tags: ["R Markdown", "plotly", "regression"]
 ---
@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 This is a nice plot 
-```{r cars, include= TRUE, echo= TRUE, message = FALSE}
+```{r cars, include= TRUE, echo= TRUE, message = FALSE, warning = FALSE}
 
 library(plotly)
 ggiris <- qplot(Petal.Width, Sepal.Length, data = iris, color = Species)
