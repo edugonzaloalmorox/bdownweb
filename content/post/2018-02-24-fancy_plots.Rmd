@@ -12,17 +12,9 @@ knitr::opts_chunk$set(echo = TRUE)
 This is a nice plot 
 ```{r cars, include= TRUE, echo= TRUE}
 
-devtools::install_github("ropensci/plotly")
-devtools::install_github('hadley/ggplot2')
+library(plotly)
 
-set.seed(100)
-d <- diamonds[sample(nrow(diamonds), 1000), ]
-
-p <- ggplot(data = d, aes(x = carat, y = price)) +
-  geom_point(aes(text = paste("Clarity:", clarity)), size = 4) +
-  geom_smooth(aes(colour = cut, fill = cut)) + facet_wrap(~ cut)
-
-p <- ggplotly(p)
-p
+ggiris <- qplot(Petal.Width, Sepal.Length, data = iris, color = Species)
+ggplotly(ggiris)
 ```
 
