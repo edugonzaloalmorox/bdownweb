@@ -4,13 +4,13 @@ title = "About"
 hidden = true
 +++
 
-Welcome to my page. I am an applied economist based at [Newcastle University](http://www.ncl.ac.uk/business-school/). You can find more details of what I have done what I do in my [CV](../images/cv-edu_2018.pdf)
+Welcome to my page. I am a ESRC PhD researcher at [Newcastle University](http://www.ncl.ac.uk/business-school/). My primary research is based on the area of applied microeconomics.My main focus is on health economics problems. For more details of what I currently do please click on my [CV](../images/cv-edu_2018.pdf)
 
 ***
 
 ### _Research and PhD_
 
-My PhD analyses the market of long term care in England. I am using empirical methods for exploring factors that affect the provision and funding of these services. 
+My PhD analyses the market of long term care in England. I am using empirical methods to factors that affect the provision and funding of these services. 
 
 The first [working paper](https://mpra.ub.uni-muenchen.de/81987/1/MPRA_paper_81987.pdf) studies how high prices in the English housing market affects the provision of residential care. 
 ***
