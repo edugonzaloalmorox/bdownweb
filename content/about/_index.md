@@ -4,16 +4,11 @@ title = "About"
 hidden = true
 +++
 
-Welcome to my page. I am a ESRC PhD researcher at [Newcastle University](http://www.ncl.ac.uk/business-school/). My primary research is based on the area of applied microeconomics.My main focus is on health economics problems. For more details of what I currently do please click on my [CV](../images/cv-edu_2018.pdf)
+Welcome to my page. I am a ESRC PhD researcher at [Newcastle University](http://www.ncl.ac.uk/business-school/). My primary research is based on the area of applied microeconomics. My main focus is on health economics problems. My PhD analyses the market of long term care in England
+For more details of what I currently do please click on my [CV](../images/cv-edu_2018.pdf)
 
 ***
 
-### _Research and PhD_
-
-My PhD analyses the market of long term care in England. I am using empirical methods to factors that affect the provision and funding of these services. 
-
-The first [working paper](https://mpra.ub.uni-muenchen.de/81987/1/MPRA_paper_81987.pdf) studies how high prices in the English housing market affects the provision of residential care. 
-***
 
 ### _Publications_ 
 
@@ -23,13 +18,15 @@ The first [working paper](https://mpra.ub.uni-muenchen.de/81987/1/MPRA_paper_819
 
 ### _Working papers_
  
- Local budgets and the quality of care homes [with Nils Braakmann and John Wildman]
+ [The effect of house prices on the long-term care market: Evidence from England](../images/house_prices_carehomes_feb_2018.pdf)
+ 
+ Local budgets and the quality of care homes (with Nils Braakmann and John Wildman)
  
  Food and unhealthy environments: The case of England (with Heather Brown)
 
 #### _Other Projects_
 
-Course for introduction to R for social scientists: 
+[Workshop](https://github.com/edugonzaloalmorox/R-social-science) introducing R to social scientists of Durham and Newcastle University.
 
-- [Introduction](../images/s1.html)
+
 
