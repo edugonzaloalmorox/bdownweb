@@ -24,7 +24,9 @@ For more details of what I currently do please click on my [CV](../images/cv-edu
  
  Food and unhealthy environments: The case of England (with Heather Brown)
 
-#### _Other Projects_
+***
+
+### _Other Projects_
 
 [Workshop](https://github.com/edugonzaloalmorox/R-social-science) introducing R to social scientists of Durham and Newcastle University.
 
