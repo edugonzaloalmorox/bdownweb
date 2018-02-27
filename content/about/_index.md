@@ -4,8 +4,7 @@ title = "About"
 hidden = true
 +++
 
-Welcome to my page. I am a ESRC PhD researcher at [Newcastle University](http://www.ncl.ac.uk/business-school/). My primary research is based on the area of applied microeconomics. My main focus is on health economics problems. My PhD analyses the market of long term care in England
-For more details of what I currently do please click on my [CV](../images/cv-edu_2018.pdf)
+Welcome to my page. I am a ESRC PhD researcher in Economics at [Newcastle University](http://www.ncl.ac.uk/business-school/). My primary research is based on the area of applied microeconomics. My main focus is on health economics problems. My PhD analyses the market of long term care in England. Before my PhD I worked as a health economist at the [Institute of Health & Society](http://www.ncl.ac.uk/ihs/). For further details please click on my [CV](../images/cv-edu_2018.pdf)
 
 ***
 
