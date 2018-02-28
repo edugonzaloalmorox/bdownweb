@@ -14,7 +14,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 
 body {
-    line-height: 13px
+    line-height: 1
 }
 
 blockquote, q {
@@ -830,8 +830,8 @@ h2.month {
     color: #5694f1;
 }
 
-.fa.fa-car:hover {
-    color: #5694f1;
+.fa.fa-heart:hover {
+    color: #ff3356;
     transition: 0.7s ease-out;
     cursor: pointer;
 }
