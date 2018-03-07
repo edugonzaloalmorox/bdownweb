@@ -13,10 +13,9 @@
     
   
   
-  <meta name="twitter:title" content="my blog test"/>
-  <meta name="twitter:description" content="Intro This is a test where I am going to load a dataset with import() and explore it with glimpse()
-library(rio) social = import(&quot;data/adult_socialcare.csv&quot;) I can summarise my data with summarise
-library(tidyverse) social %&gt;% group_by(year) %&gt;% mutate_at(vars(adult_sc), funs(as.numeric)) %&gt;% summarise(min =min(adult_sc), max = max(adult_sc)) %&gt;% filter(!is.na(min)) %&gt;% ggplot(., aes(year, min)) &#43; geom_bar(stat = &quot;identity&quot;)  "/>
+  <meta name="twitter:title" content="Hello world in blogdown(land)"/>
+  <meta name="twitter:description" content="What is this about? After several attempts I am finally deploying a website. This has been a long journey of trial and error where I have two main sources: This post by Allison Presmanes and this video by John Muschelli.
+The website is built with R blogdown and Hugo, a static site generator. It is hosted and deployed in netlifly.com. The template is based on the minimal cactus plus theme."/>
   
     <meta name="twitter:site" content="@your_twitter_id"/>
   
@@ -32,7 +31,7 @@ library(tidyverse) social %&gt;% group_by(year) %&gt;% mutate_at(vars(adult_sc),
 		<meta name="author" content="Edu Gonzalo Almorox">
 		
 		<meta name="generator" content="Hugo 0.29" />
-		<title>my blog test &middot; Edu Gonzalo Almorox</title>
+		<title>Hello world in blogdown(land) &middot; Edu Gonzalo Almorox</title>
 		<link rel="shortcut icon" href="/images/favicon.ico">
 		<link rel="stylesheet" href="/css/style.css">
 		<link rel="stylesheet" href="/css/highlight.css">
@@ -70,13 +69,19 @@ library(tidyverse) social %&gt;% group_by(year) %&gt;% mutate_at(vars(adult_sc),
             <article>
                 <header>
                     <h1>
-                        my blog test
+                        Hello world in blogdown(land)
                     </h1>
                     <h2 class="headline">
                     Feb 25, 2018 00:00
-                    · 54 words
+                    · 82 words
                     · 1 minute read
                       <span class="tags">
+                      
+                      
+                          
+                              <a href="/tags/blogdown">blogdown</a>
+                          
+                      
                       
                       </span>
                     </h2>
@@ -85,29 +90,18 @@ library(tidyverse) social %&gt;% group_by(year) %&gt;% mutate_at(vars(adult_sc),
                   
                 
                 <section id="post-body">
-                    <div id="intro" class="section level1">
-<h1>Intro</h1>
-<p>This is a test where I am going to load a dataset with <code>import()</code> and explore it with <code>glimpse()</code></p>
-<pre class="r"><code>library(rio)
-social = import(&quot;data/adult_socialcare.csv&quot;)</code></pre>
-<p>I can summarise my data with summarise</p>
-<pre class="r"><code>library(tidyverse)
-
-social %&gt;% 
-  group_by(year) %&gt;%
-  mutate_at(vars(adult_sc), funs(as.numeric)) %&gt;%
-  summarise(min  =min(adult_sc),
-            max  = max(adult_sc)) %&gt;%
-  filter(!is.na(min)) %&gt;%
-  ggplot(., aes(year, min)) + geom_bar(stat = &quot;identity&quot;)</code></pre>
-<p><img src="/post/2018-02-25-my-blog-test_files/figure-html/unnamed-chunk-2-1.png" width="1152" /></p>
+                    <div id="what-is-this-about" class="section level2">
+<h2>What is this about?</h2>
+<p>After several attempts I am finally deploying a website. This has been a long journey of trial and error where I have two main sources: <a href="https://alison.rbind.io/post/up-and-running-with-blogdown/">This post</a> by Allison Presmanes and this <a href="https://www.youtube.com/watch?v=syWAKaj-4ck">video</a> by John Muschelli.</p>
+<p>The website is built with R <a href="https://github.com/rstudio/blogdown"><code>blogdown</code></a> and <a href="https://gohugo.io">Hugo</a>, a static site generator. It is hosted and deployed in <a href="https://www.netlify.com">netlifly.com</a>. The template is based on the minimal <a href="https://github.com/nodejh/hugo-theme-cactus-plus">cactus plus</a> theme.</p>
+<p>The code of this website and other projects is on my <a href="https://github.com/edugonzaloalmorox">Github</a>.</p>
 </div>
 
                 </section>
             </article>
 
             
-                <a class="twitter" href="https://twitter.com/intent/tweet?text=%2fpost%2fmy-blog-test%2f - my%20blog%20test by @your_twitter_id"><span class="icon-twitter"> tweet</span></a>
+                <a class="twitter" href="https://twitter.com/intent/tweet?text=%2fpost%2fmy-blog-test%2f - Hello%20world%20in%20blogdown%28land%29 by @your_twitter_id"><span class="icon-twitter"> tweet</span></a>
 
 <a class="facebook" href="#" onclick="
     window.open(

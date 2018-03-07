@@ -2,24 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>R on Edu Gonzalo Almorox</title>
-    <link>https://edugonzalm.netlify.com/categories/r/</link>
+    <link>/categories/r/</link>
     <description>Recent content in R on Edu Gonzalo Almorox</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 23 Jul 2015 21:13:14 -0500</lastBuildDate>
+    <lastBuildDate>Sun, 25 Feb 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://edugonzalm.netlify.com/categories/r/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Hello R Markdown</title>
-      <link>https://edugonzalm.netlify.com/post/2015-07-23-r-rmarkdown/</link>
-      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
+      <title>Hello world in blogdown(land)</title>
+      <link>/post/my-blog-test/</link>
+      <pubDate>Sun, 25 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://edugonzalm.netlify.com/post/2015-07-23-r-rmarkdown/</guid>
-      <description>R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-You can embed an R code chunk like this:
-summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</description>
+      <guid>/post/my-blog-test/</guid>
+      <description>What is this about? After several attempts I am finally deploying a website. This has been a long journey of trial and error where I have two main sources: This post by Allison Presmanes and this video by John Muschelli.
+The website is built with R blogdown and Hugo, a static site generator. It is hosted and deployed in netlifly.com. The template is based on the minimal cactus plus theme.</description>
     </item>
     
   </channel>

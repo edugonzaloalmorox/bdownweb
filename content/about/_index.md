@@ -4,7 +4,13 @@ title = "About"
 hidden = true
 +++
 
-Welcome to my page. I am a ESRC PhD researcher in Economics at [Newcastle University](http://www.ncl.ac.uk/business-school/). I am an applied economist with a focus on microeconomic questions specially related to health issues. In my PhD I am investigating the market of long term care services in England. Before my PhD I worked as a health economist at the [Institute of Health & Society](http://www.ncl.ac.uk/ihs/) and in the industry. For further details please click on my [CV](../images/cv-edu_2018.pdf)
+Welcome to my page. I am a ESRC PhD researcher in Economics at [Newcastle University](http://www.ncl.ac.uk/business-school/). I am an applied economist with a focus on microeconomic questions specially related to health issues. 
+
+In my PhD I am investigating the market of long term care services in England. I am interested in tools for open science and particularly [R](https://www.r-project.org).
+
+Before my PhD, I worked as a health economist at the [Institute of Health & Society](http://www.ncl.ac.uk/ihs/) and research economist for international companies in the financial industry. For further details please click on my [CV](../images/cv-edu_2018.pdf).
+
+In my free time I ride bikes and run in trails or roads or both. 
 
 ***
 
@@ -27,7 +33,9 @@ Welcome to my page. I am a ESRC PhD researcher in Economics at [Newcastle Univer
 
 ### _Other Projects_
 
-[Workshop](https://github.com/edugonzaloalmorox/R-social-science) introducing R to social scientists of Durham and Newcastle University.
+[Workshop](https://github.com/edugonzaloalmorox/R-social-science) introducing R to social scientists of Durham and Newcastle universities.
+
+
 
 
 

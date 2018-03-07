@@ -1,10 +1,10 @@
 ---
-title: my blog test
+title: Hello world in blogdown(land)
 author: Edu Gonzalo
-date: '2018-02-25'
+date: "2018-02-25"
 slug: my-blog-test
-categories: []
-tags: []
+categories: [R]
+tags: [blogdown]
 ---
 
 ```{r global_options, include=FALSE}
@@ -12,31 +12,17 @@ knitr::opts_chunk$set(fig.width=12, fig.height=8,
                       echo=FALSE, warning=FALSE, message=FALSE)
 ```
 
-# Intro 
+## What is this about?
 
-This is a test where I am going to load a dataset with `import()` and explore it with `glimpse()`
+After several attempts I am finally deploying a website. This has been a long journey of trial and error where I have two main sources: [This post](https://alison.rbind.io/post/up-and-running-with-blogdown/) by Allison Presmanes and this [video](https://www.youtube.com/watch?v=syWAKaj-4ck) by John Muschelli. 
 
-```{r, echo = TRUE, include  =TRUE}
-library(rio)
-social = import("data/adult_socialcare.csv")
-```
-
-I can summarise my data with summarise 
+The website is built with R [`blogdown`](https://github.com/rstudio/blogdown) and [Hugo](https://gohugo.io), a static site generator. It is hosted and deployed in [netlifly.com](https://www.netlify.com). The template is based on the minimal [cactus plus](https://github.com/nodejh/hugo-theme-cactus-plus) theme. 
 
 
-```{r, echo = TRUE, include  =TRUE}
-library(tidyverse)
+The code of this website and other projects is on my [Github](https://github.com/edugonzaloalmorox).  
 
-social %>% 
-  group_by(year) %>%
-  mutate_at(vars(adult_sc), funs(as.numeric)) %>%
-  summarise(min  =min(adult_sc),
-            max  = max(adult_sc)) %>%
-  filter(!is.na(min)) %>%
-  ggplot(., aes(year, min)) + geom_bar(stat = "identity")
-  
 
-```
+
 
 
 

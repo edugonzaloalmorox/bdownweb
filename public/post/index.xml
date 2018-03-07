@@ -12,14 +12,13 @@
     
     
     <item>
-      <title>my blog test</title>
+      <title>Hello world in blogdown(land)</title>
       <link>/post/my-blog-test/</link>
       <pubDate>Sun, 25 Feb 2018 00:00:00 +0000</pubDate>
       
       <guid>/post/my-blog-test/</guid>
-      <description>Intro This is a test where I am going to load a dataset with import() and explore it with glimpse()
-library(rio) social = import(&amp;quot;data/adult_socialcare.csv&amp;quot;) I can summarise my data with summarise
-library(tidyverse) social %&amp;gt;% group_by(year) %&amp;gt;% mutate_at(vars(adult_sc), funs(as.numeric)) %&amp;gt;% summarise(min =min(adult_sc), max = max(adult_sc)) %&amp;gt;% filter(!is.na(min)) %&amp;gt;% ggplot(., aes(year, min)) + geom_bar(stat = &amp;quot;identity&amp;quot;)  </description>
+      <description>What is this about? After several attempts I am finally deploying a website. This has been a long journey of trial and error where I have two main sources: This post by Allison Presmanes and this video by John Muschelli.
+The website is built with R blogdown and Hugo, a static site generator. It is hosted and deployed in netlifly.com. The template is based on the minimal cactus plus theme.</description>
     </item>
     
   </channel>
