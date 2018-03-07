@@ -10,7 +10,7 @@ In my PhD I am investigating the market of long term care services in England. I
 
 Before my PhD, I worked as a health economist at the [Institute of Health & Society](http://www.ncl.ac.uk/ihs/) and research economist for international companies in the financial industry. For further details please click on my [CV](../images/cv-edu_2018.pdf).
 
-In my free time I ride bikes and run in trails or roads or both. 
+In my free time I ride bikes, sometimes a [bit far](http://trackleaders.com/transconrace15i.php?name=72___Edu_Gonzalo). 
 
 ***
 
