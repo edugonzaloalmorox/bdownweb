@@ -1,29 +1,17 @@
 ---
 title: Hello world in blogdown(land)
 author: Edu Gonzalo
-date: '2018-02-25'
+date: "2018-02-25"
 slug: my-blog-test
-categories: []
-tags: []
+categories: [R]
+tags: [blogdown]
 ---
 
 
 
-<div id="what-is-this-about" class="section level1">
-<h1>What is this about?</h1>
-<p>After several attempts I am finally deploying a website. I</p>
-<p>his is a test where I am going to load a dataset with <code>import()</code> and explore it with <code>glimpse()</code></p>
-<pre class="r"><code>library(rio)
-social = import(&quot;data/adult_socialcare.csv&quot;)</code></pre>
-<p>I can summarise my data with summarise</p>
-<pre class="r"><code>library(tidyverse)
-
-social %&gt;% 
-  group_by(year) %&gt;%
-  mutate_at(vars(adult_sc), funs(as.numeric)) %&gt;%
-  summarise(min  =min(adult_sc),
-            max  = max(adult_sc)) %&gt;%
-  filter(!is.na(min)) %&gt;%
-  ggplot(., aes(year, min)) + geom_bar(stat = &quot;identity&quot;)</code></pre>
-<p><img src="/post/2018-02-25-my-blog-test_files/figure-html/unnamed-chunk-2-1.png" width="1152" /></p>
+<div id="what-is-this-about" class="section level2">
+<h2>What is this about?</h2>
+<p>After several attempts I am finally deploying a website. This has been a long journey of trial and error where I have two main sources: <a href="https://alison.rbind.io/post/up-and-running-with-blogdown/">This post</a> by Allison Presmanes and this <a href="https://www.youtube.com/watch?v=syWAKaj-4ck">video</a> by John Muschelli.</p>
+<p>The website is built with R <a href="https://github.com/rstudio/blogdown"><code>blogdown</code></a> and <a href="https://gohugo.io">Hugo</a>, a static site generator. It is hosted and deployed in <a href="https://www.netlify.com">netlifly.com</a>. The template is based on the minimal <a href="https://github.com/nodejh/hugo-theme-cactus-plus">cactus plus</a> theme.</p>
+<p>The code of this website and other projects is on my <a href="https://github.com/edugonzaloalmorox">Github</a>.</p>
 </div>
