@@ -6,7 +6,7 @@ hidden = true
 
 Welcome to my page. I am a ESRC PhD researcher in Economics at [Newcastle University](http://www.ncl.ac.uk/business-school/). I am an applied economist with a focus on microeconomic questions specially related to health issues. 
 
-In my PhD I am investigating the market of long term care services in England. I am also interested in elements associated with unhealthy behaviours and tools for open science. In particular [R](https://www.r-project.org) programming language. 
+In my PhD I am investigating the market of long term care services in England. I am also interested in elements associated with unhealthy behaviours and tools for open science that involve the use of data. In particular [R](https://www.r-project.org) programming language. 
 
 Before my PhD, I worked as a health economist at the [Institute of Health & Society](http://www.ncl.ac.uk/ihs/) and research economist for international companies in the financial industry. For further details please click on my [CV](../images/cv-edu_2018.pdf).
 
