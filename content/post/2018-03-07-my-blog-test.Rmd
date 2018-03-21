@@ -1,0 +1,159 @@
+---
+title: Bike accidents in Madrid
+author: ~
+date: '2018-03-07'
+slug: bike-accidents-madrid
+categories: []
+tags: []
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(fig.width=12, fig.height=8,
+                      echo=FALSE, warning=FALSE, message=FALSE)
+```
+
+
+As other cities in Europe, Madrid is becoming more bike friendly. At the same time, the city council is releasing more [open data](https://datos.madrid.es/portal/site/egob/) about several issues in the city. Here I look at the incidence of bike accidents in Madrid during each hour of the day. 
+
+
+```{r, echo= FALSE, include=TRUE, message=FALSE}
+
+library(rio)         # import data
+library(janitor)     # clean names and frequency
+library(dplyr)       # consistent data.frame operations
+library(tidyr)       # consistent data.frame cleaning
+library(lubridate)   # date manipulation
+library(ggplot2)     # plots
+library(ggthemes)    # has a clean theme for ggplot2
+library(viridis)     # best. color. palette. evar.
+library(stringr)     # strings
+library(forcats)     # factors 
+library(plotly)      # interactive
+library(kableExtra)  # for tables
+library(tibble)
+library(knitr)
+
+```
+
+## Load and clean data
+
+
+For this visualisation I use a unique dataset that is hosted directly on the [website](http://datos.madrid.es/egobfiles/MANUAL/300110/AccidentesBicicletas_2017.csv). I load the data with [`import`](https://cran.r-project.org/web/packages/rio/README.html) and standarise the name of the variables with [`clean_names`](https://cran.r-project.org/web/packages/janitor/README.html). This will ease the manipulation. I take a quick and look at how the data are with `glimpse`
+
+```{r, echo= TRUE, include=TRUE, message=FALSE}
+
+# load data and make variables cleaner
+ bicis =  import("http://datos.madrid.es/egobfiles/MANUAL/300110/AccidentesBicicletas_2017.csv", sep = ";")
+
+ bicis = clean_names(bicis)
+
+ glimpse(bicis)
+
+```
+
+ I am particularly interested in the dates (_fecha_) and hours (_tramo horario_). The purpose is to calculate the number of accidents that occur every day and every hour (_tramo_horario_). I use a combination of `group_by` and `n()` for calculating the counts.
+
+```{r, echo= TRUE, include=TRUE, message=FALSE}
+
+# calculate accidents for dates and hours
+
+bicis = bicis %>% 
+  mutate(fecha = gsub(" 0:00", "", fecha)) %>%
+  group_by(fecha) %>%
+  mutate(counts_date = n()) %>%
+  group_by(tramo_horario) %>%
+  mutate(accidents = n()) 
+
+```
+
+The hours are read as `character`. I recode them as a factor and set the levels for each hour starting at `00:00`. I also create a variable with the week day of the accident. I use `wday` from [`lubridate`](https://cran.r-project.org/web/packages/lubridate/lubridate.pdf)
+ 
+```{r, echo= TRUE, include=TRUE, message=FALSE}
+
+# reformat variables
+
+bicis$hours = factor(bicis$tramo_horario, c("DE 00:00 A 00:59", "DE 1:00 A 1:59", "DE 2:00 A 2:59",
+                             "DE 3:00 A 3:59","DE 4:00 A 4:59","DE 5:00 A 5:59", "DE 6:00 A 6:59",
+                             "DE 7:00 A 7:59", "DE 8:00 A 8:59",   "DE 9:00 A 9:59", 
+                             "10:00 A 10:59", "DE 11:00 A 11:59", "DE 12:00 A 12:59", "DE 13:00 A 13:59",
+"DE 14:00 A 14:59", "DE 15:00 A 15:59",  "DE 16:00 A 16:59", "DE 17:00 A 17:59", "DE 18:00 A 18:59", "DE 19:00 A 19:59",
+"DE 20:00 A 20:59", "DE 21:00 A 21:59",  "DE 22:00 A 22:59",  "DE 23:00 A 23:59"))
+
+bicis$hours = factor(bicis$hours, levels=rev(levels(bicis$hours)))
+
+bicis$date = as.Date(bicis$fecha, format="%d/%m/%Y")
+
+bicis = bicis %>%
+  mutate(week_day = wday(date, label = TRUE)) %>%
+  select(date, hours, week_day, everything())
+
+bicis %>% 
+  select(date, hours, week_day, counts_date, accidents) %>%
+  as.tibble()
+
+```
+
+## Prepare data for visualisation
+
+The next step is to create the dataset I will use for the visualisation. It will summarise the number of events per day and hour. 
+
+```{r, echo= TRUE, include=TRUE, message=FALSE}
+
+# accidents by hour and week day
+bicis_events = bicis %>%
+  group_by(hours, week_day) %>%
+  mutate(accidents = n()) %>% 
+  select(hours, week_day, accidents) %>%
+  unique()
+
+# total accidents by  
+bicis_event_total  = bicis_events %>%
+  group_by(hours, week_day) %>% 
+  summarise(accidents = sum(accidents))
+
+bicis_event_total %>% as.tibble()
+
+```
+
+## Visualisation
+
+For the visualisation I edit the names of some variables and create the plot with `geom_bar()`.
+
+```{r, echo= TRUE, include=TRUE, message=FALSE}
+
+# data edition
+ bicis_event_total %>% 
+   ungroup() %>% 
+  drop_na(hours) %>%
+   rename(Hour = hours, `Week day` = week_day) %>% 
+  
+  #plot 
+  ggplot(aes(x = Hour, y = accidents, fill = `Week day`)) +
+   scale_fill_viridis(discrete=TRUE) +
+   geom_bar(stat = "identity") +
+  coord_flip() +
+   labs(x=NULL, y=NULL,  title="Bike accidents Madrid (jan-oct 2017)")+
+   theme_tufte(base_family="Helvetica")+ 
+   theme(plot.title=element_text(hjust=0))+ 
+   theme(axis.ticks=element_blank())+
+   theme(axis.text=element_text(size=10))+
+   theme(legend.title=element_text(size=14))+
+   theme(legend.text=element_text(size=8))  -> plot 
+
+plot 
+
+```
+
+### Dynamic plot
+
+It is possible to make the plot dynamic transforming it as a [plotly](https://plot.ly/r/) object. `ggplot` is compatible with this type of objects using [`ggplotly`](https://www.rdocumentation.org/packages/plotly/versions/4.7.1/topics/ggplotly).
+
+```{r, echo= TRUE, include=TRUE, message=FALSE}
+
+# dynamic plot
+plotly_plot <- ggplotly(plot)
+plotly_plot
+
+
+```
+

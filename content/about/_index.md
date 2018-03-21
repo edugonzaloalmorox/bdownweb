@@ -4,11 +4,11 @@ title = "About"
 hidden = true
 +++
 
-Welcome to my page. I am a ESRC PhD researcher in Economics at [Newcastle University](http://www.ncl.ac.uk/business-school/). I am an applied economist with a focus on microeconomic questions specially related to health issues. 
+I am a ESRC PhD student in Economics at [Newcastle University](http://www.ncl.ac.uk/business-school/). I do applied economics with a focus on microeconomic questions specially related to health issues. 
 
-In my PhD I am investigating the market of long term care services in England. I am also interested in elements associated with unhealthy behaviours and tools for open science that involve the use of data. In particular [R](https://www.r-project.org) programming language. 
+In my PhD I am investigating the market of long term care services in England. I am also interested in elements associated with unhealthy behaviours and tools for open science that involve the use of data and computational methods. 
 
-Before my PhD, I worked as a health economist at the [Institute of Health & Society](http://www.ncl.ac.uk/ihs/) and research economist for international companies in the financial industry. For further details please click on my [CV](../images/cv-edu_2018.pdf).
+Before my PhD, I was a NIHR reserch methods fellow in the [Health Economics Group](https://research.ncl.ac.uk/healtheconomicsgroup/) at Newcastle University and prior to that I hold several positions as economists in the industry. For further details please click on my [CV](../images/cv-edu_2018.pdf).
 
 In my free time I ride bikes, sometimes [for a while](http://trackleaders.com/transconrace15i.php?name=72___Edu_Gonzalo). 
 

@@ -6,10 +6,20 @@
     <description>Recent content in Posts on Edu Gonzalo Almorox</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 25 Feb 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 07 Mar 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Bike accidents in Madrid</title>
+      <link>/post/bike-accidents-madrid/</link>
+      <pubDate>Wed, 07 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/bike-accidents-madrid/</guid>
+      <description>As other cities in Europe, Madrid is becoming more bike friendly. At the same time, the city council is releasing more open data about several issues in the city. Here I look at the incidence of bike accidents in Madrid during each hour of the day.
+Load and clean data For this visualisation I use a unique dataset that is hosted directly on the website.</description>
+    </item>
     
     <item>
       <title>Hello world in blogdown(land)</title>
