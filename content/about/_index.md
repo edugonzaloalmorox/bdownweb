@@ -27,6 +27,8 @@ In my free time I ride bikes, sometimes [for a while](http://trackleaders.com/tr
  
  Local budgets and the quality of care homes (with Nils Braakmann and John Wildman)
  
+ “The effect of care homes’ closures on the quality of nearby care homes”
+ 
  Food and unhealthy environments: The case of England (with Heather Brown)
 
 ***
