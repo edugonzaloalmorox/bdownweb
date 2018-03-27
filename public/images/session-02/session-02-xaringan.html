@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Quantitative social science with R</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Edu Gonzalo Almorox" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Quantitative social science with R
+## Get and manipulate data
+### Edu Gonzalo Almorox
+### 18/10/2017
+
+---
+
+
+exclude: true
+
+
+
+---
+
+# Outline
+
+.pull-left[1. Import data
+
+1. Types of datasets
+
+1. Manipulate data
+
+ 
+]
+
+.pull-right[
+
+&lt;figure&gt;&lt;img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTW-RXsNKw8mOlCLUu54hp1hMyo6dPIlXD4XiYiAjxBUSamo0y_"&gt;&lt;figcaption&gt;.  &lt;a href=""&gt;&lt;/a&gt;&lt;/figcaption&gt;&lt;/figure&gt;
+
+]
+---
+class: center, middle
+
+# Import data into R
+---
+## Getting data 
+
+-  There are two possible ways to input information: 
+
+     - **Manually**
+     
+     - **Import from somewhere**
+
+- The majority of the analyses consist of data created externally 
+
+    - Data are delivered in different formats
+    
+    - Important to understand how information is structured 
+    
+    
+---
+## Step 1: Get started
+
+The first commands consist of the following instructions intended to locate the project in the computer and load the set of functions needed for the analysis. 
+
+* Working directory
+
+```r
+# working directory
+setwd("~/Users/my-file/my_document") 
+```
+
+* Packages
+
+```r
+install.packages() # for installing packages 
+```
+
+* Library
+
+```r
+library() # for loading libraries
+```
+
+
+---
+## Step 2: Load your data 
+
+* Various packages and libraries that allow for this. 
+
+* Use depends on the type of data to be loaded
+
+| Function     | Package    | Data 
+|---------------|-----------| ------------------------
+| `read.csv()`  | `base`    | Comma separated values
+| `read.dta()`  | [`foreign`](https://cran.r-project.org/web/packages/foreign/foreign.pdf) | Stata files (before Stata 13)
+| `import()`    |  [`rio`](https://cran.r-project.org/web/packages/rio/rio.pdf)   | All types
+| `read_csv()`  |  [`readr`](https://cran.r-project.org/web/packages/readr/readr.pdf)  | Comma separated values
+| `read_xlsx()` |  [`readr`](https://cran.r-project.org/web/packages/readr/readr.pdf)  | Excel type
+| `read_excel()`| [`readxl`](https://cran.r-project.org/web/packages/readxl/readxl.pdf)  | Excel files
+| `read_xml()`  | [`xml2`](https://cran.r-project.org/web/packages/xml2/xml2.pdf)        | XML files
+
+
+---
+## Load data: read.csv
+
+
+
+
+---
+class: center, middle
+
+# Thanks!
+
+@EduGonzalo
+
+Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {window.dispatchEvent(new Event('resize'));});
+(function() {var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler"); if (!r) return; s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }"; d.head.appendChild(s);})();</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

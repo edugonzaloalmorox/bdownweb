@@ -38,6 +38,7 @@ In my free time I ride bikes, sometimes [for a while](http://trackleaders.com/tr
 [Workshop](https://github.com/edugonzaloalmorox/R-social-science) introducing R to social scientists of Durham and Newcastle universities.
 
 
+[slides](../images/session-01/session-01-xaringan.html)
 
 
 
