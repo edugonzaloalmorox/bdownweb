@@ -1,0 +1,2837 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		 
+			
+  
+    <meta name="twitter:card" content="summary"/>
+    
+      <meta name="twitter:image" content="/images/avatar.png" />
+    
+  
+  
+  <meta name="twitter:title" content="Quantitative social science with R"/>
+  <meta name="twitter:description" content="exclude: true
+Outline .pull-left[1. Import data
+ - .csv - .excel  Types of data
+ factors
+ strings
+ dates
+  Manipulate data
+ dplyr
+ tidyr
+   ]
+.pull-right[
+     ] class: center, middle
+ # Import data into R  Getting data  There are two possible ways to input information:
+ Manually
+ Import from somewhere
+  The majority of the analyses consist of data created externally"/>
+  
+    <meta name="twitter:site" content="@your_twitter_id"/>
+  
+  
+  
+  
+    <meta name="twitter:creator" content="@Edu Gonzalo Almorox"/>
+  
+
+
+
+		
+		<meta name="author" content="Edu Gonzalo Almorox">
+		
+		<meta name="generator" content="Hugo 0.29" />
+		<title>Quantitative social science with R &middot; Edu Gonzalo Almorox</title>
+		<link rel="shortcut icon" href="/images/favicon.ico">
+		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/highlight.css">
+
+		
+		<link rel="stylesheet" href="/css/font-awesome.min.css">
+		
+
+		
+		<link href="/index.xml" rel="alternate" type="application/rss+xml" title="Edu Gonzalo Almorox" />
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='/posts'>Archive</a>
+	<a href='/tags'>Tags</a>
+	<a href='/about'>About Me</a>
+
+	
+
+	
+	<a class="cta" href="/index.xml">Subscribe</a>
+	
+</nav>
+
+
+        <section id="wrapper" class="post">
+            <article>
+                <header>
+                    <h1>
+                        Quantitative social science with R
+                    </h1>
+                    <h2 class="headline">
+                    Jan 1, 0001 00:00
+                    · 17095 words
+                    · 81 minute read
+                      <span class="tags">
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                  
+                
+                <section id="post-body">
+                    <p>exclude: true</p>
+<hr />
+<div id="outline" class="section level1">
+<h1>Outline</h1>
+<p>.pull-left[1. Import data</p>
+<pre><code>  - .csv
+  
+  - .excel
+  </code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li><p>Types of data</p>
+<ul>
+<li><p>factors</p></li>
+<li><p>strings</p></li>
+<li><p>dates</p></li>
+</ul></li>
+<li><p>Manipulate data</p>
+<ul>
+<li><p>dplyr</p></li>
+<li><p>tidyr</p></li>
+</ul></li>
+</ol>
+<p>]</p>
+<p>.pull-right[</p>
+<figure>
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTW-RXsNKw8mOlCLUu54hp1hMyo6dPIlXD4XiYiAjxBUSamo0y_">
+<figcaption>
+<a href=""></a>
+</figcaption>
+</figure>
+<div id="section" class="section level2">
+<h2>]</h2>
+<p>class: center, middle</p>
+</div>
+<div id="import-data-into-r" class="section level2">
+<h2># Import data into R</h2>
+</div>
+<div id="getting-data" class="section level2">
+<h2>Getting data</h2>
+<ul>
+<li><p>There are two possible ways to input information:</p>
+<ul>
+<li><p><strong>Manually</strong></p></li>
+<li><p><strong>Import from somewhere</strong></p></li>
+</ul></li>
+<li><p>The majority of the analyses consist of data created externally</p>
+<ul>
+<li><p>Data are delivered in different <strong>formats</strong></p></li>
+<li><p>Important to understand how information is <strong>structured</strong></p></li>
+</ul></li>
+</ul>
+</div>
+<div id="step-2-load-your-data" class="section level2">
+<h2>Step 2: Load your data</h2>
+<ul>
+<li><p>Various packages and libraries that allow for this</p></li>
+<li><p>Use depends on the type of data to be loaded</p></li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Package</th>
+<th>Format</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>read.csv()</code></td>
+<td><code>base</code></td>
+<td>Comma separated values</td>
+</tr>
+<tr class="even">
+<td><code>read.dta()</code></td>
+<td><a href="https://cran.r-project.org/web/packages/foreign/foreign.pdf"><code>foreign</code></a></td>
+<td>Stata files</td>
+</tr>
+<tr class="odd">
+<td><code>import()</code></td>
+<td><a href="https://cran.r-project.org/web/packages/rio/rio.pdf"><code>rio</code></a></td>
+<td>All types</td>
+</tr>
+<tr class="even">
+<td><code>read_csv()</code></td>
+<td><a href="https://cran.r-project.org/web/packages/readr/readr.pdf"><code>readr</code></a></td>
+<td>Comma separated values</td>
+</tr>
+<tr class="odd">
+<td><code>read_xlsx()</code></td>
+<td><a href="https://cran.r-project.org/web/packages/readr/readr.pdf"><code>readr</code></a></td>
+<td>Excel type</td>
+</tr>
+<tr class="even">
+<td><code>read_excel()</code></td>
+<td><a href="https://cran.r-project.org/web/packages/readxl/readxl.pdf"><code>readxl</code></a></td>
+<td>Excel files</td>
+</tr>
+<tr class="odd">
+<td><code>read_xml()</code></td>
+<td><a href="https://cran.r-project.org/web/packages/xml2/xml2.pdf"><code>xml2</code></a></td>
+<td>XML files</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="load-data-csv-files" class="section level2">
+<h2>Load data: csv files</h2>
+<ul>
+<li>There are other functions: <code>import()</code>…</li>
+</ul>
+<pre class="r"><code># load data including working directory
+library(rio)
+my_df_import = import(&quot;data/data_intro_r.csv&quot;)
+
+head(my_df_import, 3)</code></pre>
+<pre><code>##   location.id location.region       date jsa.fem
+## 1 1-125058834 East of England 2010-10-01      55
+## 2 1-125058834 East of England 2010-12-21      55
+## 3 1-125058834 East of England       &lt;NA&gt;      55</code></pre>
+</div>
+<div id="load-data-excel-files" class="section level2">
+<h2>Load data: excel files</h2>
+<ul>
+<li><p>Excel files have been tedious to parse in R</p></li>
+<li><p><code>readxl</code> works very well for this</p></li>
+</ul>
+<pre class="r"><code># load data including working directory
+
+library(readxl)
+my_excel = read_excel(&quot;data/r_intro.xlsx&quot;)
+
+
+head(my_excel, 5)</code></pre>
+<pre><code>## # A tibble: 5 x 13
+##   `benefit payments… X__1  X__2  X__3  X__4  X__5  X__6  X__7  X__8  X__9 
+##   &lt;chr&gt;              &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
+## 1 ONS Crown Copyrig… &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## 2 &lt;NA&gt;               &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## 3 sex                Total &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## 4 item name          numb… &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## 5 age                Total &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## # ... with 3 more variables: X__10 &lt;chr&gt;, X__11 &lt;chr&gt;, X__12 &lt;chr&gt;</code></pre>
+</div>
+<div id="load-data-excel-files-1" class="section level2">
+<h2>Load data: excel files</h2>
+<ul>
+<li><p>Refine the information that can be loaded controlling for sheets, rows and columns</p>
+<ul>
+<li><strong>sheet position</strong></li>
+</ul></li>
+</ul>
+<pre class="r"><code># name of the sheet 
+library(readxl)
+my_excel = read_excel(&quot;data/r_intro.xlsx&quot;, sheet = 1)
+
+head(my_excel, 2)</code></pre>
+<pre><code>## # A tibble: 2 x 13
+##   `benefit payments… X__1  X__2  X__3  X__4  X__5  X__6  X__7  X__8  X__9 
+##   &lt;chr&gt;              &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
+## 1 ONS Crown Copyrig… &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## 2 &lt;NA&gt;               &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## # ... with 3 more variables: X__10 &lt;chr&gt;, X__11 &lt;chr&gt;, X__12 &lt;chr&gt;</code></pre>
+</div>
+<div id="load-data-excel-files-2" class="section level2">
+<h2>Load data: excel files</h2>
+<ul>
+<li><p>Refine the information that can be loaded controlling for sheets, rows and columns</p>
+<ul>
+<li><strong>columns</strong></li>
+</ul></li>
+</ul>
+<pre class="r"><code>library(readxl)
+
+# columns
+
+my_excel_clean_cols = read_excel(&quot;data/r_intro.xlsx&quot;, sheet = 1, cell_cols(&quot;C:L&quot;))
+
+head(my_excel_clean_cols, 3)</code></pre>
+<pre><code>## # A tibble: 3 x 10
+##   `August 2014` `November 2014` `February 2015` `May 2015` `August 2015`
+##           &lt;dbl&gt;           &lt;dbl&gt;           &lt;dbl&gt;      &lt;dbl&gt;         &lt;dbl&gt;
+## 1         2900.           2860.           2790.      2690.         2640.
+## 2         6210.           6150.           6010.      5760.         5670.
+## 3         4580.           4530.           4430.      4260.         4210.
+## # ... with 5 more variables: `November 2015` &lt;dbl&gt;, `February 2016` &lt;dbl&gt;,
+## #   `May 2016` &lt;dbl&gt;, `August 2016` &lt;dbl&gt;, `November 2016` &lt;dbl&gt;</code></pre>
+</div>
+<div id="exercise" class="section level2">
+<h2>Exercise</h2>
+<p>Load information corresponding to 2015</p>
+<pre><code>## # A tibble: 6 x 4
+##   `February 2015` `May 2015` `August 2015` `November 2015`
+##             &lt;dbl&gt;      &lt;dbl&gt;         &lt;dbl&gt;           &lt;dbl&gt;
+## 1           2790.      2690.         2640.           2600.
+## 2           6010.      5760.         5670.           5610.
+## 3           4430.      4260.         4210.           4170.
+## 4           4530.      4330.         4270.           4230.
+## 5           4950.      4740.         4670.           4600.
+## 6           1740.      1660.         1640.           1620.</code></pre>
+</div>
+<div id="data-types-factors" class="section level2">
+<h2>Data types: factors</h2>
+<ul>
+<li><p><a href="http://r4ds.had.co.nz/factors.html">Factors</a> refer to variables that represent different categories: gender, labour status, being treated or not, etc…</p></li>
+<li><p>What do we mean by categories?</p>
+<ul>
+<li><p>fixed and known set of possible values</p></li>
+<li><p>order in some cases</p></li>
+</ul></li>
+</ul>
+<div class="figure">
+<img src="figures/fig_factor.png" />
+
+</div>
+<hr />
+</div>
+<div id="data-types-factors-1" class="section level2">
+<h2>Data types: factors</h2>
+<pre><code>##   location.id location.region       date jsa.fem
+## 1 1-125058834 East of England 2010-10-01      55
+## 2 1-125058834 East of England 2010-12-21      55
+## 3 1-125058834 East of England       &lt;NA&gt;      55
+## 4 1-125058834 East of England       &lt;NA&gt;      55
+## 5 1-118532985 East of England 2010-10-01      40
+## 6 1-118532985 East of England 2011-01-06      40
+## 7 1-118532985 East of England       &lt;NA&gt;      40</code></pre>
+</div>
+<div id="data-types-factors-2" class="section level2">
+<h2>Data types: factors</h2>
+<ul>
+<li><p>How can we transform <code>characters</code> into <code>factors</code>?</p></li>
+<li><p>Base solution: combination of <code>$</code> and <code>as.factor()</code></p></li>
+</ul>
+<pre class="r"><code>my_data$location.id = as.factor(my_data$location.id)
+
+glimpse(my_data)</code></pre>
+<pre><code>## Observations: 97,416
+## Variables: 4
+## $ location.id     &lt;fct&gt; 1-125058834, 1-125058834, 1-125058834, 1-12505...
+## $ location.region &lt;chr&gt; &quot;East of England&quot;, &quot;East of England&quot;, &quot;East of...
+## $ date            &lt;date&gt; 2010-10-01, 2010-12-21, NA, NA, 2010-10-01, 2...
+## $ jsa.fem         &lt;int&gt; 55, 55, 55, 55, 40, 40, 40, 40, 35, 35, 35, 35...</code></pre>
+<ul>
+<li>We will see other alternatives further on</li>
+</ul>
+</div>
+<div id="data-types-factors-3" class="section level2">
+<h2>Data types: factors</h2>
+<ul>
+<li><p>Levels can be renamed</p></li>
+<li><p><em>Define “Unspecified” as “no_name”</em></p></li>
+</ul>
+<pre class="r"><code>library(forcats) 
+
+# transform into a factor
+my_data$location.region = as.factor(my_data$location.region)
+
+# get region levels
+regions = levels(my_data$location.region)
+
+fct_recode(regions, no_name = &quot;Unspecified&quot;)</code></pre>
+<pre><code>##  [1] East Midlands            East of England         
+##  [3] London                   North East              
+##  [5] North West               South East              
+##  [7] South West               no_name                 
+##  [9] West Midlands            Yorkshire and The Humber
+## 10 Levels: East Midlands East of England London North East ... Yorkshire and The Humber</code></pre>
+</div>
+<div id="exercise-1" class="section level2">
+<h2>Exercise</h2>
+<p>Create a variable called <code>regions.recoded</code> where “Unspecified” regions are recoded as “No Name”</p>
+<pre><code>##   location.id location.region       date jsa.fem regions.recoded
+## 1 1-125058834 East of England 2010-10-01      55 East of England
+## 2 1-125058834 East of England 2010-12-21      55 East of England
+## 3 1-125058834 East of England       &lt;NA&gt;      55 East of England
+## 4 1-125058834 East of England       &lt;NA&gt;      55 East of England
+## 5 1-118532985 East of England 2010-10-01      40 East of England
+## 6 1-118532985 East of England 2011-01-06      40 East of England</code></pre>
+<pre><code>## 
+##            East Midlands          East of England                   London 
+##                     9100                    10180                     9992 
+##               North East               North West               South East 
+##                     5560                    11508                    18412 
+##               South West                  No name            West Midlands 
+##                    12928                       16                    10532 
+## Yorkshire and The Humber 
+##                     9188</code></pre>
+</div>
+<div id="data-types-strings" class="section level2">
+<h2>Data types: strings</h2>
+<ul>
+<li><p>Text can be analysed as data</p></li>
+<li><p>Text data are becoming more frequent: tweets, reviews, news…</p></li>
+<li>Text may appear in your data
+<ul>
+<li><p>remove a given character in the names of your variables</p></li>
+<li><p>replace a given character in your data</p></li>
+<li><p>extact a given character in your data</p></li>
+</ul></li>
+</ul>
+</div>
+<div id="data-types-strings-1" class="section level2">
+<h2>Data types: strings</h2>
+<ul>
+<li><p>Create a new variable that includes a particular string to a variable - for example <code>&quot;region_&quot;</code></p></li>
+<li><p>Make it lower case</p></li>
+</ul>
+<pre class="r"><code>library(stringr)
+
+# transform and add the string
+
+my_data$new_region = str_c(&quot;region&quot;, my_data$location.region, sep = &quot;_&quot;)
+
+# make it lower
+
+my_data$new_region = tolower(my_data$new_region)
+
+head(my_data$new_region)</code></pre>
+<pre><code>## [1] &quot;region_east of england&quot; &quot;region_east of england&quot;
+## [3] &quot;region_east of england&quot; &quot;region_east of england&quot;
+## [5] &quot;region_east of england&quot; &quot;region_east of england&quot;</code></pre>
+</div>
+<div id="data-types-strings-2" class="section level2">
+<h2>Data types: strings</h2>
+<ul>
+<li>Extract <code>region_</code> from the variable <code>new_region</code></li>
+</ul>
+<pre class="r"><code>library(stringr)
+
+my_data$new_region2 = str_sub(my_data$new_region, 1, 7)
+
+head(my_data$new_region2, 10)</code></pre>
+<pre><code>##  [1] &quot;region_&quot; &quot;region_&quot; &quot;region_&quot; &quot;region_&quot; &quot;region_&quot; &quot;region_&quot; &quot;region_&quot;
+##  [8] &quot;region_&quot; &quot;region_&quot; &quot;region_&quot;</code></pre>
+<ul>
+<li>Drop <code>&quot;_&quot;</code> from <code>new_region</code> variable</li>
+</ul>
+<pre class="r"><code>library(stringr)
+
+my_data$new_region2 = gsub(&quot;_&quot;, &quot; &quot;, my_data$new_region)
+
+head(my_data$new_region2)</code></pre>
+<pre><code>## [1] &quot;region east of england&quot; &quot;region east of england&quot;
+## [3] &quot;region east of england&quot; &quot;region east of england&quot;
+## [5] &quot;region east of england&quot; &quot;region east of england&quot;</code></pre>
+<p>class: center, middle</p>
+</div>
+</div>
+<div id="types-of-data" class="section level1">
+<h1>Types of data</h1>
+<div id="dates-and-times" class="section level2">
+<h2>dates and times</h2>
+</div>
+<div id="data-types-dates" class="section level2">
+<h2>Data types: dates</h2>
+<ul>
+<li>Transform to date format: <code>mdy_hms()</code></li>
+</ul>
+<pre class="r"><code>library(lubridate)
+str(x)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    5 obs. of  3 variables:
+##  $ dates      : Factor w/ 4 levels &quot;01/14/92&quot;,&quot;02/01/92&quot;,..: 3 3 1 4 2
+##  $ times      : Factor w/ 5 levels &quot;01:03:30&quot;,&quot;16:56:26&quot;,..: 5 4 1 3 2
+##  $ dates_times: Factor w/ 5 levels &quot;01/14/92 01:03:30&quot;,..: 4 3 1 5 2</code></pre>
+<pre class="r"><code># transform to &quot;date format&quot; 
+
+x$new_datetime = mdy_hms(x$dates_times)
+str(x)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    5 obs. of  4 variables:
+##  $ dates       : Factor w/ 4 levels &quot;01/14/92&quot;,&quot;02/01/92&quot;,..: 3 3 1 4 2
+##  $ times       : Factor w/ 5 levels &quot;01:03:30&quot;,&quot;16:56:26&quot;,..: 5 4 1 3 2
+##  $ dates_times : Factor w/ 5 levels &quot;01/14/92 01:03:30&quot;,..: 4 3 1 5 2
+##  $ new_datetime: POSIXct, format: &quot;1992-02-27 23:03:20&quot; &quot;1992-02-27 22:29:56&quot; ...</code></pre>
+</div>
+<div id="data-types-dates-1" class="section level2">
+<h2>Data types: dates</h2>
+<ul>
+<li><p>Arithmetic operations</p>
+<ul>
+<li><p>what´s the average date and time?</p></li>
+<li><p>what are the max and min date and time?</p></li>
+</ul></li>
+</ul>
+<pre class="r"><code>library(lubridate)
+
+summary(x$new_datetime) </code></pre>
+<pre><code>##                  Min.               1st Qu.                Median 
+## &quot;1992-01-14 01:03:30&quot; &quot;1992-02-01 16:56:26&quot; &quot;1992-02-27 22:29:56&quot; 
+##                  Mean               3rd Qu.                  Max. 
+## &quot;1992-02-13 21:10:51&quot; &quot;1992-02-27 23:03:20&quot; &quot;1992-02-28 18:21:03&quot;</code></pre>
+</div>
+<div id="data-manipulation-dplyr" class="section level2">
+<h2>Data manipulation: dplyr</h2>
+<ul>
+<li><p><a href="https://cran.r-project.org/web/packages/dplyr/dplyr.pdf"><code>dplyr</code></a> is the backbone of the grammar for data manipulation</p></li>
+<li><p>Compatibility with the pipes: <a href="http://r4ds.had.co.nz/pipes.html"><code>%&gt;%</code></a></p></li>
+<li><p>Main functions associated with different tasks</p></li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>mutate()</td>
+<td>adds new variables that are functions of existing variables</td>
+</tr>
+<tr class="even">
+<td>select()</td>
+<td>picks variables based on their names.</td>
+</tr>
+<tr class="odd">
+<td>filter()</td>
+<td>picks cases based on their values.</td>
+</tr>
+<tr class="even">
+<td>summarise()</td>
+<td>reduces multiple values down to a single summary.</td>
+</tr>
+<tr class="odd">
+<td>arrange()</td>
+<td>changes the ordering of the rows.</td>
+</tr>
+</tbody>
+</table>
+<p><a href="http://dplyr.tidyverse.org/reference/index.html">Source: tidyverse</a></p>
+<hr />
+</div>
+<div id="data-manipulation-dplyr-1" class="section level2">
+<h2>Data manipulation: dplyr</h2>
+<ul>
+<li><p>Working example</p>
+<ul>
+<li>create a variable that reflects the level of female unemployment in the region of the location. Less than 30 claimants is below the average, 30-35 is in the average and more than 35 is above the average.</li>
+</ul></li>
+</ul>
+<pre class="r"><code>library(rio)
+library(dplyr)
+        
+my_data = import(&quot;data/data_intro_r.csv&quot;)
+
+my_data = my_data %&gt;% mutate(unemp_level = ifelse(jsa.fem &lt; 30, &quot;below&quot;, 
+                                  ifelse(jsa.fem &gt;= 30 &amp; jsa.fem &lt; 35, &quot;medium&quot;,
+                                  ifelse(jsa.fem &gt;=35, &quot;high&quot;, &quot;other&quot;))))
+
+head(my_data,4)</code></pre>
+<pre><code>##   location.id location.region       date jsa.fem unemp_level
+## 1 1-125058834 East of England 2010-10-01      55        high
+## 2 1-125058834 East of England 2010-12-21      55        high
+## 3 1-125058834 East of England       &lt;NA&gt;      55        high
+## 4 1-125058834 East of England       &lt;NA&gt;      55        high</code></pre>
+<hr />
+</div>
+<div id="data-manipulation-dplyr-2" class="section level2">
+<h2>Data manipulation: dplyr</h2>
+<ul>
+<li>Select locations in the South East and South West and order by date.</li>
+</ul>
+<pre class="r"><code>library(dplyr)
+        
+regions_south = c(&quot;South East&quot;, &quot;South West&quot;)
+
+my_data_south = my_data %&gt;%
+  filter(location.region %in% regions_south) %&gt;%
+  arrange(date)
+
+head(my_data_south,7)</code></pre>
+<pre><code>##   location.id location.region       date jsa.fem unemp_level
+## 1       RX229      South East 2010-04-01      10       below
+## 2       RX2Y5      South East 2010-04-01      25       below
+## 3       RXXDL      South East 2010-04-01      10       below
+## 4       RXXDM      South East 2010-04-01      10       below
+## 5       RXXY3      South East 2010-04-01      10       below
+## 6       RXXEC      South East 2010-04-01      30      medium
+## 7       RXXY2      South East 2010-04-01       5       below</code></pre>
+<hr />
+</div>
+<div id="data-manipulation-dplyr-3" class="section level2">
+<h2>Data manipulation: dplyr</h2>
+<ul>
+<li>What´s the average, max and min number of claimants in each region?</li>
+</ul>
+<pre class="r"><code>sum_jsa = my_data %&gt;%
+  group_by(location.region) %&gt;%
+  summarise(mean.jsa = mean(jsa.fem),
+            min.jsa = min(jsa.fem),
+            max.jsa = max(jsa.fem)) 
+
+sum_jsa</code></pre>
+<pre><code>## # A tibble: 10 x 4
+##    location.region          mean.jsa min.jsa max.jsa
+##    &lt;chr&gt;                       &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+##  1 East Midlands                38.5      0.    200.
+##  2 East of England              33.4      0.    250.
+##  3 London                       42.1      0.    160.
+##  4 North East                   51.7      0.    265.
+##  5 North West                   39.8      0.    320.
+##  6 South East                   26.2      0.    375.
+##  7 South West                   27.7      0.    210.
+##  8 Unspecified                  13.8      5.     25.
+##  9 West Midlands                44.0      0.    235.
+## 10 Yorkshire and The Humber     45.1      0.    270.</code></pre>
+</div>
+<div id="data-manipulation-dplyr-4" class="section level2">
+<h2>Data manipulation: dplyr</h2>
+<ul>
+<li>Change the types of variables</li>
+</ul>
+<pre class="r"><code>glimpse(my_data)</code></pre>
+<pre><code>## Observations: 97,416
+## Variables: 5
+## $ location.id     &lt;chr&gt; &quot;1-125058834&quot;, &quot;1-125058834&quot;, &quot;1-125058834&quot;, &quot;...
+## $ location.region &lt;chr&gt; &quot;East of England&quot;, &quot;East of England&quot;, &quot;East of...
+## $ date            &lt;chr&gt; &quot;2010-10-01&quot;, &quot;2010-12-21&quot;, NA, NA, &quot;2010-10-0...
+## $ jsa.fem         &lt;int&gt; 55, 55, 55, 55, 40, 40, 40, 40, 35, 35, 35, 35...
+## $ unemp_level     &lt;chr&gt; &quot;high&quot;, &quot;high&quot;, &quot;high&quot;, &quot;high&quot;, &quot;high&quot;, &quot;high&quot;...</code></pre>
+<ul>
+<li><code>location.region</code> and <code>unemp_level</code> are represent categories. <code>date</code> represents dates.</li>
+</ul>
+<pre class="r"><code>my_data =  my_data %&gt;%  
+  mutate_at(vars(location.region, unemp_level), funs(as.factor)) %&gt;%
+  mutate_at(vars(date), funs(as.Date))</code></pre>
+</div>
+<div id="data-manipulation-dplyr-5" class="section level2">
+<h2>Data manipulation: dplyr</h2>
+<ul>
+<li><code>dplyr</code> has functions for linking datasets</li>
+</ul>
+<table style="width:42%;">
+<colgroup>
+<col width="23%" />
+<col width="18%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>inner(join)</td>
+<td>return all rows from x where there are matching values in y, and all columns from x and y</td>
+</tr>
+<tr class="even">
+<td>left_join()</td>
+<td>return all rows from x, and all columns from x and y</td>
+</tr>
+<tr class="odd">
+<td>right_join()</td>
+<td>return all rows from y, and all columns from x and y</td>
+</tr>
+<tr class="even">
+<td>semi_join()</td>
+<td>return all rows from x where there are matching values in y, keeping just columns from x</td>
+</tr>
+<tr class="odd">
+<td>anti_join()</td>
+<td>return all rows from x where there are not matching values in y, keeping just columns from x</td>
+</tr>
+<tr class="even">
+<td>full_join()</td>
+<td>return all rows and all columns from both x and y</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="data-manipulation-dplyr-6" class="section level2">
+<h2>Data manipulation: dplyr</h2>
+<pre class="r"><code>glimpse(d1)</code></pre>
+<pre><code>## Observations: 326
+## Variables: 8
+## $ `Local Authority` &lt;chr&gt; &quot;Babergh&quot;, &quot;Basildon&quot;, &quot;Bedford&quot;, &quot;Braintree...
+## $ oslaua            &lt;chr&gt; &quot;E07000200&quot;, &quot;E07000066&quot;, &quot;E06000055&quot;, &quot;E070...
+## $ `All Ages`        &lt;int&gt; 88845, 180521, 163924, 149985, 133986, 75645...
+## $ `Aged 65-69`      &lt;int&gt; 6947, 9808, 8600, 9443, 9917, 4464, 9580, 51...
+## $ `Aged 70-74`      &lt;int&gt; 5045, 6816, 6223, 6461, 7249, 3174, 6988, 37...
+## $ `Aged 75-79`      &lt;int&gt; 3907, 5850, 5177, 4864, 5977, 2902, 5870, 33...
+## $ `Aged 80-84`      &lt;int&gt; 2856, 4493, 4000, 3561, 4358, 2368, 4361, 25...
+## $ `Aged 85+`        &lt;int&gt; 2961, 3844, 3910, 3886, 4225, 2361, 4315, 21...</code></pre>
+<pre class="r"><code>glimpse(d2)</code></pre>
+<pre><code>## Observations: 326
+## Variables: 6
+## $ `Local Authority` &lt;chr&gt; &quot;Babergh&quot;, &quot;Basildon&quot;, &quot;Bedford&quot;, &quot;Braintree...
+## $ code_la           &lt;chr&gt; &quot;E07000200&quot;, &quot;E07000066&quot;, &quot;E06000055&quot;, &quot;E070...
+## $ `2014`            &lt;int&gt; 88845, 180521, 163924, 149985, 133986, 75645...
+## $ `2015`            &lt;int&gt; 88990, 181859, 166167, 150947, 134887, 76169...
+## $ `2016`            &lt;int&gt; 89237, 183308, 168303, 151970, 135832, 76749...
+## $ `2017`            &lt;int&gt; 89549, 184789, 170394, 153030, 136783, 77357...</code></pre>
+</div>
+<div id="data-manipulation-dplyr-7" class="section level2">
+<h2>Data manipulation: dplyr</h2>
+<ul>
+<li>Add information from <code>d2</code> to <code>d1</code></li>
+</ul>
+<pre class="r"><code>new_data = left_join(d1, d2,
+                     by = c(&quot;Local Authority&quot; = &quot;Local Authority&quot;, 
+                                    &quot;oslaua&quot; = &quot;code_la&quot;))
+
+glimpse(new_data)</code></pre>
+<pre><code>## Observations: 326
+## Variables: 12
+## $ `Local Authority` &lt;chr&gt; &quot;Babergh&quot;, &quot;Basildon&quot;, &quot;Bedford&quot;, &quot;Braintree...
+## $ oslaua            &lt;chr&gt; &quot;E07000200&quot;, &quot;E07000066&quot;, &quot;E06000055&quot;, &quot;E070...
+## $ `All Ages`        &lt;int&gt; 88845, 180521, 163924, 149985, 133986, 75645...
+## $ `Aged 65-69`      &lt;int&gt; 6947, 9808, 8600, 9443, 9917, 4464, 9580, 51...
+## $ `Aged 70-74`      &lt;int&gt; 5045, 6816, 6223, 6461, 7249, 3174, 6988, 37...
+## $ `Aged 75-79`      &lt;int&gt; 3907, 5850, 5177, 4864, 5977, 2902, 5870, 33...
+## $ `Aged 80-84`      &lt;int&gt; 2856, 4493, 4000, 3561, 4358, 2368, 4361, 25...
+## $ `Aged 85+`        &lt;int&gt; 2961, 3844, 3910, 3886, 4225, 2361, 4315, 21...
+## $ `2014`            &lt;int&gt; 88845, 180521, 163924, 149985, 133986, 75645...
+## $ `2015`            &lt;int&gt; 88990, 181859, 166167, 150947, 134887, 76169...
+## $ `2016`            &lt;int&gt; 89237, 183308, 168303, 151970, 135832, 76749...
+## $ `2017`            &lt;int&gt; 89549, 184789, 170394, 153030, 136783, 77357...</code></pre>
+</div>
+<div id="data-manipulation-tidyr" class="section level2">
+<h2>Data manipulation: tidyr</h2>
+<ul>
+<li><p>Working example</p>
+<ul>
+<li>transform a wide data frame into a long</li>
+</ul></li>
+</ul>
+<pre class="r"><code>library(rio)
+library(tidyr)
+library(dplyr)
+
+d1  = import(&quot;data/pop_link.csv&quot;)
+
+head(d1)</code></pre>
+<pre><code>##   Local Authority    oslaua All Ages Aged 65-69 Aged 70-74 Aged 75-79
+## 1         Babergh E07000200    88845       6947       5045       3907
+## 2        Basildon E07000066   180521       9808       6816       5850
+## 3         Bedford E06000055   163924       8600       6223       5177
+## 4       Braintree E07000067   149985       9443       6461       4864
+## 5       Breckland E07000143   133986       9917       7249       5977
+## 6       Brentwood E07000068    75645       4464       3174       2902
+##   Aged 80-84 Aged 85+
+## 1       2856     2961
+## 2       4493     3844
+## 3       4000     3910
+## 4       3561     3886
+## 5       4358     4225
+## 6       2368     2361</code></pre>
+</div>
+<div id="data-manipulation-tidyr-1" class="section level2">
+<h2>Data manipulation: tidyr</h2>
+<ul>
+<li><code>tidyr</code> and <code>dplyr</code></li>
+</ul>
+<pre class="r"><code> d1 %&gt;% gather(age, number, `All Ages`: `Aged 85+`) %&gt;%
+  arrange(`Local Authority`)</code></pre>
+<pre><code>##                   Local Authority    oslaua        age  number
+## 1                            Adur E07000223   All Ages   63176
+## 2                            Adur E07000223 Aged 65-69    4310
+## 3                            Adur E07000223 Aged 70-74    3283
+## 4                            Adur E07000223 Aged 75-79    2767
+## 5                            Adur E07000223 Aged 80-84    2086
+## 6                            Adur E07000223   Aged 85+    2161
+## 7                       Allerdale E07000026   All Ages   96471
+## 8                       Allerdale E07000026 Aged 65-69    7014
+## 9                       Allerdale E07000026 Aged 70-74    5275
+## 10                      Allerdale E07000026 Aged 75-79    4138
+## 11                      Allerdale E07000026 Aged 80-84    2913
+## 12                      Allerdale E07000026   Aged 85+    2728
+## 13                   Amber Valley E07000032   All Ages  123942
+## 14                   Amber Valley E07000032 Aged 65-69    8653
+## 15                   Amber Valley E07000032 Aged 70-74    6164
+## 16                   Amber Valley E07000032 Aged 75-79    4536
+## 17                   Amber Valley E07000032 Aged 80-84    3206
+## 18                   Amber Valley E07000032   Aged 85+    3296
+## 19                           Arun E07000224   All Ages  154414
+## 20                           Arun E07000224 Aged 65-69   12410
+## 21                           Arun E07000224 Aged 70-74    9652
+## 22                           Arun E07000224 Aged 75-79    8218
+## 23                           Arun E07000224 Aged 80-84    6252
+## 24                           Arun E07000224   Aged 85+    6784
+## 25                       Ashfield E07000170   All Ages  122508
+## 26                       Ashfield E07000170 Aged 65-69    7237
+## 27                       Ashfield E07000170 Aged 70-74    5759
+## 28                       Ashfield E07000170 Aged 75-79    4228
+## 29                       Ashfield E07000170 Aged 80-84    2788
+## 30                       Ashfield E07000170   Aged 85+    2543
+## 31                        Ashford E07000105   All Ages  123285
+## 32                        Ashford E07000105 Aged 65-69    7638
+## 33                        Ashford E07000105 Aged 70-74    5353
+## 34                        Ashford E07000105 Aged 75-79    4014
+## 35                        Ashford E07000105 Aged 80-84    2981
+## 36                        Ashford E07000105   Aged 85+    3014
+## 37                 Aylesbury Vale E07000004   All Ages  184560
+## 38                 Aylesbury Vale E07000004 Aged 65-69   10001
+## 39                 Aylesbury Vale E07000004 Aged 70-74    6968
+## 40                 Aylesbury Vale E07000004 Aged 75-79    5535
+## 41                 Aylesbury Vale E07000004 Aged 80-84    3820
+## 42                 Aylesbury Vale E07000004   Aged 85+    3855
+## 43                        Babergh E07000200   All Ages   88845
+## 44                        Babergh E07000200 Aged 65-69    6947
+## 45                        Babergh E07000200 Aged 70-74    5045
+## 46                        Babergh E07000200 Aged 75-79    3907
+## 47                        Babergh E07000200 Aged 80-84    2856
+## 48                        Babergh E07000200   Aged 85+    2961
+## 49           Barking and Dagenham E09000002   All Ages  198294
+## 50           Barking and Dagenham E09000002 Aged 65-69    5738
+## 51           Barking and Dagenham E09000002 Aged 70-74    4119
+## 52           Barking and Dagenham E09000002 Aged 75-79    3721
+## 53           Barking and Dagenham E09000002 Aged 80-84    3000
+## 54           Barking and Dagenham E09000002   Aged 85+    3078
+## 55                         Barnet E09000003   All Ages  374915
+## 56                         Barnet E09000003 Aged 65-69   15438
+## 57                         Barnet E09000003 Aged 70-74   11366
+## 58                         Barnet E09000003 Aged 75-79    9348
+## 59                         Barnet E09000003 Aged 80-84    7464
+## 60                         Barnet E09000003   Aged 85+    8112
+## 61                       Barnsley E08000016   All Ages  237843
+## 62                       Barnsley E08000016 Aged 65-69   14261
+## 63                       Barnsley E08000016 Aged 70-74   10573
+## 64                       Barnsley E08000016 Aged 75-79    8178
+## 65                       Barnsley E08000016 Aged 80-84    5910
+## 66                       Barnsley E08000016   Aged 85+    5094
+## 67              Barrow-in-Furness E07000027   All Ages   67648
+## 68              Barrow-in-Furness E07000027 Aged 65-69    4501
+## 69              Barrow-in-Furness E07000027 Aged 70-74    3509
+## 70              Barrow-in-Furness E07000027 Aged 75-79    2626
+## 71              Barrow-in-Furness E07000027 Aged 80-84    1781
+## 72              Barrow-in-Furness E07000027   Aged 85+    1604
+## 73                       Basildon E07000066   All Ages  180521
+## 74                       Basildon E07000066 Aged 65-69    9808
+## 75                       Basildon E07000066 Aged 70-74    6816
+## 76                       Basildon E07000066 Aged 75-79    5850
+## 77                       Basildon E07000066 Aged 80-84    4493
+## 78                       Basildon E07000066   Aged 85+    3844
+## 79          Basingstoke and Deane E07000084   All Ages  172870
+## 80          Basingstoke and Deane E07000084 Aged 65-69    9450
+## 81          Basingstoke and Deane E07000084 Aged 70-74    6595
+## 82          Basingstoke and Deane E07000084 Aged 75-79    5072
+## 83          Basingstoke and Deane E07000084 Aged 80-84    3598
+## 84          Basingstoke and Deane E07000084   Aged 85+    3300
+## 85                      Bassetlaw E07000171   All Ages  114143
+## 86                      Bassetlaw E07000171 Aged 65-69    7726
+## 87                      Bassetlaw E07000171 Aged 70-74    5608
+## 88                      Bassetlaw E07000171 Aged 75-79    4305
+## 89                      Bassetlaw E07000171 Aged 80-84    3023
+## 90                      Bassetlaw E07000171   Aged 85+    2791
+## 91   Bath and North East Somerset E06000022   All Ages  182021
+## 92   Bath and North East Somerset E06000022 Aged 65-69   10379
+## 93   Bath and North East Somerset E06000022 Aged 70-74    7604
+## 94   Bath and North East Somerset E06000022 Aged 75-79    6471
+## 95   Bath and North East Somerset E06000022 Aged 80-84    4952
+## 96   Bath and North East Somerset E06000022   Aged 85+    5233
+## 97                        Bedford E06000055   All Ages  163924
+## 98                        Bedford E06000055 Aged 65-69    8600
+## 99                        Bedford E06000055 Aged 70-74    6223
+## 100                       Bedford E06000055 Aged 75-79    5177
+## 101                       Bedford E06000055 Aged 80-84    4000
+## 102                       Bedford E06000055   Aged 85+    3910
+## 103                        Bexley E09000004   All Ages  239865
+## 104                        Bexley E09000004 Aged 65-69   11577
+## 105                        Bexley E09000004 Aged 70-74    8608
+## 106                        Bexley E09000004 Aged 75-79    7878
+## 107                        Bexley E09000004 Aged 80-84    5986
+## 108                        Bexley E09000004   Aged 85+    5774
+## 109                    Birmingham E08000025   All Ages 1101360
+## 110                    Birmingham E08000025 Aged 65-69   40887
+## 111                    Birmingham E08000025 Aged 70-74   32604
+## 112                    Birmingham E08000025 Aged 75-79   28399
+## 113                    Birmingham E08000025 Aged 80-84   21625
+## 114                    Birmingham E08000025   Aged 85+   20376
+## 115                         Blaby E07000129   All Ages   95851
+## 116                         Blaby E07000129 Aged 65-69    5976
+## 117                         Blaby E07000129 Aged 70-74    4370
+## 118                         Blaby E07000129 Aged 75-79    3573
+## 119                         Blaby E07000129 Aged 80-84    2603
+## 120                         Blaby E07000129   Aged 85+    2351
+## 121         Blackburn with Darwen E06000008   All Ages  146743
+## 122         Blackburn with Darwen E06000008 Aged 65-69    6845
+## 123         Blackburn with Darwen E06000008 Aged 70-74    4770
+## 124         Blackburn with Darwen E06000008 Aged 75-79    3878
+## 125         Blackburn with Darwen E06000008 Aged 80-84    2671
+## 126         Blackburn with Darwen E06000008   Aged 85+    2386
+## 127                     Blackpool E06000009   All Ages  140501
+## 128                     Blackpool E06000009 Aged 65-69    8806
+## 129                     Blackpool E06000009 Aged 70-74    6615
+## 130                     Blackpool E06000009 Aged 75-79    5427
+## 131                     Blackpool E06000009 Aged 80-84    3859
+## 132                     Blackpool E06000009   Aged 85+    3775
+## 133                      Bolsover E07000033   All Ages   77155
+## 134                      Bolsover E07000033 Aged 65-69    4827
+## 135                      Bolsover E07000033 Aged 70-74    3667
+## 136                      Bolsover E07000033 Aged 75-79    2722
+## 137                      Bolsover E07000033 Aged 80-84    1933
+## 138                      Bolsover E07000033   Aged 85+    1786
+## 139                        Bolton E08000001   All Ages  280439
+## 140                        Bolton E08000001 Aged 65-69   15469
+## 141                        Bolton E08000001 Aged 70-74   11302
+## 142                        Bolton E08000001 Aged 75-79    8704
+## 143                        Bolton E08000001 Aged 80-84    5899
+## 144                        Bolton E08000001   Aged 85+    5419
+## 145                        Boston E07000136   All Ages   66458
+## 146                        Boston E07000136 Aged 65-69    4226
+## 147                        Boston E07000136 Aged 70-74    3270
+## 148                        Boston E07000136 Aged 75-79    2532
+## 149                        Boston E07000136 Aged 80-84    1938
+## 150                        Boston E07000136   Aged 85+    1813
+## 151                   Bournemouth E06000028   All Ages  191390
+## 152                   Bournemouth E06000028 Aged 65-69    9836
+## 153                   Bournemouth E06000028 Aged 70-74    7060
+## 154                   Bournemouth E06000028 Aged 75-79    6125
+## 155                   Bournemouth E06000028 Aged 80-84    5274
+## 156                   Bournemouth E06000028   Aged 85+    6151
+## 157              Bracknell Forest E06000036   All Ages  118025
+## 158              Bracknell Forest E06000036 Aged 65-69    5314
+## 159              Bracknell Forest E06000036 Aged 70-74    3525
+## 160              Bracknell Forest E06000036 Aged 75-79    3016
+## 161              Bracknell Forest E06000036 Aged 80-84    2112
+## 162              Bracknell Forest E06000036   Aged 85+    2033
+## 163                      Bradford E08000032   All Ages  528155
+## 164                      Bradford E08000032 Aged 65-69   23147
+## 165                      Bradford E08000032 Aged 70-74   16512
+## 166                      Bradford E08000032 Aged 75-79   14522
+## 167                      Bradford E08000032 Aged 80-84   10710
+## 168                      Bradford E08000032   Aged 85+   10067
+## 169                     Braintree E07000067   All Ages  149985
+## 170                     Braintree E07000067 Aged 65-69    9443
+## 171                     Braintree E07000067 Aged 70-74    6461
+## 172                     Braintree E07000067 Aged 75-79    4864
+## 173                     Braintree E07000067 Aged 80-84    3561
+## 174                     Braintree E07000067   Aged 85+    3886
+## 175                     Breckland E07000143   All Ages  133986
+## 176                     Breckland E07000143 Aged 65-69    9917
+## 177                     Breckland E07000143 Aged 70-74    7249
+## 178                     Breckland E07000143 Aged 75-79    5977
+## 179                     Breckland E07000143 Aged 80-84    4358
+## 180                     Breckland E07000143   Aged 85+    4225
+## 181                         Brent E09000005   All Ages  320762
+## 182                         Brent E09000005 Aged 65-69   10630
+## 183                         Brent E09000005 Aged 70-74    8380
+## 184                         Brent E09000005 Aged 75-79    7192
+## 185                         Brent E09000005 Aged 80-84    5115
+## 186                         Brent E09000005   Aged 85+    4228
+## 187                     Brentwood E07000068   All Ages   75645
+## 188                     Brentwood E07000068 Aged 65-69    4464
+## 189                     Brentwood E07000068 Aged 70-74    3174
+## 190                     Brentwood E07000068 Aged 75-79    2902
+## 191                     Brentwood E07000068 Aged 80-84    2368
+## 192                     Brentwood E07000068   Aged 85+    2361
+## 193             Brighton and Hove E06000043   All Ages  281076
+## 194             Brighton and Hove E06000043 Aged 65-69   11390
+## 195             Brighton and Hove E06000043 Aged 70-74    8128
+## 196             Brighton and Hove E06000043 Aged 75-79    6685
+## 197             Brighton and Hove E06000043 Aged 80-84    5435
+## 198             Brighton and Hove E06000043   Aged 85+    6084
+## 199              Bristol, City of E06000023   All Ages  442474
+## 200              Bristol, City of E06000023 Aged 65-69   17593
+## 201              Bristol, City of E06000023 Aged 70-74   13005
+## 202              Bristol, City of E06000023 Aged 75-79   10669
+## 203              Bristol, City of E06000023 Aged 80-84    8433
+## 204              Bristol, City of E06000023   Aged 85+    9069
+## 205                     Broadland E07000144   All Ages  125961
+## 206                     Broadland E07000144 Aged 65-69    9580
+## 207                     Broadland E07000144 Aged 70-74    6988
+## 208                     Broadland E07000144 Aged 75-79    5870
+## 209                     Broadland E07000144 Aged 80-84    4361
+## 210                     Broadland E07000144   Aged 85+    4315
+## 211                       Bromley E09000006   All Ages  321278
+## 212                       Bromley E09000006 Aged 65-69   16994
+## 213                       Bromley E09000006 Aged 70-74   12039
+## 214                       Bromley E09000006 Aged 75-79   10370
+## 215                       Bromley E09000006 Aged 80-84    8450
+## 216                       Bromley E09000006   Aged 85+    8488
+## 217                    Bromsgrove E07000234   All Ages   95485
+## 218                    Bromsgrove E07000234 Aged 65-69    6207
+## 219                    Bromsgrove E07000234 Aged 70-74    4761
+## 220                    Bromsgrove E07000234 Aged 75-79    3855
+## 221                    Bromsgrove E07000234 Aged 80-84    3014
+## 222                    Bromsgrove E07000234   Aged 85+    3028
+## 223                    Broxbourne E07000095   All Ages   95748
+## 224                    Broxbourne E07000095 Aged 65-69    5102
+## 225                    Broxbourne E07000095 Aged 70-74    3744
+## 226                    Broxbourne E07000095 Aged 75-79    3320
+## 227                    Broxbourne E07000095 Aged 80-84    2519
+## 228                    Broxbourne E07000095   Aged 85+    2114
+## 229                      Broxtowe E07000172   All Ages  111780
+## 230                      Broxtowe E07000172 Aged 65-69    7169
+## 231                      Broxtowe E07000172 Aged 70-74    5148
+## 232                      Broxtowe E07000172 Aged 75-79    4136
+## 233                      Broxtowe E07000172 Aged 80-84    3000
+## 234                      Broxtowe E07000172   Aged 85+    2894
+## 235                       Burnley E07000117   All Ages   87291
+## 236                       Burnley E07000117 Aged 65-69    5286
+## 237                       Burnley E07000117 Aged 70-74    3606
+## 238                       Burnley E07000117 Aged 75-79    2768
+## 239                       Burnley E07000117 Aged 80-84    1940
+## 240                       Burnley E07000117   Aged 85+    1952
+## 241                          Bury E08000002   All Ages  187474
+## 242                          Bury E08000002 Aged 65-69   10781
+## 243                          Bury E08000002 Aged 70-74    7787
+## 244                          Bury E08000002 Aged 75-79    6249
+## 245                          Bury E08000002 Aged 80-84    4129
+## 246                          Bury E08000002   Aged 85+    3903
+## 247                    Calderdale E08000033   All Ages  207376
+## 248                    Calderdale E08000033 Aged 65-69   12075
+## 249                    Calderdale E08000033 Aged 70-74    8427
+## 250                    Calderdale E08000033 Aged 75-79    6523
+## 251                    Calderdale E08000033 Aged 80-84    4699
+## 252                    Calderdale E08000033   Aged 85+    4635
+## 253                     Cambridge E07000008   All Ages  128515
+## 254                     Cambridge E07000008 Aged 65-69    4501
+## 255                     Cambridge E07000008 Aged 70-74    3243
+## 256                     Cambridge E07000008 Aged 75-79    2814
+## 257                     Cambridge E07000008 Aged 80-84    2256
+## 258                     Cambridge E07000008   Aged 85+    2799
+## 259                        Camden E09000007   All Ages  234846
+## 260                        Camden E09000007 Aged 65-69    8827
+## 261                        Camden E09000007 Aged 70-74    6235
+## 262                        Camden E09000007 Aged 75-79    4942
+## 263                        Camden E09000007 Aged 80-84    3613
+## 264                        Camden E09000007   Aged 85+    3622
+## 265                 Cannock Chase E07000192   All Ages   98549
+## 266                 Cannock Chase E07000192 Aged 65-69    5733
+## 267                 Cannock Chase E07000192 Aged 70-74    4257
+## 268                 Cannock Chase E07000192 Aged 75-79    3257
+## 269                 Cannock Chase E07000192 Aged 80-84    2175
+## 270                 Cannock Chase E07000192   Aged 85+    2111
+## 271                    Canterbury E07000106   All Ages  157649
+## 272                    Canterbury E07000106 Aged 65-69    9704
+## 273                    Canterbury E07000106 Aged 70-74    7051
+## 274                    Canterbury E07000106 Aged 75-79    5681
+## 275                    Canterbury E07000106 Aged 80-84    4303
+## 276                    Canterbury E07000106   Aged 85+    4844
+## 277                      Carlisle E07000028   All Ages  108022
+## 278                      Carlisle E07000028 Aged 65-69    6636
+## 279                      Carlisle E07000028 Aged 70-74    5069
+## 280                      Carlisle E07000028 Aged 75-79    4031
+## 281                      Carlisle E07000028 Aged 80-84    3054
+## 282                      Carlisle E07000028   Aged 85+    2953
+## 283                  Castle Point E07000069   All Ages   88907
+## 284                  Castle Point E07000069 Aged 65-69    7011
+## 285                  Castle Point E07000069 Aged 70-74    5092
+## 286                  Castle Point E07000069 Aged 75-79    4138
+## 287                  Castle Point E07000069 Aged 80-84    2858
+## 288                  Castle Point E07000069   Aged 85+    2455
+## 289          Central Bedfordshire E06000056   All Ages  269076
+## 290          Central Bedfordshire E06000056 Aged 65-69   15230
+## 291          Central Bedfordshire E06000056 Aged 70-74   10830
+## 292          Central Bedfordshire E06000056 Aged 75-79    8544
+## 293          Central Bedfordshire E06000056 Aged 80-84    5909
+## 294          Central Bedfordshire E06000056   Aged 85+    5201
+## 295                     Charnwood E07000130   All Ages  173545
+## 296                     Charnwood E07000130 Aged 65-69    9687
+## 297                     Charnwood E07000130 Aged 70-74    7036
+## 298                     Charnwood E07000130 Aged 75-79    5562
+## 299                     Charnwood E07000130 Aged 80-84    4215
+## 300                     Charnwood E07000130   Aged 85+    4016
+## 301                    Chelmsford E07000070   All Ages  171633
+## 302                    Chelmsford E07000070 Aged 65-69   10301
+## 303                    Chelmsford E07000070 Aged 70-74    7026
+## 304                    Chelmsford E07000070 Aged 75-79    5979
+## 305                    Chelmsford E07000070 Aged 80-84    4430
+## 306                    Chelmsford E07000070   Aged 85+    4157
+## 307                    Cheltenham E07000078   All Ages  116495
+## 308                    Cheltenham E07000078 Aged 65-69    6099
+## 309                    Cheltenham E07000078 Aged 70-74    4546
+## 310                    Cheltenham E07000078 Aged 75-79    3915
+## 311                    Cheltenham E07000078 Aged 80-84    3020
+## 312                    Cheltenham E07000078   Aged 85+    3437
+## 313                      Cherwell E07000177   All Ages  144494
+## 314                      Cherwell E07000177 Aged 65-69    7672
+## 315                      Cherwell E07000177 Aged 70-74    5688
+## 316                      Cherwell E07000177 Aged 75-79    4679
+## 317                      Cherwell E07000177 Aged 80-84    3334
+## 318                      Cherwell E07000177   Aged 85+    3160
+## 319                 Cheshire East E06000049   All Ages  374179
+## 320                 Cheshire East E06000049 Aged 65-69   25157
+## 321                 Cheshire East E06000049 Aged 70-74   18641
+## 322                 Cheshire East E06000049 Aged 75-79   14944
+## 323                 Cheshire East E06000049 Aged 80-84   10876
+## 324                 Cheshire East E06000049   Aged 85+   10946
+## 325     Cheshire West and Chester E06000050   All Ages  332210
+## 326     Cheshire West and Chester E06000050 Aged 65-69   21301
+## 327     Cheshire West and Chester E06000050 Aged 70-74   15823
+## 328     Cheshire West and Chester E06000050 Aged 75-79   12734
+## 329     Cheshire West and Chester E06000050 Aged 80-84    9057
+## 330     Cheshire West and Chester E06000050   Aged 85+    8649
+## 331                  Chesterfield E07000034   All Ages  104288
+## 332                  Chesterfield E07000034 Aged 65-69    6495
+## 333                  Chesterfield E07000034 Aged 70-74    4919
+## 334                  Chesterfield E07000034 Aged 75-79    3788
+## 335                  Chesterfield E07000034 Aged 80-84    2798
+## 336                  Chesterfield E07000034   Aged 85+    2861
+## 337                    Chichester E07000225   All Ages  115527
+## 338                    Chichester E07000225 Aged 65-69    8743
+## 339                    Chichester E07000225 Aged 70-74    6881
+## 340                    Chichester E07000225 Aged 75-79    5685
+## 341                    Chichester E07000225 Aged 80-84    4503
+## 342                    Chichester E07000225   Aged 85+    4738
+## 343                      Chiltern E07000005   All Ages   93972
+## 344                      Chiltern E07000005 Aged 65-69    5820
+## 345                      Chiltern E07000005 Aged 70-74    4470
+## 346                      Chiltern E07000005 Aged 75-79    3887
+## 347                      Chiltern E07000005 Aged 80-84    2810
+## 348                      Chiltern E07000005   Aged 85+    2822
+## 349                       Chorley E07000118   All Ages  111607
+## 350                       Chorley E07000118 Aged 65-69    7312
+## 351                       Chorley E07000118 Aged 70-74    5178
+## 352                       Chorley E07000118 Aged 75-79    3653
+## 353                       Chorley E07000118 Aged 80-84    2481
+## 354                       Chorley E07000118   Aged 85+    2280
+## 355                  Christchurch E07000048   All Ages   48895
+## 356                  Christchurch E07000048 Aged 65-69    4118
+## 357                  Christchurch E07000048 Aged 70-74    3248
+## 358                  Christchurch E07000048 Aged 75-79    2883
+## 359                  Christchurch E07000048 Aged 80-84    2377
+## 360                  Christchurch E07000048   Aged 85+    2598
+## 361                City of London E09000001   All Ages    8072
+## 362                City of London E09000001 Aged 65-69     452
+## 363                City of London E09000001 Aged 70-74     272
+## 364                City of London E09000001 Aged 75-79     232
+## 365                City of London E09000001 Aged 80-84     142
+## 366                City of London E09000001   Aged 85+     178
+## 367                    Colchester E07000071   All Ages  180420
+## 368                    Colchester E07000071 Aged 65-69   10131
+## 369                    Colchester E07000071 Aged 70-74    7054
+## 370                    Colchester E07000071 Aged 75-79    5551
+## 371                    Colchester E07000071 Aged 80-84    4154
+## 372                    Colchester E07000071   Aged 85+    4024
+## 373                      Copeland E07000029   All Ages   69832
+## 374                      Copeland E07000029 Aged 65-69    4716
+## 375                      Copeland E07000029 Aged 70-74    3577
+## 376                      Copeland E07000029 Aged 75-79    2836
+## 377                      Copeland E07000029 Aged 80-84    1948
+## 378                      Copeland E07000029   Aged 85+    1620
+## 379                         Corby E07000150   All Ages   65434
+## 380                         Corby E07000150 Aged 65-69    2977
+## 381                         Corby E07000150 Aged 70-74    2211
+## 382                         Corby E07000150 Aged 75-79    1785
+## 383                         Corby E07000150 Aged 80-84    1161
+## 384                         Corby E07000150   Aged 85+    1021
+## 385                      Cornwall E06000052   All Ages  545335
+## 386                      Cornwall E06000052 Aged 65-69   42413
+## 387                      Cornwall E06000052 Aged 70-74   30098
+## 388                      Cornwall E06000052 Aged 75-79   22993
+## 389                      Cornwall E06000052 Aged 80-84   16791
+## 390                      Cornwall E06000052   Aged 85+   16807
+## 391                      Cotswold E07000079   All Ages   84637
+## 392                      Cotswold E07000079 Aged 65-69    6200
+## 393                      Cotswold E07000079 Aged 70-74    4807
+## 394                      Cotswold E07000079 Aged 75-79    3709
+## 395                      Cotswold E07000079 Aged 80-84    2909
+## 396                      Cotswold E07000079   Aged 85+    2958
+## 397                 County Durham E06000047   All Ages  517773
+## 398                 County Durham E06000047 Aged 65-69   33128
+## 399                 County Durham E06000047 Aged 70-74   23910
+## 400                 County Durham E06000047 Aged 75-79   19468
+## 401                 County Durham E06000047 Aged 80-84   13340
+## 402                 County Durham E06000047   Aged 85+   11625
+## 403                      Coventry E08000026   All Ages  337428
+## 404                      Coventry E08000026 Aged 65-69   14252
+## 405                      Coventry E08000026 Aged 70-74   11451
+## 406                      Coventry E08000026 Aged 75-79    9304
+## 407                      Coventry E08000026 Aged 80-84    6714
+## 408                      Coventry E08000026   Aged 85+    7022
+## 409                        Craven E07000163   All Ages   55696
+## 410                        Craven E07000163 Aged 65-69    4363
+## 411                        Craven E07000163 Aged 70-74    3183
+## 412                        Craven E07000163 Aged 75-79    2542
+## 413                        Craven E07000163 Aged 80-84    1899
+## 414                        Craven E07000163   Aged 85+    2055
+## 415                       Crawley E07000226   All Ages  109883
+## 416                       Crawley E07000226 Aged 65-69    4440
+## 417                       Crawley E07000226 Aged 70-74    2903
+## 418                       Crawley E07000226 Aged 75-79    2487
+## 419                       Crawley E07000226 Aged 80-84    2318
+## 420                       Crawley E07000226   Aged 85+    2252
+## 421                       Croydon E09000008   All Ages  376040
+## 422                       Croydon E09000008 Aged 65-69   14984
+## 423                       Croydon E09000008 Aged 70-74   10897
+## 424                       Croydon E09000008 Aged 75-79    9347
+## 425                       Croydon E09000008 Aged 80-84    6824
+## 426                       Croydon E09000008   Aged 85+    6524
+## 427                       Dacorum E07000096   All Ages  149741
+## 428                       Dacorum E07000096 Aged 65-69    7597
+## 429                       Dacorum E07000096 Aged 70-74    5236
+## 430                       Dacorum E07000096 Aged 75-79    4590
+## 431                       Dacorum E07000096 Aged 80-84    3750
+## 432                       Dacorum E07000096   Aged 85+    3717
+## 433                    Darlington E06000005   All Ages  105367
+## 434                    Darlington E06000005 Aged 65-69    6337
+## 435                    Darlington E06000005 Aged 70-74    4467
+## 436                    Darlington E06000005 Aged 75-79    3938
+## 437                    Darlington E06000005 Aged 80-84    2686
+## 438                    Darlington E06000005   Aged 85+    2740
+## 439                      Dartford E07000107   All Ages  102234
+## 440                      Dartford E07000107 Aged 65-69    4554
+## 441                      Dartford E07000107 Aged 70-74    3388
+## 442                      Dartford E07000107 Aged 75-79    2856
+## 443                      Dartford E07000107 Aged 80-84    2307
+## 444                      Dartford E07000107   Aged 85+    2091
+## 445                      Daventry E07000151   All Ages   79036
+## 446                      Daventry E07000151 Aged 65-69    5371
+## 447                      Daventry E07000151 Aged 70-74    3725
+## 448                      Daventry E07000151 Aged 75-79    2647
+## 449                      Daventry E07000151 Aged 80-84    1831
+## 450                      Daventry E07000151   Aged 85+    1707
+## 451                         Derby E06000015   All Ages  252463
+## 452                         Derby E06000015 Aged 65-69   11815
+## 453                         Derby E06000015 Aged 70-74    8900
+## 454                         Derby E06000015 Aged 75-79    7696
+## 455                         Derby E06000015 Aged 80-84    5994
+## 456                         Derby E06000015   Aged 85+    5891
+## 457              Derbyshire Dales E07000035   All Ages   71281
+## 458              Derbyshire Dales E07000035 Aged 65-69    5761
+## 459              Derbyshire Dales E07000035 Aged 70-74    4153
+## 460              Derbyshire Dales E07000035 Aged 75-79    3270
+## 461              Derbyshire Dales E07000035 Aged 80-84    2296
+## 462              Derbyshire Dales E07000035   Aged 85+    2293
+## 463                     Doncaster E08000017   All Ages  304185
+## 464                     Doncaster E08000017 Aged 65-69   17496
+## 465                     Doncaster E08000017 Aged 70-74   12731
+## 466                     Doncaster E08000017 Aged 75-79   10633
+## 467                     Doncaster E08000017 Aged 80-84    7713
+## 468                     Doncaster E08000017   Aged 85+    6840
+## 469                         Dover E07000108   All Ages  113066
+## 470                         Dover E07000108 Aged 65-69    8364
+## 471                         Dover E07000108 Aged 70-74    5827
+## 472                         Dover E07000108 Aged 75-79    4524
+## 473                         Dover E07000108 Aged 80-84    3264
+## 474                         Dover E07000108   Aged 85+    3362
+## 475                        Dudley E08000027   All Ages  315799
+## 476                        Dudley E08000027 Aged 65-69   18499
+## 477                        Dudley E08000027 Aged 70-74   15250
+## 478                        Dudley E08000027 Aged 75-79   12493
+## 479                        Dudley E08000027 Aged 80-84    8724
+## 480                        Dudley E08000027   Aged 85+    7609
+## 481                        Ealing E09000009   All Ages  342118
+## 482                        Ealing E09000009 Aged 65-69   12134
+## 483                        Ealing E09000009 Aged 70-74    8953
+## 484                        Ealing E09000009 Aged 75-79    7879
+## 485                        Ealing E09000009 Aged 80-84    5516
+## 486                        Ealing E09000009   Aged 85+    5039
+## 487           East Cambridgeshire E07000009   All Ages   86685
+## 488           East Cambridgeshire E07000009 Aged 65-69    5279
+## 489           East Cambridgeshire E07000009 Aged 70-74    3804
+## 490           East Cambridgeshire E07000009 Aged 75-79    2895
+## 491           East Cambridgeshire E07000009 Aged 80-84    2174
+## 492           East Cambridgeshire E07000009   Aged 85+    2208
+## 493                    East Devon E07000040   All Ages  136374
+## 494                    East Devon E07000040 Aged 65-69   11567
+## 495                    East Devon E07000040 Aged 70-74    8999
+## 496                    East Devon E07000040 Aged 75-79    7443
+## 497                    East Devon E07000040 Aged 80-84    5967
+## 498                    East Devon E07000040   Aged 85+    6532
+## 499                   East Dorset E07000049   All Ages   88186
+## 500                   East Dorset E07000049 Aged 65-69    7614
+## 501                   East Dorset E07000049 Aged 70-74    5960
+## 502                   East Dorset E07000049 Aged 75-79    5064
+## 503                   East Dorset E07000049 Aged 80-84    3946
+## 504                   East Dorset E07000049   Aged 85+    4218
+## 505                East Hampshire E07000085   All Ages  117483
+## 506                East Hampshire E07000085 Aged 65-69    8008
+## 507                East Hampshire E07000085 Aged 70-74    5938
+## 508                East Hampshire E07000085 Aged 75-79    4611
+## 509                East Hampshire E07000085 Aged 80-84    3391
+## 510                East Hampshire E07000085   Aged 85+    3549
+## 511            East Hertfordshire E07000242   All Ages  143021
+## 512            East Hertfordshire E07000242 Aged 65-69    7752
+## 513            East Hertfordshire E07000242 Aged 70-74    5436
+## 514            East Hertfordshire E07000242 Aged 75-79    4518
+## 515            East Hertfordshire E07000242 Aged 80-84    3450
+## 516            East Hertfordshire E07000242   Aged 85+    3070
+## 517                  East Lindsey E07000137   All Ages  137623
+## 518                  East Lindsey E07000137 Aged 65-69   12744
+## 519                  East Lindsey E07000137 Aged 70-74    9682
+## 520                  East Lindsey E07000137 Aged 75-79    7208
+## 521                  East Lindsey E07000137 Aged 80-84    4936
+## 522                  East Lindsey E07000137   Aged 85+    4412
+## 523         East Northamptonshire E07000152   All Ages   88872
+## 524         East Northamptonshire E07000152 Aged 65-69    5964
+## 525         East Northamptonshire E07000152 Aged 70-74    3929
+## 526         East Northamptonshire E07000152 Aged 75-79    3029
+## 527         East Northamptonshire E07000152 Aged 80-84    2097
+## 528         East Northamptonshire E07000152   Aged 85+    2218
+## 529      East Riding of Yorkshire E06000011   All Ages  337115
+## 530      East Riding of Yorkshire E06000011 Aged 65-69   26205
+## 531      East Riding of Yorkshire E06000011 Aged 70-74   18694
+## 532      East Riding of Yorkshire E06000011 Aged 75-79   15336
+## 533      East Riding of Yorkshire E06000011 Aged 80-84   10777
+## 534      East Riding of Yorkshire E06000011   Aged 85+    9599
+## 535            East Staffordshire E07000193   All Ages  115663
+## 536            East Staffordshire E07000193 Aged 65-69    6574
+## 537            East Staffordshire E07000193 Aged 70-74    5109
+## 538            East Staffordshire E07000193 Aged 75-79    3938
+## 539            East Staffordshire E07000193 Aged 80-84    2889
+## 540            East Staffordshire E07000193   Aged 85+    2612
+## 541                    Eastbourne E07000061   All Ages  101547
+## 542                    Eastbourne E07000061 Aged 65-69    6799
+## 543                    Eastbourne E07000061 Aged 70-74    4915
+## 544                    Eastbourne E07000061 Aged 75-79    4468
+## 545                    Eastbourne E07000061 Aged 80-84    3693
+## 546                    Eastbourne E07000061   Aged 85+    4508
+## 547                     Eastleigh E07000086   All Ages  128877
+## 548                     Eastleigh E07000086 Aged 65-69    7451
+## 549                     Eastleigh E07000086 Aged 70-74    5318
+## 550                     Eastleigh E07000086 Aged 75-79    4386
+## 551                     Eastleigh E07000086 Aged 80-84    3210
+## 552                     Eastleigh E07000086   Aged 85+    3084
+## 553                          Eden E07000030   All Ages   52630
+## 554                          Eden E07000030 Aged 65-69    4025
+## 555                          Eden E07000030 Aged 70-74    3028
+## 556                          Eden E07000030 Aged 75-79    2426
+## 557                          Eden E07000030 Aged 80-84    1706
+## 558                          Eden E07000030   Aged 85+    1694
+## 559                     Elmbridge E07000207   All Ages  132769
+## 560                     Elmbridge E07000207 Aged 65-69    6910
+## 561                     Elmbridge E07000207 Aged 70-74    4951
+## 562                     Elmbridge E07000207 Aged 75-79    4314
+## 563                     Elmbridge E07000207 Aged 80-84    3393
+## 564                     Elmbridge E07000207   Aged 85+    3870
+## 565                       Enfield E09000010   All Ages  324574
+## 566                       Enfield E09000010 Aged 65-69   12230
+## 567                       Enfield E09000010 Aged 70-74    9701
+## 568                       Enfield E09000010 Aged 75-79    8018
+## 569                       Enfield E09000010 Aged 80-84    6036
+## 570                       Enfield E09000010   Aged 85+    5611
+## 571                 Epping Forest E07000072   All Ages  128777
+## 572                 Epping Forest E07000072 Aged 65-69    7705
+## 573                 Epping Forest E07000072 Aged 70-74    5384
+## 574                 Epping Forest E07000072 Aged 75-79    4537
+## 575                 Epping Forest E07000072 Aged 80-84    3651
+## 576                 Epping Forest E07000072   Aged 85+    3695
+## 577               Epsom and Ewell E07000208   All Ages   78318
+## 578               Epsom and Ewell E07000208 Aged 65-69    4298
+## 579               Epsom and Ewell E07000208 Aged 70-74    3107
+## 580               Epsom and Ewell E07000208 Aged 75-79    2518
+## 581               Epsom and Ewell E07000208 Aged 80-84    1984
+## 582               Epsom and Ewell E07000208   Aged 85+    1945
+## 583                       Erewash E07000036   All Ages  114048
+## 584                       Erewash E07000036 Aged 65-69    6860
+## 585                       Erewash E07000036 Aged 70-74    5203
+## 586                       Erewash E07000036 Aged 75-79    4102
+## 587                       Erewash E07000036 Aged 80-84    3128
+## 588                       Erewash E07000036   Aged 85+    2864
+## 589                        Exeter E07000041   All Ages  124328
+## 590                        Exeter E07000041 Aged 65-69    5673
+## 591                        Exeter E07000041 Aged 70-74    4240
+## 592                        Exeter E07000041 Aged 75-79    3521
+## 593                        Exeter E07000041 Aged 80-84    2926
+## 594                        Exeter E07000041   Aged 85+    3272
+## 595                       Fareham E07000087   All Ages  114331
+## 596                       Fareham E07000087 Aged 65-69    7830
+## 597                       Fareham E07000087 Aged 70-74    5858
+## 598                       Fareham E07000087 Aged 75-79    4751
+## 599                       Fareham E07000087 Aged 80-84    3690
+## 600                       Fareham E07000087   Aged 85+    3369
+## 601                       Fenland E07000010   All Ages   97732
+## 602                       Fenland E07000010 Aged 65-69    6641
+## 603                       Fenland E07000010 Aged 70-74    4795
+## 604                       Fenland E07000010 Aged 75-79    4049
+## 605                       Fenland E07000010 Aged 80-84    3017
+## 606                       Fenland E07000010   Aged 85+    2858
+## 607                  Forest Heath E07000201   All Ages   62812
+## 608                  Forest Heath E07000201 Aged 65-69    3470
+## 609                  Forest Heath E07000201 Aged 70-74    2439
+## 610                  Forest Heath E07000201 Aged 75-79    2029
+## 611                  Forest Heath E07000201 Aged 80-84    1477
+## 612                  Forest Heath E07000201   Aged 85+    1455
+## 613                Forest of Dean E07000080   All Ages   83674
+## 614                Forest of Dean E07000080 Aged 65-69    6189
+## 615                Forest of Dean E07000080 Aged 70-74    4694
+## 616                Forest of Dean E07000080 Aged 75-79    3489
+## 617                Forest of Dean E07000080 Aged 80-84    2428
+## 618                Forest of Dean E07000080   Aged 85+    2381
+## 619                         Fylde E07000119   All Ages   77042
+## 620                         Fylde E07000119 Aged 65-69    5890
+## 621                         Fylde E07000119 Aged 70-74    4559
+## 622                         Fylde E07000119 Aged 75-79    3741
+## 623                         Fylde E07000119 Aged 80-84    2938
+## 624                         Fylde E07000119   Aged 85+    2953
+## 625                     Gateshead E08000037   All Ages  200505
+## 626                     Gateshead E08000037 Aged 65-69   11613
+## 627                     Gateshead E08000037 Aged 70-74    8512
+## 628                     Gateshead E08000037 Aged 75-79    7671
+## 629                     Gateshead E08000037 Aged 80-84    5501
+## 630                     Gateshead E08000037   Aged 85+    4538
+## 631                       Gedling E07000173   All Ages  115638
+## 632                       Gedling E07000173 Aged 65-69    7254
+## 633                       Gedling E07000173 Aged 70-74    5217
+## 634                       Gedling E07000173 Aged 75-79    4517
+## 635                       Gedling E07000173 Aged 80-84    3214
+## 636                       Gedling E07000173   Aged 85+    2878
+## 637                    Gloucester E07000081   All Ages  125649
+## 638                    Gloucester E07000081 Aged 65-69    6150
+## 639                    Gloucester E07000081 Aged 70-74    4618
+## 640                    Gloucester E07000081 Aged 75-79    3659
+## 641                    Gloucester E07000081 Aged 80-84    2724
+## 642                    Gloucester E07000081   Aged 85+    2758
+## 643                       Gosport E07000088   All Ages   84287
+## 644                       Gosport E07000088 Aged 65-69    5183
+## 645                       Gosport E07000088 Aged 70-74    3404
+## 646                       Gosport E07000088 Aged 75-79    2949
+## 647                       Gosport E07000088 Aged 80-84    2289
+## 648                       Gosport E07000088   Aged 85+    2098
+## 649                     Gravesham E07000109   All Ages  105261
+## 650                     Gravesham E07000109 Aged 65-69    5457
+## 651                     Gravesham E07000109 Aged 70-74    4051
+## 652                     Gravesham E07000109 Aged 75-79    3433
+## 653                     Gravesham E07000109 Aged 80-84    2589
+## 654                     Gravesham E07000109   Aged 85+    2243
+## 655                Great Yarmouth E07000145   All Ages   98172
+## 656                Great Yarmouth E07000145 Aged 65-69    7131
+## 657                Great Yarmouth E07000145 Aged 70-74    5413
+## 658                Great Yarmouth E07000145 Aged 75-79    3976
+## 659                Great Yarmouth E07000145 Aged 80-84    3028
+## 660                Great Yarmouth E07000145   Aged 85+    2969
+## 661                     Greenwich E09000011   All Ages  268678
+## 662                     Greenwich E09000011 Aged 65-69    9122
+## 663                     Greenwich E09000011 Aged 70-74    6349
+## 664                     Greenwich E09000011 Aged 75-79    5171
+## 665                     Greenwich E09000011 Aged 80-84    3724
+## 666                     Greenwich E09000011   Aged 85+    3813
+## 667                     Guildford E07000209   All Ages  142958
+## 668                     Guildford E07000209 Aged 65-69    7249
+## 669                     Guildford E07000209 Aged 70-74    5108
+## 670                     Guildford E07000209 Aged 75-79    4311
+## 671                     Guildford E07000209 Aged 80-84    3311
+## 672                     Guildford E07000209   Aged 85+    3482
+## 673                       Hackney E09000012   All Ages  263150
+## 674                       Hackney E09000012 Aged 65-69    6048
+## 675                       Hackney E09000012 Aged 70-74    4391
+## 676                       Hackney E09000012 Aged 75-79    3702
+## 677                       Hackney E09000012 Aged 80-84    2484
+## 678                       Hackney E09000012   Aged 85+    2250
+## 679                        Halton E06000006   All Ages  126354
+## 680                        Halton E06000006 Aged 65-69    7335
+## 681                        Halton E06000006 Aged 70-74    4961
+## 682                        Halton E06000006 Aged 75-79    3876
+## 683                        Halton E06000006 Aged 80-84    2673
+## 684                        Halton E06000006   Aged 85+    2168
+## 685                     Hambleton E07000164   All Ages   89828
+## 686                     Hambleton E07000164 Aged 65-69    6748
+## 687                     Hambleton E07000164 Aged 70-74    5105
+## 688                     Hambleton E07000164 Aged 75-79    4110
+## 689                     Hambleton E07000164 Aged 80-84    2912
+## 690                     Hambleton E07000164   Aged 85+    2722
+## 691        Hammersmith and Fulham E09000013   All Ages  178365
+## 692        Hammersmith and Fulham E09000013 Aged 65-69    5891
+## 693        Hammersmith and Fulham E09000013 Aged 70-74    4256
+## 694        Hammersmith and Fulham E09000013 Aged 75-79    3343
+## 695        Hammersmith and Fulham E09000013 Aged 80-84    2330
+## 696        Hammersmith and Fulham E09000013   Aged 85+    2168
+## 697                    Harborough E07000131   All Ages   88008
+## 698                    Harborough E07000131 Aged 65-69    5848
+## 699                    Harborough E07000131 Aged 70-74    4127
+## 700                    Harborough E07000131 Aged 75-79    3324
+## 701                    Harborough E07000131 Aged 80-84    2356
+## 702                    Harborough E07000131   Aged 85+    2340
+## 703                      Haringey E09000014   All Ages  267541
+## 704                      Haringey E09000014 Aged 65-69    8016
+## 705                      Haringey E09000014 Aged 70-74    5734
+## 706                      Haringey E09000014 Aged 75-79    4936
+## 707                      Haringey E09000014 Aged 80-84    3341
+## 708                      Haringey E09000014   Aged 85+    2622
+## 709                        Harlow E07000073   All Ages   84564
+## 710                        Harlow E07000073 Aged 65-69    3675
+## 711                        Harlow E07000073 Aged 70-74    2746
+## 712                        Harlow E07000073 Aged 75-79    2549
+## 713                        Harlow E07000073 Aged 80-84    2207
+## 714                        Harlow E07000073   Aged 85+    1829
+## 715                     Harrogate E07000165   All Ages  157267
+## 716                     Harrogate E07000165 Aged 65-69   10442
+## 717                     Harrogate E07000165 Aged 70-74    7641
+## 718                     Harrogate E07000165 Aged 75-79    6584
+## 719                     Harrogate E07000165 Aged 80-84    4765
+## 720                     Harrogate E07000165   Aged 85+    5071
+## 721                        Harrow E09000015   All Ages  246011
+## 722                        Harrow E09000015 Aged 65-69   10744
+## 723                        Harrow E09000015 Aged 70-74    8128
+## 724                        Harrow E09000015 Aged 75-79    7128
+## 725                        Harrow E09000015 Aged 80-84    5352
+## 726                        Harrow E09000015   Aged 85+    5001
+## 727                          Hart E07000089   All Ages   93325
+## 728                          Hart E07000089 Aged 65-69    5621
+## 729                          Hart E07000089 Aged 70-74    4124
+## 730                          Hart E07000089 Aged 75-79    3218
+## 731                          Hart E07000089 Aged 80-84    2199
+## 732                          Hart E07000089   Aged 85+    2127
+## 733                    Hartlepool E06000001   All Ages   92590
+## 734                    Hartlepool E06000001 Aged 65-69    5337
+## 735                    Hartlepool E06000001 Aged 70-74    3689
+## 736                    Hartlepool E06000001 Aged 75-79    3443
+## 737                    Hartlepool E06000001 Aged 80-84    2568
+## 738                    Hartlepool E06000001   Aged 85+    2097
+## 739                      Hastings E07000062   All Ages   91093
+## 740                      Hastings E07000062 Aged 65-69    5771
+## 741                      Hastings E07000062 Aged 70-74    3725
+## 742                      Hastings E07000062 Aged 75-79    3000
+## 743                      Hastings E07000062 Aged 80-84    2131
+## 744                      Hastings E07000062   Aged 85+    2509
+## 745                        Havant E07000090   All Ages  122210
+## 746                        Havant E07000090 Aged 65-69    8309
+## 747                        Havant E07000090 Aged 70-74    6132
+## 748                        Havant E07000090 Aged 75-79    5297
+## 749                        Havant E07000090 Aged 80-84    4207
+## 750                        Havant E07000090   Aged 85+    3901
+## 751                      Havering E09000016   All Ages  245974
+## 752                      Havering E09000016 Aged 65-69   13418
+## 753                      Havering E09000016 Aged 70-74    9616
+## 754                      Havering E09000016 Aged 75-79    8603
+## 755                      Havering E09000016 Aged 80-84    7094
+## 756                      Havering E09000016   Aged 85+    6851
+## 757      Herefordshire, County of E06000019   All Ages  187160
+## 758      Herefordshire, County of E06000019 Aged 65-69   13368
+## 759      Herefordshire, County of E06000019 Aged 70-74   10095
+## 760      Herefordshire, County of E06000019 Aged 75-79    7958
+## 761      Herefordshire, County of E06000019 Aged 80-84    5911
+## 762      Herefordshire, County of E06000019   Aged 85+    5856
+## 763                     Hertsmere E07000098   All Ages  102427
+## 764                     Hertsmere E07000098 Aged 65-69    5295
+## 765                     Hertsmere E07000098 Aged 70-74    3927
+## 766                     Hertsmere E07000098 Aged 75-79    3271
+## 767                     Hertsmere E07000098 Aged 80-84    2607
+## 768                     Hertsmere E07000098   Aged 85+    2973
+## 769                     High Peak E07000037   All Ages   91364
+## 770                     High Peak E07000037 Aged 65-69    5983
+## 771                     High Peak E07000037 Aged 70-74    4283
+## 772                     High Peak E07000037 Aged 75-79    3132
+## 773                     High Peak E07000037 Aged 80-84    2194
+## 774                     High Peak E07000037   Aged 85+    2110
+## 775                    Hillingdon E09000017   All Ages  292690
+## 776                    Hillingdon E09000017 Aged 65-69   11592
+## 777                    Hillingdon E09000017 Aged 70-74    8482
+## 778                    Hillingdon E09000017 Aged 75-79    7646
+## 779                    Hillingdon E09000017 Aged 80-84    5639
+## 780                    Hillingdon E09000017   Aged 85+    5122
+## 781         Hinckley and Bosworth E07000132   All Ages  107722
+## 782         Hinckley and Bosworth E07000132 Aged 65-69    7460
+## 783         Hinckley and Bosworth E07000132 Aged 70-74    5173
+## 784         Hinckley and Bosworth E07000132 Aged 75-79    3982
+## 785         Hinckley and Bosworth E07000132 Aged 80-84    2766
+## 786         Hinckley and Bosworth E07000132   Aged 85+    2715
+## 787                       Horsham E07000227   All Ages  134158
+## 788                       Horsham E07000227 Aged 65-69    8842
+## 789                       Horsham E07000227 Aged 70-74    6559
+## 790                       Horsham E07000227 Aged 75-79    5332
+## 791                       Horsham E07000227 Aged 80-84    4077
+## 792                       Horsham E07000227   Aged 85+    4095
+## 793                      Hounslow E09000018   All Ages  265568
+## 794                      Hounslow E09000018 Aged 65-69    9421
+## 795                      Hounslow E09000018 Aged 70-74    6843
+## 796                      Hounslow E09000018 Aged 75-79    5761
+## 797                      Hounslow E09000018 Aged 80-84    4063
+## 798                      Hounslow E09000018   Aged 85+    3460
+## 799               Huntingdonshire E07000011   All Ages  173605
+## 800               Huntingdonshire E07000011 Aged 65-69   10864
+## 801               Huntingdonshire E07000011 Aged 70-74    7596
+## 802               Huntingdonshire E07000011 Aged 75-79    5745
+## 803               Huntingdonshire E07000011 Aged 80-84    3909
+## 804               Huntingdonshire E07000011   Aged 85+    3846
+## 805                      Hyndburn E07000120   All Ages   80208
+## 806                      Hyndburn E07000120 Aged 65-69    4716
+## 807                      Hyndburn E07000120 Aged 70-74    3367
+## 808                      Hyndburn E07000120 Aged 75-79    2578
+## 809                      Hyndburn E07000120 Aged 80-84    1815
+## 810                      Hyndburn E07000120   Aged 85+    1659
+## 811                       Ipswich E07000202   All Ages  134966
+## 812                       Ipswich E07000202 Aged 65-69    6498
+## 813                       Ipswich E07000202 Aged 70-74    4449
+## 814                       Ipswich E07000202 Aged 75-79    4032
+## 815                       Ipswich E07000202 Aged 80-84    3070
+## 816                       Ipswich E07000202   Aged 85+    3381
+## 817                 Isle of Wight E06000046   All Ages  139105
+## 818                 Isle of Wight E06000046 Aged 65-69   11366
+## 819                 Isle of Wight E06000046 Aged 70-74    8527
+## 820                 Isle of Wight E06000046 Aged 75-79    6400
+## 821                 Isle of Wight E06000046 Aged 80-84    4838
+## 822                 Isle of Wight E06000046   Aged 85+    5181
+## 823               Isles of Scilly E06000053   All Ages    2280
+## 824               Isles of Scilly E06000053 Aged 65-69     185
+## 825               Isles of Scilly E06000053 Aged 70-74     135
+## 826               Isles of Scilly E06000053 Aged 75-79      91
+## 827               Isles of Scilly E06000053 Aged 80-84      66
+## 828               Isles of Scilly E06000053   Aged 85+      92
+## 829                     Islington E09000019   All Ages  221030
+## 830                     Islington E09000019 Aged 65-69    6331
+## 831                     Islington E09000019 Aged 70-74    4629
+## 832                     Islington E09000019 Aged 75-79    3683
+## 833                     Islington E09000019 Aged 80-84    2656
+## 834                     Islington E09000019   Aged 85+    2319
+## 835        Kensington and Chelsea E09000020   All Ages  156190
+## 836        Kensington and Chelsea E09000020 Aged 65-69    7300
+## 837        Kensington and Chelsea E09000020 Aged 70-74    5315
+## 838        Kensington and Chelsea E09000020 Aged 75-79    3931
+## 839        Kensington and Chelsea E09000020 Aged 80-84    2526
+## 840        Kensington and Chelsea E09000020   Aged 85+    2719
+## 841                     Kettering E07000153   All Ages   96945
+## 842                     Kettering E07000153 Aged 65-69    5857
+## 843                     Kettering E07000153 Aged 70-74    3924
+## 844                     Kettering E07000153 Aged 75-79    2924
+## 845                     Kettering E07000153 Aged 80-84    2106
+## 846                     Kettering E07000153   Aged 85+    2326
+## 847  King`s Lynn and West Norfolk E07000146   All Ages  150026
+## 848  King`s Lynn and West Norfolk E07000146 Aged 65-69   11343
+## 849  King`s Lynn and West Norfolk E07000146 Aged 70-74    8663
+## 850  King`s Lynn and West Norfolk E07000146 Aged 75-79    7048
+## 851  King`s Lynn and West Norfolk E07000146 Aged 80-84    5179
+## 852  King`s Lynn and West Norfolk E07000146   Aged 85+    4896
+## 853   Kingston upon Hull, City of E06000010   All Ages  257710
+## 854   Kingston upon Hull, City of E06000010 Aged 65-69   12122
+## 855   Kingston upon Hull, City of E06000010 Aged 70-74    8281
+## 856   Kingston upon Hull, City of E06000010 Aged 75-79    7453
+## 857   Kingston upon Hull, City of E06000010 Aged 80-84    5418
+## 858   Kingston upon Hull, City of E06000010   Aged 85+    4781
+## 859          Kingston upon Thames E09000021   All Ages  169958
+## 860          Kingston upon Thames E09000021 Aged 65-69    7087
+## 861          Kingston upon Thames E09000021 Aged 70-74    4914
+## 862          Kingston upon Thames E09000021 Aged 75-79    3947
+## 863          Kingston upon Thames E09000021 Aged 80-84    3108
+## 864          Kingston upon Thames E09000021   Aged 85+    3448
+## 865                      Kirklees E08000034   All Ages  431020
+## 866                      Kirklees E08000034 Aged 65-69   23583
+## 867                      Kirklees E08000034 Aged 70-74   16563
+## 868                      Kirklees E08000034 Aged 75-79   13575
+## 869                      Kirklees E08000034 Aged 80-84    9271
+## 870                      Kirklees E08000034   Aged 85+    8580
+## 871                      Knowsley E08000011   All Ages  146407
+## 872                      Knowsley E08000011 Aged 65-69    7226
+## 873                      Knowsley E08000011 Aged 70-74    5448
+## 874                      Knowsley E08000011 Aged 75-79    5110
+## 875                      Knowsley E08000011 Aged 80-84    3767
+## 876                      Knowsley E08000011   Aged 85+    2814
+## 877                       Lambeth E09000022   All Ages  318216
+## 878                       Lambeth E09000022 Aged 65-69    7585
+## 879                       Lambeth E09000022 Aged 70-74    5812
+## 880                       Lambeth E09000022 Aged 75-79    4799
+## 881                       Lambeth E09000022 Aged 80-84    3423
+## 882                       Lambeth E09000022   Aged 85+    3143
+## 883                     Lancaster E07000121   All Ages  141277
+## 884                     Lancaster E07000121 Aged 65-69    8364
+## 885                     Lancaster E07000121 Aged 70-74    6302
+## 886                     Lancaster E07000121 Aged 75-79    5201
+## 887                     Lancaster E07000121 Aged 80-84    3819
+## 888                     Lancaster E07000121   Aged 85+    3692
+## 889                         Leeds E08000035   All Ages  766399
+## 890                         Leeds E08000035 Aged 65-69   36154
+## 891                         Leeds E08000035 Aged 70-74   26261
+## 892                         Leeds E08000035 Aged 75-79   23113
+## 893                         Leeds E08000035 Aged 80-84   16674
+## 894                         Leeds E08000035   Aged 85+   15391
+## 895                     Leicester E06000016   All Ages  337653
+## 896                     Leicester E06000016 Aged 65-69   11849
+## 897                     Leicester E06000016 Aged 70-74    8664
+## 898                     Leicester E06000016 Aged 75-79    7608
+## 899                     Leicester E06000016 Aged 80-84    5664
+## 900                     Leicester E06000016   Aged 85+    5680
+## 901                         Lewes E07000063   All Ages  100229
+## 902                         Lewes E07000063 Aged 65-69    7138
+## 903                         Lewes E07000063 Aged 70-74    5381
+## 904                         Lewes E07000063 Aged 75-79    4441
+## 905                         Lewes E07000063 Aged 80-84    3557
+## 906                         Lewes E07000063   Aged 85+    3935
+## 907                      Lewisham E09000023   All Ages  291933
+## 908                      Lewisham E09000023 Aged 65-69    8318
+## 909                      Lewisham E09000023 Aged 70-74    6178
+## 910                      Lewisham E09000023 Aged 75-79    5380
+## 911                      Lewisham E09000023 Aged 80-84    3836
+## 912                      Lewisham E09000023   Aged 85+    3663
+## 913                     Lichfield E07000194   All Ages  102093
+## 914                     Lichfield E07000194 Aged 65-69    7485
+## 915                     Lichfield E07000194 Aged 70-74    6028
+## 916                     Lichfield E07000194 Aged 75-79    4183
+## 917                     Lichfield E07000194 Aged 80-84    2867
+## 918                     Lichfield E07000194   Aged 85+    2566
+## 919                       Lincoln E07000138   All Ages   96202
+## 920                       Lincoln E07000138 Aged 65-69    4397
+## 921                       Lincoln E07000138 Aged 70-74    3153
+## 922                       Lincoln E07000138 Aged 75-79    2572
+## 923                       Lincoln E07000138 Aged 80-84    2048
+## 924                       Lincoln E07000138   Aged 85+    2125
+## 925                     Liverpool E08000012   All Ages  473073
+## 926                     Liverpool E08000012 Aged 65-69   21184
+## 927                     Liverpool E08000012 Aged 70-74   15539
+## 928                     Liverpool E08000012 Aged 75-79   14038
+## 929                     Liverpool E08000012 Aged 80-84   10189
+## 930                     Liverpool E08000012   Aged 85+    8355
+## 931                         Luton E06000032   All Ages  210962
+## 932                         Luton E06000032 Aged 65-69    7367
+## 933                         Luton E06000032 Aged 70-74    5695
+## 934                         Luton E06000032 Aged 75-79    5427
+## 935                         Luton E06000032 Aged 80-84    3768
+## 936                         Luton E06000032   Aged 85+    3236
+## 937                     Maidstone E07000110   All Ages  161819
+## 938                     Maidstone E07000110 Aged 65-69    9749
+## 939                     Maidstone E07000110 Aged 70-74    6922
+## 940                     Maidstone E07000110 Aged 75-79    5610
+## 941                     Maidstone E07000110 Aged 80-84    4101
+## 942                     Maidstone E07000110   Aged 85+    3801
+## 943                        Maldon E07000074   All Ages   62767
+## 944                        Maldon E07000074 Aged 65-69    5034
+## 945                        Maldon E07000074 Aged 70-74    3420
+## 946                        Maldon E07000074 Aged 75-79    2642
+## 947                        Maldon E07000074 Aged 80-84    1803
+## 948                        Maldon E07000074   Aged 85+    1604
+## 949                 Malvern Hills E07000235   All Ages   75911
+## 950                 Malvern Hills E07000235 Aged 65-69    6034
+## 951                 Malvern Hills E07000235 Aged 70-74    4634
+## 952                 Malvern Hills E07000235 Aged 75-79    3716
+## 953                 Malvern Hills E07000235 Aged 80-84    2822
+## 954                 Malvern Hills E07000235   Aged 85+    2959
+## 955                    Manchester E08000003   All Ages  520215
+## 956                    Manchester E08000003 Aged 65-69   15285
+## 957                    Manchester E08000003 Aged 70-74   11304
+## 958                    Manchester E08000003 Aged 75-79    9495
+## 959                    Manchester E08000003 Aged 80-84    6792
+## 960                    Manchester E08000003   Aged 85+    6478
+## 961                     Mansfield E07000174   All Ages  105893
+## 962                     Mansfield E07000174 Aged 65-69    6151
+## 963                     Mansfield E07000174 Aged 70-74    4588
+## 964                     Mansfield E07000174 Aged 75-79    3642
+## 965                     Mansfield E07000174 Aged 80-84    2693
+## 966                     Mansfield E07000174   Aged 85+    2439
+## 967                        Medway E06000035   All Ages  274015
+## 968                        Medway E06000035 Aged 65-69   14281
+## 969                        Medway E06000035 Aged 70-74    9737
+## 970                        Medway E06000035 Aged 75-79    7747
+## 971                        Medway E06000035 Aged 80-84    5316
+## 972                        Medway E06000035   Aged 85+    4739
+## 973                        Melton E07000133   All Ages   50969
+## 974                        Melton E07000133 Aged 65-69    3404
+## 975                        Melton E07000133 Aged 70-74    2497
+## 976                        Melton E07000133 Aged 75-79    1845
+## 977                        Melton E07000133 Aged 80-84    1371
+## 978                        Melton E07000133   Aged 85+    1334
+## 979                        Mendip E07000187   All Ages  110844
+## 980                        Mendip E07000187 Aged 65-69    7594
+## 981                        Mendip E07000187 Aged 70-74    5480
+## 982                        Mendip E07000187 Aged 75-79    4305
+## 983                        Mendip E07000187 Aged 80-84    3246
+## 984                        Mendip E07000187   Aged 85+    3387
+## 985                        Merton E09000024   All Ages  203515
+## 986                        Merton E09000024 Aged 65-69    7540
+## 987                        Merton E09000024 Aged 70-74    5475
+## 988                        Merton E09000024 Aged 75-79    4684
+## 989                        Merton E09000024 Aged 80-84    3568
+## 990                        Merton E09000024   Aged 85+    3372
+## 991                     Mid Devon E07000042   All Ages   79198
+## 992                     Mid Devon E07000042 Aged 65-69    5588
+## 993                     Mid Devon E07000042 Aged 70-74    4189
+## 994                     Mid Devon E07000042 Aged 75-79    3170
+## 995                     Mid Devon E07000042 Aged 80-84    2363
+## 996                     Mid Devon E07000042   Aged 85+    2408
+## 997                   Mid Suffolk E07000203   All Ages   99121
+## 998                   Mid Suffolk E07000203 Aged 65-69    7425
+## 999                   Mid Suffolk E07000203 Aged 70-74    5334
+## 1000                  Mid Suffolk E07000203 Aged 75-79    4068
+## 1001                  Mid Suffolk E07000203 Aged 80-84    2866
+## 1002                  Mid Suffolk E07000203   Aged 85+    2822
+## 1003                   Mid Sussex E07000228   All Ages  144377
+## 1004                   Mid Sussex E07000228 Aged 65-69    8816
+## 1005                   Mid Sussex E07000228 Aged 70-74    6270
+## 1006                   Mid Sussex E07000228 Aged 75-79    4984
+## 1007                   Mid Sussex E07000228 Aged 80-84    4055
+## 1008                   Mid Sussex E07000228   Aged 85+    4374
+## 1009                Middlesbrough E06000002   All Ages  139119
+## 1010                Middlesbrough E06000002 Aged 65-69    6692
+## 1011                Middlesbrough E06000002 Aged 70-74    4951
+## 1012                Middlesbrough E06000002 Aged 75-79    4400
+## 1013                Middlesbrough E06000002 Aged 80-84    3252
+## 1014                Middlesbrough E06000002   Aged 85+    2663
+## 1015                Milton Keynes E06000042   All Ages  259245
+## 1016                Milton Keynes E06000042 Aged 65-69   11353
+## 1017                Milton Keynes E06000042 Aged 70-74    7502
+## 1018                Milton Keynes E06000042 Aged 75-79    5601
+## 1019                Milton Keynes E06000042 Aged 80-84    3942
+## 1020                Milton Keynes E06000042   Aged 85+    3887
+## 1021                  Mole Valley E07000210   All Ages   86234
+## 1022                  Mole Valley E07000210 Aged 65-69    5686
+## 1023                  Mole Valley E07000210 Aged 70-74    4266
+## 1024                  Mole Valley E07000210 Aged 75-79    3656
+## 1025                  Mole Valley E07000210 Aged 80-84    2835
+## 1026                  Mole Valley E07000210   Aged 85+    2895
+## 1027                   New Forest E07000091   All Ages  178907
+## 1028                   New Forest E07000091 Aged 65-69   14145
+## 1029                   New Forest E07000091 Aged 70-74   10631
+## 1030                   New Forest E07000091 Aged 75-79    8885
+## 1031                   New Forest E07000091 Aged 80-84    7135
+## 1032                   New Forest E07000091   Aged 85+    7887
+## 1033          Newark and Sherwood E07000175   All Ages  117758
+## 1034          Newark and Sherwood E07000175 Aged 65-69    7983
+## 1035          Newark and Sherwood E07000175 Aged 70-74    5825
+## 1036          Newark and Sherwood E07000175 Aged 75-79    4513
+## 1037          Newark and Sherwood E07000175 Aged 80-84    3158
+## 1038          Newark and Sherwood E07000175   Aged 85+    2992
+## 1039          Newcastle upon Tyne E08000021   All Ages  289835
+## 1040          Newcastle upon Tyne E08000021 Aged 65-69   12540
+## 1041          Newcastle upon Tyne E08000021 Aged 70-74    8828
+## 1042          Newcastle upon Tyne E08000021 Aged 75-79    8104
+## 1043          Newcastle upon Tyne E08000021 Aged 80-84    6054
+## 1044          Newcastle upon Tyne E08000021   Aged 85+    5929
+## 1045         Newcastle-under-Lyme E07000195   All Ages  126052
+## 1046         Newcastle-under-Lyme E07000195 Aged 65-69    7867
+## 1047         Newcastle-under-Lyme E07000195 Aged 70-74    5801
+## 1048         Newcastle-under-Lyme E07000195 Aged 75-79    4683
+## 1049         Newcastle-under-Lyme E07000195 Aged 80-84    3428
+## 1050         Newcastle-under-Lyme E07000195   Aged 85+    3051
+## 1051                       Newham E09000025   All Ages  324322
+## 1052                       Newham E09000025 Aged 65-69    7076
+## 1053                       Newham E09000025 Aged 70-74    5392
+## 1054                       Newham E09000025 Aged 75-79    4524
+## 1055                       Newham E09000025 Aged 80-84    3051
+## 1056                       Newham E09000025   Aged 85+    2500
+## 1057                  North Devon E07000043   All Ages   94059
+## 1058                  North Devon E07000043 Aged 65-69    7132
+## 1059                  North Devon E07000043 Aged 70-74    5316
+## 1060                  North Devon E07000043 Aged 75-79    4171
+## 1061                  North Devon E07000043 Aged 80-84    3064
+## 1062                  North Devon E07000043   Aged 85+    3201
+## 1063                 North Dorset E07000050   All Ages   70043
+## 1064                 North Dorset E07000050 Aged 65-69    5309
+## 1065                 North Dorset E07000050 Aged 70-74    3901
+## 1066                 North Dorset E07000050 Aged 75-79    3020
+## 1067                 North Dorset E07000050 Aged 80-84    2272
+## 1068                 North Dorset E07000050   Aged 85+    2370
+## 1069        North East Derbyshire E07000038   All Ages   99352
+## 1070        North East Derbyshire E07000038 Aged 65-69    7526
+## 1071        North East Derbyshire E07000038 Aged 70-74    5621
+## 1072        North East Derbyshire E07000038 Aged 75-79    4381
+## 1073        North East Derbyshire E07000038 Aged 80-84    2989
+## 1074        North East Derbyshire E07000038   Aged 85+    2689
+## 1075      North East Lincolnshire E06000012   All Ages  159804
+## 1076      North East Lincolnshire E06000012 Aged 65-69    9462
+## 1077      North East Lincolnshire E06000012 Aged 70-74    6911
+## 1078      North East Lincolnshire E06000012 Aged 75-79    5977
+## 1079      North East Lincolnshire E06000012 Aged 80-84    4413
+## 1080      North East Lincolnshire E06000012   Aged 85+    3967
+## 1081          North Hertfordshire E07000099   All Ages  131046
+## 1082          North Hertfordshire E07000099 Aged 65-69    7162
+## 1083          North Hertfordshire E07000099 Aged 70-74    5324
+## 1084          North Hertfordshire E07000099 Aged 75-79    4452
+## 1085          North Hertfordshire E07000099 Aged 80-84    3498
+## 1086          North Hertfordshire E07000099   Aged 85+    3397
+## 1087               North Kesteven E07000139   All Ages  111046
+## 1088               North Kesteven E07000139 Aged 65-69    7839
+## 1089               North Kesteven E07000139 Aged 70-74    6209
+## 1090               North Kesteven E07000139 Aged 75-79    4785
+## 1091               North Kesteven E07000139 Aged 80-84    3292
+## 1092               North Kesteven E07000139   Aged 85+    3015
+## 1093           North Lincolnshire E06000013   All Ages  169247
+## 1094           North Lincolnshire E06000013 Aged 65-69   10727
+## 1095           North Lincolnshire E06000013 Aged 70-74    7880
+## 1096           North Lincolnshire E06000013 Aged 75-79    6209
+## 1097           North Lincolnshire E06000013 Aged 80-84    4398
+## 1098           North Lincolnshire E06000013   Aged 85+    4154
+## 1099                North Norfolk E07000147   All Ages  102867
+## 1100                North Norfolk E07000147 Aged 65-69    9589
+## 1101                North Norfolk E07000147 Aged 70-74    7315
+## 1102                North Norfolk E07000147 Aged 75-79    6056
+## 1103                North Norfolk E07000147 Aged 80-84    4644
+## 1104                North Norfolk E07000147   Aged 85+    4499
+## 1105               North Somerset E06000024   All Ages  208154
+## 1106               North Somerset E06000024 Aged 65-69   14862
+## 1107               North Somerset E06000024 Aged 70-74   10881
+## 1108               North Somerset E06000024 Aged 75-79    8671
+## 1109               North Somerset E06000024 Aged 80-84    6502
+## 1110               North Somerset E06000024   Aged 85+    6879
+## 1111               North Tyneside E08000022   All Ages  202744
+## 1112               North Tyneside E08000022 Aged 65-69   12254
+## 1113               North Tyneside E08000022 Aged 70-74    8416
+## 1114               North Tyneside E08000022 Aged 75-79    7297
+## 1115               North Tyneside E08000022 Aged 80-84    5612
+## 1116               North Tyneside E08000022   Aged 85+    5083
+## 1117           North Warwickshire E07000218   All Ages   62468
+## 1118           North Warwickshire E07000218 Aged 65-69    4270
+## 1119           North Warwickshire E07000218 Aged 70-74    3196
+## 1120           North Warwickshire E07000218 Aged 75-79    2330
+## 1121           North Warwickshire E07000218 Aged 80-84    1611
+## 1122           North Warwickshire E07000218   Aged 85+    1522
+## 1123    North West Leicestershire E07000134   All Ages   95882
+## 1124    North West Leicestershire E07000134 Aged 65-69    6363
+## 1125    North West Leicestershire E07000134 Aged 70-74    4359
+## 1126    North West Leicestershire E07000134 Aged 75-79    3210
+## 1127    North West Leicestershire E07000134 Aged 80-84    2255
+## 1128    North West Leicestershire E07000134   Aged 85+    2258
+## 1129                  Northampton E07000154   All Ages  219495
+## 1130                  Northampton E07000154 Aged 65-69   10437
+## 1131                  Northampton E07000154 Aged 70-74    7098
+## 1132                  Northampton E07000154 Aged 75-79    5530
+## 1133                  Northampton E07000154 Aged 80-84    4200
+## 1134                  Northampton E07000154   Aged 85+    4267
+## 1135               Northumberland E06000057   All Ages  315987
+## 1136               Northumberland E06000057 Aged 65-69   23387
+## 1137               Northumberland E06000057 Aged 70-74   16530
+## 1138               Northumberland E06000057 Aged 75-79   13239
+## 1139               Northumberland E06000057 Aged 80-84    9352
+## 1140               Northumberland E06000057   Aged 85+    8636
+## 1141                      Norwich E07000148   All Ages  137472
+## 1142                      Norwich E07000148 Aged 65-69    5982
+## 1143                      Norwich E07000148 Aged 70-74    4359
+## 1144                      Norwich E07000148 Aged 75-79    3645
+## 1145                      Norwich E07000148 Aged 80-84    2995
+## 1146                      Norwich E07000148   Aged 85+    3339
+## 1147                   Nottingham E06000018   All Ages  314268
+## 1148                   Nottingham E06000018 Aged 65-69   10914
+## 1149                   Nottingham E06000018 Aged 70-74    8061
+## 1150                   Nottingham E06000018 Aged 75-79    7071
+## 1151                   Nottingham E06000018 Aged 80-84    5523
+## 1152                   Nottingham E06000018   Aged 85+    5424
+## 1153        Nuneaton and Bedworth E07000219   All Ages  126174
+## 1154        Nuneaton and Bedworth E07000219 Aged 65-69    7560
+## 1155        Nuneaton and Bedworth E07000219 Aged 70-74    5651
+## 1156        Nuneaton and Bedworth E07000219 Aged 75-79    4280
+## 1157        Nuneaton and Bedworth E07000219 Aged 80-84    3056
+## 1158        Nuneaton and Bedworth E07000219   Aged 85+    2635
+## 1159            Oadby and Wigston E07000135   All Ages   55928
+## 1160            Oadby and Wigston E07000135 Aged 65-69    3239
+## 1161            Oadby and Wigston E07000135 Aged 70-74    2515
+## 1162            Oadby and Wigston E07000135 Aged 75-79    2347
+## 1163            Oadby and Wigston E07000135 Aged 80-84    1921
+## 1164            Oadby and Wigston E07000135   Aged 85+    1686
+## 1165                       Oldham E08000004   All Ages  228765
+## 1166                       Oldham E08000004 Aged 65-69   11632
+## 1167                       Oldham E08000004 Aged 70-74    8720
+## 1168                       Oldham E08000004 Aged 75-79    6809
+## 1169                       Oldham E08000004 Aged 80-84    4574
+## 1170                       Oldham E08000004   Aged 85+    4272
+## 1171                       Oxford E07000178   All Ages  157997
+## 1172                       Oxford E07000178 Aged 65-69    5228
+## 1173                       Oxford E07000178 Aged 70-74    3987
+## 1174                       Oxford E07000178 Aged 75-79    3246
+## 1175                       Oxford E07000178 Aged 80-84    2509
+## 1176                       Oxford E07000178   Aged 85+    2847
+## 1177                       Pendle E07000122   All Ages   89840
+## 1178                       Pendle E07000122 Aged 65-69    5309
+## 1179                       Pendle E07000122 Aged 70-74    3619
+## 1180                       Pendle E07000122 Aged 75-79    2843
+## 1181                       Pendle E07000122 Aged 80-84    2070
+## 1182                       Pendle E07000122   Aged 85+    2006
+## 1183                 Peterborough E06000031   All Ages  190461
+## 1184                 Peterborough E06000031 Aged 65-69    8487
+## 1185                 Peterborough E06000031 Aged 70-74    6032
+## 1186                 Peterborough E06000031 Aged 75-79    5059
+## 1187                 Peterborough E06000031 Aged 80-84    3981
+## 1188                 Peterborough E06000031   Aged 85+    3705
+## 1189                     Plymouth E06000026   All Ages  261546
+## 1190                     Plymouth E06000026 Aged 65-69   14275
+## 1191                     Plymouth E06000026 Aged 70-74   10489
+## 1192                     Plymouth E06000026 Aged 75-79    8562
+## 1193                     Plymouth E06000026 Aged 80-84    6334
+## 1194                     Plymouth E06000026   Aged 85+    5942
+## 1195                        Poole E06000029   All Ages  150109
+## 1196                        Poole E06000029 Aged 65-69    9633
+## 1197                        Poole E06000029 Aged 70-74    7041
+## 1198                        Poole E06000029 Aged 75-79    6097
+## 1199                        Poole E06000029 Aged 80-84    4922
+## 1200                        Poole E06000029   Aged 85+    5199
+## 1201                   Portsmouth E06000044   All Ages  209085
+## 1202                   Portsmouth E06000044 Aged 65-69    9207
+## 1203                   Portsmouth E06000044 Aged 70-74    6458
+## 1204                   Portsmouth E06000044 Aged 75-79    5410
+## 1205                   Portsmouth E06000044 Aged 80-84    4041
+## 1206                   Portsmouth E06000044   Aged 85+    4355
+## 1207                      Preston E07000123   All Ages  140452
+## 1208                      Preston E07000123 Aged 65-69    6121
+## 1209                      Preston E07000123 Aged 70-74    4632
+## 1210                      Preston E07000123 Aged 75-79    4001
+## 1211                      Preston E07000123 Aged 80-84    2942
+## 1212                      Preston E07000123   Aged 85+    2625
+## 1213                      Purbeck E07000051   All Ages   45679
+## 1214                      Purbeck E07000051 Aged 65-69    3729
+## 1215                      Purbeck E07000051 Aged 70-74    2763
+## 1216                      Purbeck E07000051 Aged 75-79    2145
+## 1217                      Purbeck E07000051 Aged 80-84    1750
+## 1218                      Purbeck E07000051   Aged 85+    1599
+## 1219                      Reading E06000038   All Ages  160825
+## 1220                      Reading E06000038 Aged 65-69    5795
+## 1221                      Reading E06000038 Aged 70-74    4323
+## 1222                      Reading E06000038 Aged 75-79    3595
+## 1223                      Reading E06000038 Aged 80-84    2680
+## 1224                      Reading E06000038   Aged 85+    2836
+## 1225                    Redbridge E09000026   All Ages  293055
+## 1226                    Redbridge E09000026 Aged 65-69   10678
+## 1227                    Redbridge E09000026 Aged 70-74    7846
+## 1228                    Redbridge E09000026 Aged 75-79    6674
+## 1229                    Redbridge E09000026 Aged 80-84    5157
+## 1230                    Redbridge E09000026   Aged 85+    5293
+## 1231         Redcar and Cleveland E06000003   All Ages  135042
+## 1232         Redcar and Cleveland E06000003 Aged 65-69    9131
+## 1233         Redcar and Cleveland E06000003 Aged 70-74    6836
+## 1234         Redcar and Cleveland E06000003 Aged 75-79    5633
+## 1235         Redcar and Cleveland E06000003 Aged 80-84    3770
+## 1236         Redcar and Cleveland E06000003   Aged 85+    3440
+## 1237                     Redditch E07000236   All Ages   84471
+## 1238                     Redditch E07000236 Aged 65-69    5010
+## 1239                     Redditch E07000236 Aged 70-74    3236
+## 1240                     Redditch E07000236 Aged 75-79    2223
+## 1241                     Redditch E07000236 Aged 80-84    1616
+## 1242                     Redditch E07000236   Aged 85+    1613
+## 1243         Reigate and Banstead E07000211   All Ages  143094
+## 1244         Reigate and Banstead E07000211 Aged 65-69    7722
+## 1245         Reigate and Banstead E07000211 Aged 70-74    5350
+## 1246         Reigate and Banstead E07000211 Aged 75-79    4500
+## 1247         Reigate and Banstead E07000211 Aged 80-84    3617
+## 1248         Reigate and Banstead E07000211   Aged 85+    4137
+## 1249                Ribble Valley E07000124   All Ages   58091
+## 1250                Ribble Valley E07000124 Aged 65-69    4231
+## 1251                Ribble Valley E07000124 Aged 70-74    3036
+## 1252                Ribble Valley E07000124 Aged 75-79    2372
+## 1253                Ribble Valley E07000124 Aged 80-84    1747
+## 1254                Ribble Valley E07000124   Aged 85+    1661
+## 1255         Richmond upon Thames E09000027   All Ages  193585
+## 1256         Richmond upon Thames E09000027 Aged 65-69    9207
+## 1257         Richmond upon Thames E09000027 Aged 70-74    6311
+## 1258         Richmond upon Thames E09000027 Aged 75-79    4830
+## 1259         Richmond upon Thames E09000027 Aged 80-84    3720
+## 1260         Richmond upon Thames E09000027   Aged 85+    4230
+## 1261                Richmondshire E07000166   All Ages   52729
+## 1262                Richmondshire E07000166 Aged 65-69    3424
+## 1263                Richmondshire E07000166 Aged 70-74    2378
+## 1264                Richmondshire E07000166 Aged 75-79    1988
+## 1265                Richmondshire E07000166 Aged 80-84    1296
+## 1266                Richmondshire E07000166   Aged 85+    1141
+## 1267                     Rochdale E08000005   All Ages  212962
+## 1268                     Rochdale E08000005 Aged 65-69   10985
+## 1269                     Rochdale E08000005 Aged 70-74    7889
+## 1270                     Rochdale E08000005 Aged 75-79    6277
+## 1271                     Rochdale E08000005 Aged 80-84    4467
+## 1272                     Rochdale E08000005   Aged 85+    4123
+## 1273                     Rochford E07000075   All Ages   84776
+## 1274                     Rochford E07000075 Aged 65-69    6044
+## 1275                     Rochford E07000075 Aged 70-74    4257
+## 1276                     Rochford E07000075 Aged 75-79    3601
+## 1277                     Rochford E07000075 Aged 80-84    2653
+## 1278                     Rochford E07000075   Aged 85+    2359
+## 1279                   Rossendale E07000125   All Ages   69168
+## 1280                   Rossendale E07000125 Aged 65-69    4239
+## 1281                   Rossendale E07000125 Aged 70-74    2776
+## 1282                   Rossendale E07000125 Aged 75-79    2060
+## 1283                   Rossendale E07000125 Aged 80-84    1482
+## 1284                   Rossendale E07000125   Aged 85+    1423
+## 1285                       Rother E07000064   All Ages   92130
+## 1286                       Rother E07000064 Aged 65-69    8374
+## 1287                       Rother E07000064 Aged 70-74    6236
+## 1288                       Rother E07000064 Aged 75-79    5177
+## 1289                       Rother E07000064 Aged 80-84    3943
+## 1290                       Rother E07000064   Aged 85+    4671
+## 1291                    Rotherham E08000018   All Ages  260070
+## 1292                    Rotherham E08000018 Aged 65-69   15736
+## 1293                    Rotherham E08000018 Aged 70-74   11642
+## 1294                    Rotherham E08000018 Aged 75-79    9407
+## 1295                    Rotherham E08000018 Aged 80-84    6350
+## 1296                    Rotherham E08000018   Aged 85+    5796
+## 1297                        Rugby E07000220   All Ages  102500
+## 1298                        Rugby E07000220 Aged 65-69    5904
+## 1299                        Rugby E07000220 Aged 70-74    4717
+## 1300                        Rugby E07000220 Aged 75-79    3527
+## 1301                        Rugby E07000220 Aged 80-84    2422
+## 1302                        Rugby E07000220   Aged 85+    2670
+## 1303                    Runnymede E07000212   All Ages   84584
+## 1304                    Runnymede E07000212 Aged 65-69    4311
+## 1305                    Runnymede E07000212 Aged 70-74    3224
+## 1306                    Runnymede E07000212 Aged 75-79    2687
+## 1307                    Runnymede E07000212 Aged 80-84    2203
+## 1308                    Runnymede E07000212   Aged 85+    2173
+## 1309                   Rushcliffe E07000176   All Ages  113670
+## 1310                   Rushcliffe E07000176 Aged 65-69    7114
+## 1311                   Rushcliffe E07000176 Aged 70-74    5183
+## 1312                   Rushcliffe E07000176 Aged 75-79    4146
+## 1313                   Rushcliffe E07000176 Aged 80-84    3233
+## 1314                   Rushcliffe E07000176   Aged 85+    3255
+## 1315                     Rushmoor E07000092   All Ages   95296
+## 1316                     Rushmoor E07000092 Aged 65-69    4240
+## 1317                     Rushmoor E07000092 Aged 70-74    3059
+## 1318                     Rushmoor E07000092 Aged 75-79    2383
+## 1319                     Rushmoor E07000092 Aged 80-84    1570
+## 1320                     Rushmoor E07000092   Aged 85+    1693
+## 1321                      Rutland E06000017   All Ages   38022
+## 1322                      Rutland E06000017 Aged 65-69    2697
+## 1323                      Rutland E06000017 Aged 70-74    2065
+## 1324                      Rutland E06000017 Aged 75-79    1685
+## 1325                      Rutland E06000017 Aged 80-84    1153
+## 1326                      Rutland E06000017   Aged 85+    1230
+## 1327                      Ryedale E07000167   All Ages   52655
+## 1328                      Ryedale E07000167 Aged 65-69    4240
+## 1329                      Ryedale E07000167 Aged 70-74    3105
+## 1330                      Ryedale E07000167 Aged 75-79    2488
+## 1331                      Ryedale E07000167 Aged 80-84    1820
+## 1332                      Ryedale E07000167   Aged 85+    1689
+## 1333                      Salford E08000006   All Ages  242040
+## 1334                      Salford E08000006 Aged 65-69   11049
+## 1335                      Salford E08000006 Aged 70-74    8189
+## 1336                      Salford E08000006 Aged 75-79    6746
+## 1337                      Salford E08000006 Aged 80-84    4708
+## 1338                      Salford E08000006   Aged 85+    4645
+## 1339                     Sandwell E08000028   All Ages  316719
+## 1340                     Sandwell E08000028 Aged 65-69   13810
+## 1341                     Sandwell E08000028 Aged 70-74   11747
+## 1342                     Sandwell E08000028 Aged 75-79    9648
+## 1343                     Sandwell E08000028 Aged 80-84    6858
+## 1344                     Sandwell E08000028   Aged 85+    6460
+## 1345                  Scarborough E07000168   All Ages  108006
+## 1346                  Scarborough E07000168 Aged 65-69    8563
+## 1347                  Scarborough E07000168 Aged 70-74    6307
+## 1348                  Scarborough E07000168 Aged 75-79    5277
+## 1349                  Scarborough E07000168 Aged 80-84    3789
+## 1350                  Scarborough E07000168   Aged 85+    3530
+## 1351                    Sedgemoor E07000188   All Ages  119057
+## 1352                    Sedgemoor E07000188 Aged 65-69    8365
+## 1353                    Sedgemoor E07000188 Aged 70-74    6107
+## 1354                    Sedgemoor E07000188 Aged 75-79    4736
+## 1355                    Sedgemoor E07000188 Aged 80-84    3486
+## 1356                    Sedgemoor E07000188   Aged 85+    3630
+## 1357                       Sefton E08000014   All Ages  273531
+## 1358                       Sefton E08000014 Aged 65-69   17339
+## 1359                       Sefton E08000014 Aged 70-74   13842
+## 1360                       Sefton E08000014 Aged 75-79   12145
+## 1361                       Sefton E08000014 Aged 80-84    9478
+## 1362                       Sefton E08000014   Aged 85+    8349
+## 1363                        Selby E07000169   All Ages   85355
+## 1364                        Selby E07000169 Aged 65-69    5551
+## 1365                        Selby E07000169 Aged 70-74    3766
+## 1366                        Selby E07000169 Aged 75-79    2926
+## 1367                        Selby E07000169 Aged 80-84    2001
+## 1368                        Selby E07000169   Aged 85+    1935
+## 1369                    Sevenoaks E07000111   All Ages  117811
+## 1370                    Sevenoaks E07000111 Aged 65-69    7647
+## 1371                    Sevenoaks E07000111 Aged 70-74    5363
+## 1372                    Sevenoaks E07000111 Aged 75-79    4407
+## 1373                    Sevenoaks E07000111 Aged 80-84    3488
+## 1374                    Sevenoaks E07000111   Aged 85+    3266
+## 1375                    Sheffield E08000019   All Ages  563749
+## 1376                    Sheffield E08000019 Aged 65-69   26977
+## 1377                    Sheffield E08000019 Aged 70-74   20981
+## 1378                    Sheffield E08000019 Aged 75-79   17844
+## 1379                    Sheffield E08000019 Aged 80-84   12958
+## 1380                    Sheffield E08000019   Aged 85+   12426
+## 1381                      Shepway E07000112   All Ages  109452
+## 1382                      Shepway E07000112 Aged 65-69    8129
+## 1383                      Shepway E07000112 Aged 70-74    5766
+## 1384                      Shepway E07000112 Aged 75-79    4505
+## 1385                      Shepway E07000112 Aged 80-84    3293
+## 1386                      Shepway E07000112   Aged 85+    3708
+## 1387                   Shropshire E06000051   All Ages  310121
+## 1388                   Shropshire E06000051 Aged 65-69   22130
+## 1389                   Shropshire E06000051 Aged 70-74   17026
+## 1390                   Shropshire E06000051 Aged 75-79   13006
+## 1391                   Shropshire E06000051 Aged 80-84    9486
+## 1392                   Shropshire E06000051   Aged 85+    9235
+## 1393                       Slough E06000039   All Ages  144575
+## 1394                       Slough E06000039 Aged 65-69    4144
+## 1395                       Slough E06000039 Aged 70-74    3145
+## 1396                       Slough E06000039 Aged 75-79    2547
+## 1397                       Slough E06000039 Aged 80-84    2008
+## 1398                       Slough E06000039   Aged 85+    1774
+## 1399                     Solihull E08000029   All Ages  209890
+## 1400                     Solihull E08000029 Aged 65-69   13072
+## 1401                     Solihull E08000029 Aged 70-74    9882
+## 1402                     Solihull E08000029 Aged 75-79    7930
+## 1403                     Solihull E08000029 Aged 80-84    6103
+## 1404                     Solihull E08000029   Aged 85+    6285
+## 1405                  South Bucks E07000006   All Ages   68512
+## 1406                  South Bucks E07000006 Aged 65-69    3999
+## 1407                  South Bucks E07000006 Aged 70-74    3115
+## 1408                  South Bucks E07000006 Aged 75-79    2769
+## 1409                  South Bucks E07000006 Aged 80-84    2147
+## 1410                  South Bucks E07000006   Aged 85+    2238
+## 1411         South Cambridgeshire E07000012   All Ages  153281
+## 1412         South Cambridgeshire E07000012 Aged 65-69    9119
+## 1413         South Cambridgeshire E07000012 Aged 70-74    6375
+## 1414         South Cambridgeshire E07000012 Aged 75-79    5130
+## 1415         South Cambridgeshire E07000012 Aged 80-84    3752
+## 1416         South Cambridgeshire E07000012   Aged 85+    3870
+## 1417             South Derbyshire E07000039   All Ages   98374
+## 1418             South Derbyshire E07000039 Aged 65-69    5855
+## 1419             South Derbyshire E07000039 Aged 70-74    4074
+## 1420             South Derbyshire E07000039 Aged 75-79    2959
+## 1421             South Derbyshire E07000039 Aged 80-84    2163
+## 1422             South Derbyshire E07000039   Aged 85+    1895
+## 1423        South Gloucestershire E06000025   All Ages  271556
+## 1424        South Gloucestershire E06000025 Aged 65-69   15073
+## 1425        South Gloucestershire E06000025 Aged 70-74   11908
+## 1426        South Gloucestershire E06000025 Aged 75-79    9340
+## 1427        South Gloucestershire E06000025 Aged 80-84    6943
+## 1428        South Gloucestershire E06000025   Aged 85+    6234
+## 1429                   South Hams E07000044   All Ages   84108
+## 1430                   South Hams E07000044 Aged 65-69    7275
+## 1431                   South Hams E07000044 Aged 70-74    5115
+## 1432                   South Hams E07000044 Aged 75-79    3927
+## 1433                   South Hams E07000044 Aged 80-84    2904
+## 1434                   South Hams E07000044   Aged 85+    2946
+## 1435                South Holland E07000140   All Ages   90419
+## 1436                South Holland E07000140 Aged 65-69    6587
+## 1437                South Holland E07000140 Aged 70-74    4964
+## 1438                South Holland E07000140 Aged 75-79    4157
+## 1439                South Holland E07000140 Aged 80-84    3062
+## 1440                South Holland E07000140   Aged 85+    2845
+## 1441               South Kesteven E07000141   All Ages  137981
+## 1442               South Kesteven E07000141 Aged 65-69    9493
+## 1443               South Kesteven E07000141 Aged 70-74    6927
+## 1444               South Kesteven E07000141 Aged 75-79    5187
+## 1445               South Kesteven E07000141 Aged 80-84    3726
+## 1446               South Kesteven E07000141   Aged 85+    3808
+## 1447               South Lakeland E07000031   All Ages  103271
+## 1448               South Lakeland E07000031 Aged 65-69    8680
+## 1449               South Lakeland E07000031 Aged 70-74    6330
+## 1450               South Lakeland E07000031 Aged 75-79    5043
+## 1451               South Lakeland E07000031 Aged 80-84    3785
+## 1452               South Lakeland E07000031   Aged 85+    3909
+## 1453                South Norfolk E07000149   All Ages  129226
+## 1454                South Norfolk E07000149 Aged 65-69    9603
+## 1455                South Norfolk E07000149 Aged 70-74    7072
+## 1456                South Norfolk E07000149 Aged 75-79    5631
+## 1457                South Norfolk E07000149 Aged 80-84    4078
+## 1458                South Norfolk E07000149   Aged 85+    3946
+## 1459       South Northamptonshire E07000155   All Ages   88164
+## 1460       South Northamptonshire E07000155 Aged 65-69    6086
+## 1461       South Northamptonshire E07000155 Aged 70-74    3975
+## 1462       South Northamptonshire E07000155 Aged 75-79    2918
+## 1463       South Northamptonshire E07000155 Aged 80-84    2159
+## 1464       South Northamptonshire E07000155   Aged 85+    2107
+## 1465            South Oxfordshire E07000179   All Ages  137015
+## 1466            South Oxfordshire E07000179 Aged 65-69    8325
+## 1467            South Oxfordshire E07000179 Aged 70-74    6364
+## 1468            South Oxfordshire E07000179 Aged 75-79    5150
+## 1469            South Oxfordshire E07000179 Aged 80-84    3667
+## 1470            South Oxfordshire E07000179   Aged 85+    3755
+## 1471                 South Ribble E07000126   All Ages  109077
+## 1472                 South Ribble E07000126 Aged 65-69    6980
+## 1473                 South Ribble E07000126 Aged 70-74    5238
+## 1474                 South Ribble E07000126 Aged 75-79    4128
+## 1475                 South Ribble E07000126 Aged 80-84    2778
+## 1476                 South Ribble E07000126   Aged 85+    2616
+## 1477               South Somerset E07000189   All Ages  164569
+## 1478               South Somerset E07000189 Aged 65-69   12009
+## 1479               South Somerset E07000189 Aged 70-74    9025
+## 1480               South Somerset E07000189 Aged 75-79    7002
+## 1481               South Somerset E07000189 Aged 80-84    5385
+## 1482               South Somerset E07000189   Aged 85+    5564
+## 1483          South Staffordshire E07000196   All Ages  110692
+## 1484          South Staffordshire E07000196 Aged 65-69    7817
+## 1485          South Staffordshire E07000196 Aged 70-74    6331
+## 1486          South Staffordshire E07000196 Aged 75-79    4868
+## 1487          South Staffordshire E07000196 Aged 80-84    3277
+## 1488          South Staffordshire E07000196   Aged 85+    2951
+## 1489               South Tyneside E08000023   All Ages  148740
+## 1490               South Tyneside E08000023 Aged 65-69    8826
+## 1491               South Tyneside E08000023 Aged 70-74    6298
+## 1492               South Tyneside E08000023 Aged 75-79    5583
+## 1493               South Tyneside E08000023 Aged 80-84    4182
+## 1494               South Tyneside E08000023   Aged 85+    3923
+## 1495                  Southampton E06000045   All Ages  245290
+## 1496                  Southampton E06000045 Aged 65-69   10044
+## 1497                  Southampton E06000045 Aged 70-74    7156
+## 1498                  Southampton E06000045 Aged 75-79    5849
+## 1499                  Southampton E06000045 Aged 80-84    4680
+## 1500                  Southampton E06000045   Aged 85+    4915
+## 1501              Southend-on-Sea E06000033   All Ages  177931
+## 1502              Southend-on-Sea E06000033 Aged 65-69   10182
+## 1503              Southend-on-Sea E06000033 Aged 70-74    7288
+## 1504              Southend-on-Sea E06000033 Aged 75-79    6030
+## 1505              Southend-on-Sea E06000033 Aged 80-84    4690
+## 1506              Southend-on-Sea E06000033   Aged 85+    5386
+## 1507                    Southwark E09000028   All Ages  302538
+## 1508                    Southwark E09000028 Aged 65-69    7600
+## 1509                    Southwark E09000028 Aged 70-74    5579
+## 1510                    Southwark E09000028 Aged 75-79    4481
+## 1511                    Southwark E09000028 Aged 80-84    3164
+## 1512                    Southwark E09000028   Aged 85+    3152
+## 1513                   Spelthorne E07000213   All Ages   98106
+## 1514                   Spelthorne E07000213 Aged 65-69    5233
+## 1515                   Spelthorne E07000213 Aged 70-74    4010
+## 1516                   Spelthorne E07000213 Aged 75-79    3522
+## 1517                   Spelthorne E07000213 Aged 80-84    2661
+## 1518                   Spelthorne E07000213   Aged 85+    2549
+## 1519                    St Albans E07000240   All Ages  144834
+## 1520                    St Albans E07000240 Aged 65-69    7054
+## 1521                    St Albans E07000240 Aged 70-74    5153
+## 1522                    St Albans E07000240 Aged 75-79    4447
+## 1523                    St Albans E07000240 Aged 80-84    3497
+## 1524                    St Albans E07000240   Aged 85+    3612
+## 1525               St Edmundsbury E07000204   All Ages  112073
+## 1526               St Edmundsbury E07000204 Aged 65-69    7430
+## 1527               St Edmundsbury E07000204 Aged 70-74    5503
+## 1528               St Edmundsbury E07000204 Aged 75-79    4451
+## 1529               St Edmundsbury E07000204 Aged 80-84    3077
+## 1530               St Edmundsbury E07000204   Aged 85+    3263
+## 1531                   St. Helens E08000013   All Ages  177188
+## 1532                   St. Helens E08000013 Aged 65-69   11259
+## 1533                   St. Helens E08000013 Aged 70-74    8420
+## 1534                   St. Helens E08000013 Aged 75-79    6933
+## 1535                   St. Helens E08000013 Aged 80-84    4503
+## 1536                   St. Helens E08000013   Aged 85+    3730
+## 1537                     Stafford E07000197   All Ages  132241
+## 1538                     Stafford E07000197 Aged 65-69    8765
+## 1539                     Stafford E07000197 Aged 70-74    6900
+## 1540                     Stafford E07000197 Aged 75-79    5282
+## 1541                     Stafford E07000197 Aged 80-84    3603
+## 1542                     Stafford E07000197   Aged 85+    3510
+## 1543      Staffordshire Moorlands E07000198   All Ages   97763
+## 1544      Staffordshire Moorlands E07000198 Aged 65-69    7497
+## 1545      Staffordshire Moorlands E07000198 Aged 70-74    5551
+## 1546      Staffordshire Moorlands E07000198 Aged 75-79    4255
+## 1547      Staffordshire Moorlands E07000198 Aged 80-84    2906
+## 1548      Staffordshire Moorlands E07000198   Aged 85+    2657
+## 1549                    Stevenage E07000243   All Ages   85997
+## 1550                    Stevenage E07000243 Aged 65-69    3826
+## 1551                    Stevenage E07000243 Aged 70-74    2809
+## 1552                    Stevenage E07000243 Aged 75-79    2541
+## 1553                    Stevenage E07000243 Aged 80-84    1983
+## 1554                    Stevenage E07000243   Aged 85+    1807
+## 1555                    Stockport E08000007   All Ages  286755
+## 1556                    Stockport E08000007 Aged 65-69   16832
+## 1557                    Stockport E08000007 Aged 70-74   12660
+## 1558                    Stockport E08000007 Aged 75-79   10766
+## 1559                    Stockport E08000007 Aged 80-84    7969
+## 1560                    Stockport E08000007   Aged 85+    7397
+## 1561             Stockton-on-Tees E06000004   All Ages  194119
+## 1562             Stockton-on-Tees E06000004 Aged 65-69   10510
+## 1563             Stockton-on-Tees E06000004 Aged 70-74    7547
+## 1564             Stockton-on-Tees E06000004 Aged 75-79    6492
+## 1565             Stockton-on-Tees E06000004 Aged 80-84    4798
+## 1566             Stockton-on-Tees E06000004   Aged 85+    3846
+## 1567               Stoke-on-Trent E06000021   All Ages  251027
+## 1568               Stoke-on-Trent E06000021 Aged 65-69   13429
+## 1569               Stoke-on-Trent E06000021 Aged 70-74   10011
+## 1570               Stoke-on-Trent E06000021 Aged 75-79    7778
+## 1571               Stoke-on-Trent E06000021 Aged 80-84    5662
+## 1572               Stoke-on-Trent E06000021   Aged 85+    4890
+## 1573            Stratford-on-Avon E07000221   All Ages  121056
+## 1574            Stratford-on-Avon E07000221 Aged 65-69    9301
+## 1575            Stratford-on-Avon E07000221 Aged 70-74    6978
+## 1576            Stratford-on-Avon E07000221 Aged 75-79    5651
+## 1577            Stratford-on-Avon E07000221 Aged 80-84    3968
+## 1578            Stratford-on-Avon E07000221   Aged 85+    4205
+## 1579                       Stroud E07000082   All Ages  115093
+## 1580                       Stroud E07000082 Aged 65-69    7866
+## 1581                       Stroud E07000082 Aged 70-74    5759
+## 1582                       Stroud E07000082 Aged 75-79    4550
+## 1583                       Stroud E07000082 Aged 80-84    3290
+## 1584                       Stroud E07000082   Aged 85+    3077
+## 1585              Suffolk Coastal E07000205   All Ages  124776
+## 1586              Suffolk Coastal E07000205 Aged 65-69    9930
+## 1587              Suffolk Coastal E07000205 Aged 70-74    7255
+## 1588              Suffolk Coastal E07000205 Aged 75-79    5983
+## 1589              Suffolk Coastal E07000205 Aged 80-84    4567
+## 1590              Suffolk Coastal E07000205   Aged 85+    4708
+## 1591                   Sunderland E08000024   All Ages  276889
+## 1592                   Sunderland E08000024 Aged 65-69   16290
+## 1593                   Sunderland E08000024 Aged 70-74   11524
+## 1594                   Sunderland E08000024 Aged 75-79   10105
+## 1595                   Sunderland E08000024 Aged 80-84    7435
+## 1596                   Sunderland E08000024   Aged 85+    5496
+## 1597                 Surrey Heath E07000214   All Ages   87533
+## 1598                 Surrey Heath E07000214 Aged 65-69    4874
+## 1599                 Surrey Heath E07000214 Aged 70-74    3786
+## 1600                 Surrey Heath E07000214 Aged 75-79    3116
+## 1601                 Surrey Heath E07000214 Aged 80-84    2312
+## 1602                 Surrey Heath E07000214   Aged 85+    2073
+## 1603                       Sutton E09000029   All Ages  198134
+## 1604                       Sutton E09000029 Aged 65-69    9271
+## 1605                       Sutton E09000029 Aged 70-74    6501
+## 1606                       Sutton E09000029 Aged 75-79    5592
+## 1607                       Sutton E09000029 Aged 80-84    4220
+## 1608                       Sutton E09000029   Aged 85+    4313
+## 1609                        Swale E07000113   All Ages  140836
+## 1610                        Swale E07000113 Aged 65-69    8975
+## 1611                        Swale E07000113 Aged 70-74    6192
+## 1612                        Swale E07000113 Aged 75-79    4728
+## 1613                        Swale E07000113 Aged 80-84    3205
+## 1614                        Swale E07000113   Aged 85+    2989
+## 1615                      Swindon E06000030   All Ages  215799
+## 1616                      Swindon E06000030 Aged 65-69   10207
+## 1617                      Swindon E06000030 Aged 70-74    7366
+## 1618                      Swindon E06000030 Aged 75-79    5939
+## 1619                      Swindon E06000030 Aged 80-84    4544
+## 1620                      Swindon E06000030   Aged 85+    4181
+## 1621                     Tameside E08000008   All Ages  220771
+## 1622                     Tameside E08000008 Aged 65-69   12590
+## 1623                     Tameside E08000008 Aged 70-74    9114
+## 1624                     Tameside E08000008 Aged 75-79    7047
+## 1625                     Tameside E08000008 Aged 80-84    4806
+## 1626                     Tameside E08000008   Aged 85+    4233
+## 1627                     Tamworth E07000199   All Ages   77112
+## 1628                     Tamworth E07000199 Aged 65-69    4528
+## 1629                     Tamworth E07000199 Aged 70-74    3224
+## 1630                     Tamworth E07000199 Aged 75-79    2290
+## 1631                     Tamworth E07000199 Aged 80-84    1571
+## 1632                     Tamworth E07000199   Aged 85+    1333
+## 1633                    Tandridge E07000215   All Ages   85374
+## 1634                    Tandridge E07000215 Aged 65-69    5357
+## 1635                    Tandridge E07000215 Aged 70-74    3858
+## 1636                    Tandridge E07000215 Aged 75-79    2950
+## 1637                    Tandridge E07000215 Aged 80-84    2364
+## 1638                    Tandridge E07000215   Aged 85+    2560
+## 1639                Taunton Deane E07000190   All Ages  112817
+## 1640                Taunton Deane E07000190 Aged 65-69    7274
+## 1641                Taunton Deane E07000190 Aged 70-74    5454
+## 1642                Taunton Deane E07000190 Aged 75-79    4371
+## 1643                Taunton Deane E07000190 Aged 80-84    3552
+## 1644                Taunton Deane E07000190   Aged 85+    3913
+## 1645                  Teignbridge E07000045   All Ages  127357
+## 1646                  Teignbridge E07000045 Aged 65-69   10078
+## 1647                  Teignbridge E07000045 Aged 70-74    7310
+## 1648                  Teignbridge E07000045 Aged 75-79    5607
+## 1649                  Teignbridge E07000045 Aged 80-84    4295
+## 1650                  Teignbridge E07000045   Aged 85+    4946
+## 1651           Telford and Wrekin E06000020   All Ages  169440
+## 1652           Telford and Wrekin E06000020 Aged 65-69    9140
+## 1653           Telford and Wrekin E06000020 Aged 70-74    6847
+## 1654           Telford and Wrekin E06000020 Aged 75-79    5022
+## 1655           Telford and Wrekin E06000020 Aged 80-84    3326
+## 1656           Telford and Wrekin E06000020   Aged 85+    2899
+## 1657                     Tendring E07000076   All Ages  139916
+## 1658                     Tendring E07000076 Aged 65-69   12240
+## 1659                     Tendring E07000076 Aged 70-74    9389
+## 1660                     Tendring E07000076 Aged 75-79    7685
+## 1661                     Tendring E07000076 Aged 80-84    5621
+## 1662                     Tendring E07000076   Aged 85+    5767
+## 1663                  Test Valley E07000093   All Ages  119332
+## 1664                  Test Valley E07000093 Aged 65-69    7941
+## 1665                  Test Valley E07000093 Aged 70-74    5694
+## 1666                  Test Valley E07000093 Aged 75-79    4552
+## 1667                  Test Valley E07000093 Aged 80-84    3145
+## 1668                  Test Valley E07000093   Aged 85+    3152
+## 1669                   Tewkesbury E07000083   All Ages   85784
+## 1670                   Tewkesbury E07000083 Aged 65-69    5613
+## 1671                   Tewkesbury E07000083 Aged 70-74    4416
+## 1672                   Tewkesbury E07000083 Aged 75-79    3492
+## 1673                   Tewkesbury E07000083 Aged 80-84    2519
+## 1674                   Tewkesbury E07000083   Aged 85+    2527
+## 1675                       Thanet E07000114   All Ages  138410
+## 1676                       Thanet E07000114 Aged 65-69    9802
+## 1677                       Thanet E07000114 Aged 70-74    7155
+## 1678                       Thanet E07000114 Aged 75-79    5606
+## 1679                       Thanet E07000114 Aged 80-84    4234
+## 1680                       Thanet E07000114   Aged 85+    4532
+## 1681                 Three Rivers E07000102   All Ages   90423
+## 1682                 Three Rivers E07000102 Aged 65-69    4826
+## 1683                 Three Rivers E07000102 Aged 70-74    3484
+## 1684                 Three Rivers E07000102 Aged 75-79    3086
+## 1685                 Three Rivers E07000102 Aged 80-84    2359
+## 1686                 Three Rivers E07000102   Aged 85+    2409
+## 1687                     Thurrock E06000034   All Ages  163270
+## 1688                     Thurrock E06000034 Aged 65-69    7633
+## 1689                     Thurrock E06000034 Aged 70-74    5088
+## 1690                     Thurrock E06000034 Aged 75-79    3985
+## 1691                     Thurrock E06000034 Aged 80-84    2877
+## 1692                     Thurrock E06000034   Aged 85+    2766
+## 1693        Tonbridge and Malling E07000115   All Ages  124426
+## 1694        Tonbridge and Malling E07000115 Aged 65-69    7241
+## 1695        Tonbridge and Malling E07000115 Aged 70-74    5430
+## 1696        Tonbridge and Malling E07000115 Aged 75-79    4387
+## 1697        Tonbridge and Malling E07000115 Aged 80-84    3163
+## 1698        Tonbridge and Malling E07000115   Aged 85+    2837
+## 1699                       Torbay E06000027   All Ages  132984
+## 1700                       Torbay E06000027 Aged 65-69   10305
+## 1701                       Torbay E06000027 Aged 70-74    7656
+## 1702                       Torbay E06000027 Aged 75-79    6147
+## 1703                       Torbay E06000027 Aged 80-84    4652
+## 1704                       Torbay E06000027   Aged 85+    5053
+## 1705                     Torridge E07000046   All Ages   65618
+## 1706                     Torridge E07000046 Aged 65-69    5464
+## 1707                     Torridge E07000046 Aged 70-74    4090
+## 1708                     Torridge E07000046 Aged 75-79    2979
+## 1709                     Torridge E07000046 Aged 80-84    2180
+## 1710                     Torridge E07000046   Aged 85+    2070
+## 1711                Tower Hamlets E09000030   All Ages  284015
+## 1712                Tower Hamlets E09000030 Aged 65-69    5188
+## 1713                Tower Hamlets E09000030 Aged 70-74    3894
+## 1714                Tower Hamlets E09000030 Aged 75-79    3382
+## 1715                Tower Hamlets E09000030 Aged 80-84    2574
+## 1716                Tower Hamlets E09000030   Aged 85+    2053
+## 1717                     Trafford E08000009   All Ages  232458
+## 1718                     Trafford E08000009 Aged 65-69   11483
+## 1719                     Trafford E08000009 Aged 70-74    8684
+## 1720                     Trafford E08000009 Aged 75-79    7605
+## 1721                     Trafford E08000009 Aged 80-84    5830
+## 1722                     Trafford E08000009   Aged 85+    5627
+## 1723              Tunbridge Wells E07000116   All Ages  116105
+## 1724              Tunbridge Wells E07000116 Aged 65-69    6629
+## 1725              Tunbridge Wells E07000116 Aged 70-74    4734
+## 1726              Tunbridge Wells E07000116 Aged 75-79    3651
+## 1727              Tunbridge Wells E07000116 Aged 80-84    3036
+## 1728              Tunbridge Wells E07000116   Aged 85+    3329
+## 1729                   Uttlesford E07000077   All Ages   84042
+## 1730                   Uttlesford E07000077 Aged 65-69    5123
+## 1731                   Uttlesford E07000077 Aged 70-74    3667
+## 1732                   Uttlesford E07000077 Aged 75-79    2747
+## 1733                   Uttlesford E07000077 Aged 80-84    2079
+## 1734                   Uttlesford E07000077   Aged 85+    2169
+## 1735          Vale of White Horse E07000180   All Ages  124852
+## 1736          Vale of White Horse E07000180 Aged 65-69    7503
+## 1737          Vale of White Horse E07000180 Aged 70-74    5609
+## 1738          Vale of White Horse E07000180 Aged 75-79    4536
+## 1739          Vale of White Horse E07000180 Aged 80-84    3417
+## 1740          Vale of White Horse E07000180   Aged 85+    3338
+## 1741                    Wakefield E08000036   All Ages  331379
+## 1742                    Wakefield E08000036 Aged 65-69   19957
+## 1743                    Wakefield E08000036 Aged 70-74   14476
+## 1744                    Wakefield E08000036 Aged 75-79   11282
+## 1745                    Wakefield E08000036 Aged 80-84    8059
+## 1746                    Wakefield E08000036   Aged 85+    7164
+## 1747                      Walsall E08000030   All Ages  274173
+## 1748                      Walsall E08000030 Aged 65-69   14006
+## 1749                      Walsall E08000030 Aged 70-74   11778
+## 1750                      Walsall E08000030 Aged 75-79    9943
+## 1751                      Walsall E08000030 Aged 80-84    7018
+## 1752                      Walsall E08000030   Aged 85+    6008
+## 1753               Waltham Forest E09000031   All Ages  268020
+## 1754               Waltham Forest E09000031 Aged 65-69    8385
+## 1755               Waltham Forest E09000031 Aged 70-74    6128
+## 1756               Waltham Forest E09000031 Aged 75-79    5370
+## 1757               Waltham Forest E09000031 Aged 80-84    3865
+## 1758               Waltham Forest E09000031   Aged 85+    3763
+## 1759                   Wandsworth E09000032   All Ages  312145
+## 1760                   Wandsworth E09000032 Aged 65-69    9135
+## 1761                   Wandsworth E09000032 Aged 70-74    6593
+## 1762                   Wandsworth E09000032 Aged 75-79    5529
+## 1763                   Wandsworth E09000032 Aged 80-84    3822
+## 1764                   Wandsworth E09000032   Aged 85+    3728
+## 1765                   Warrington E06000007   All Ages  206428
+## 1766                   Warrington E06000007 Aged 65-69   11659
+## 1767                   Warrington E06000007 Aged 70-74    8849
+## 1768                   Warrington E06000007 Aged 75-79    6962
+## 1769                   Warrington E06000007 Aged 80-84    4535
+## 1770                   Warrington E06000007   Aged 85+    4061
+## 1771                      Warwick E07000222   All Ages  139396
+## 1772                      Warwick E07000222 Aged 65-69    7575
+## 1773                      Warwick E07000222 Aged 70-74    5722
+## 1774                      Warwick E07000222 Aged 75-79    4602
+## 1775                      Warwick E07000222 Aged 80-84    3436
+## 1776                      Warwick E07000222   Aged 85+    3650
+## 1777                      Watford E07000103   All Ages   95505
+## 1778                      Watford E07000103 Aged 65-69    3614
+## 1779                      Watford E07000103 Aged 70-74    2653
+## 1780                      Watford E07000103 Aged 75-79    2323
+## 1781                      Watford E07000103 Aged 80-84    1787
+## 1782                      Watford E07000103   Aged 85+    1754
+## 1783                      Waveney E07000206   All Ages  115919
+## 1784                      Waveney E07000206 Aged 65-69    9184
+## 1785                      Waveney E07000206 Aged 70-74    6770
+## 1786                      Waveney E07000206 Aged 75-79    5616
+## 1787                      Waveney E07000206 Aged 80-84    4238
+## 1788                      Waveney E07000206   Aged 85+    4323
+## 1789                     Waverley E07000216   All Ages  122860
+## 1790                     Waverley E07000216 Aged 65-69    7615
+## 1791                     Waverley E07000216 Aged 70-74    5804
+## 1792                     Waverley E07000216 Aged 75-79    4837
+## 1793                     Waverley E07000216 Aged 80-84    3773
+## 1794                     Waverley E07000216   Aged 85+    4200
+## 1795                      Wealden E07000065   All Ages  154767
+## 1796                      Wealden E07000065 Aged 65-69   12058
+## 1797                      Wealden E07000065 Aged 70-74    8863
+## 1798                      Wealden E07000065 Aged 75-79    6966
+## 1799                      Wealden E07000065 Aged 80-84    5329
+## 1800                      Wealden E07000065   Aged 85+    5507
+## 1801               Wellingborough E07000156   All Ages   76446
+## 1802               Wellingborough E07000156 Aged 65-69    4840
+## 1803               Wellingborough E07000156 Aged 70-74    3328
+## 1804               Wellingborough E07000156 Aged 75-79    2410
+## 1805               Wellingborough E07000156 Aged 80-84    1766
+## 1806               Wellingborough E07000156   Aged 85+    1697
+## 1807              Welwyn Hatfield E07000241   All Ages  116024
+## 1808              Welwyn Hatfield E07000241 Aged 65-69    5073
+## 1809              Welwyn Hatfield E07000241 Aged 70-74    3859
+## 1810              Welwyn Hatfield E07000241 Aged 75-79    3553
+## 1811              Welwyn Hatfield E07000241 Aged 80-84    2907
+## 1812              Welwyn Hatfield E07000241   Aged 85+    3006
+## 1813               West Berkshire E06000037   All Ages  155732
+## 1814               West Berkshire E06000037 Aged 65-69    9083
+## 1815               West Berkshire E06000037 Aged 70-74    6313
+## 1816               West Berkshire E06000037 Aged 75-79    4856
+## 1817               West Berkshire E06000037 Aged 80-84    3507
+## 1818               West Berkshire E06000037   Aged 85+    3294
+## 1819                   West Devon E07000047   All Ages   54260
+## 1820                   West Devon E07000047 Aged 65-69    4562
+## 1821                   West Devon E07000047 Aged 70-74    3311
+## 1822                   West Devon E07000047 Aged 75-79    2460
+## 1823                   West Devon E07000047 Aged 80-84    1805
+## 1824                   West Devon E07000047   Aged 85+    1871
+## 1825                  West Dorset E07000052   All Ages  100474
+## 1826                  West Dorset E07000052 Aged 65-69    8544
+## 1827                  West Dorset E07000052 Aged 70-74    6608
+## 1828                  West Dorset E07000052 Aged 75-79    5294
+## 1829                  West Dorset E07000052 Aged 80-84    4160
+## 1830                  West Dorset E07000052   Aged 85+    4323
+## 1831              West Lancashire E07000127   All Ages  111940
+## 1832              West Lancashire E07000127 Aged 65-69    7432
+## 1833              West Lancashire E07000127 Aged 70-74    5633
+## 1834              West Lancashire E07000127 Aged 75-79    4588
+## 1835              West Lancashire E07000127 Aged 80-84    2961
+## 1836              West Lancashire E07000127   Aged 85+    2632
+## 1837                 West Lindsey E07000142   All Ages   91787
+## 1838                 West Lindsey E07000142 Aged 65-69    7002
+## 1839                 West Lindsey E07000142 Aged 70-74    5182
+## 1840                 West Lindsey E07000142 Aged 75-79    3903
+## 1841                 West Lindsey E07000142 Aged 80-84    2630
+## 1842                 West Lindsey E07000142   Aged 85+    2406
+## 1843             West Oxfordshire E07000181   All Ages  108158
+## 1844             West Oxfordshire E07000181 Aged 65-69    6675
+## 1845             West Oxfordshire E07000181 Aged 70-74    4995
+## 1846             West Oxfordshire E07000181 Aged 75-79    3906
+## 1847             West Oxfordshire E07000181 Aged 80-84    2886
+## 1848             West Oxfordshire E07000181   Aged 85+    3089
+## 1849                West Somerset E07000191   All Ages   34322
+## 1850                West Somerset E07000191 Aged 65-69    3274
+## 1851                West Somerset E07000191 Aged 70-74    2471
+## 1852                West Somerset E07000191 Aged 75-79    2055
+## 1853                West Somerset E07000191 Aged 80-84    1538
+## 1854                West Somerset E07000191   Aged 85+    1595
+## 1855                  Westminster E09000033   All Ages  233292
+## 1856                  Westminster E09000033 Aged 65-69    8699
+## 1857                  Westminster E09000033 Aged 70-74    6225
+## 1858                  Westminster E09000033 Aged 75-79    5246
+## 1859                  Westminster E09000033 Aged 80-84    3752
+## 1860                  Westminster E09000033   Aged 85+    3584
+## 1861        Weymouth and Portland E07000053   All Ages   64992
+## 1862        Weymouth and Portland E07000053 Aged 65-69    4931
+## 1863        Weymouth and Portland E07000053 Aged 70-74    3509
+## 1864        Weymouth and Portland E07000053 Aged 75-79    2730
+## 1865        Weymouth and Portland E07000053 Aged 80-84    2043
+## 1866        Weymouth and Portland E07000053   Aged 85+    2060
+## 1867                        Wigan E08000010   All Ages  320975
+## 1868                        Wigan E08000010 Aged 65-69   19965
+## 1869                        Wigan E08000010 Aged 70-74   14785
+## 1870                        Wigan E08000010 Aged 75-79   10641
+## 1871                        Wigan E08000010 Aged 80-84    6819
+## 1872                        Wigan E08000010   Aged 85+    5829
+## 1873                    Wiltshire E06000054   All Ages  483143
+## 1874                    Wiltshire E06000054 Aged 65-69   30452
+## 1875                    Wiltshire E06000054 Aged 70-74   22317
+## 1876                    Wiltshire E06000054 Aged 75-79   17683
+## 1877                    Wiltshire E06000054 Aged 80-84   13065
+## 1878                    Wiltshire E06000054   Aged 85+   13281
+## 1879                   Winchester E07000094   All Ages  119218
+## 1880                   Winchester E07000094 Aged 65-69    7368
+## 1881                   Winchester E07000094 Aged 70-74    5385
+## 1882                   Winchester E07000094 Aged 75-79    4406
+## 1883                   Winchester E07000094 Aged 80-84    3387
+## 1884                   Winchester E07000094   Aged 85+    3712
+## 1885       Windsor and Maidenhead E06000040   All Ages  147400
+## 1886       Windsor and Maidenhead E06000040 Aged 65-69    8106
+## 1887       Windsor and Maidenhead E06000040 Aged 70-74    5930
+## 1888       Windsor and Maidenhead E06000040 Aged 75-79    4880
+## 1889       Windsor and Maidenhead E06000040 Aged 80-84    3793
+## 1890       Windsor and Maidenhead E06000040   Aged 85+    3898
+## 1891                       Wirral E08000015   All Ages  320914
+## 1892                       Wirral E08000015 Aged 65-69   20151
+## 1893                       Wirral E08000015 Aged 70-74   15226
+## 1894                       Wirral E08000015 Aged 75-79   12226
+## 1895                       Wirral E08000015 Aged 80-84    9371
+## 1896                       Wirral E08000015   Aged 85+    9024
+## 1897                       Woking E07000217   All Ages   99426
+## 1898                       Woking E07000217 Aged 65-69    4873
+## 1899                       Woking E07000217 Aged 70-74    3489
+## 1900                       Woking E07000217 Aged 75-79    3009
+## 1901                       Woking E07000217 Aged 80-84    2375
+## 1902                       Woking E07000217   Aged 85+    2420
+## 1903                    Wokingham E06000041   All Ages  159097
+## 1904                    Wokingham E06000041 Aged 65-69    8663
+## 1905                    Wokingham E06000041 Aged 70-74    6287
+## 1906                    Wokingham E06000041 Aged 75-79    5114
+## 1907                    Wokingham E06000041 Aged 80-84    3677
+## 1908                    Wokingham E06000041   Aged 85+    3320
+## 1909                Wolverhampton E08000031   All Ages  252987
+## 1910                Wolverhampton E08000031 Aged 65-69   11616
+## 1911                Wolverhampton E08000031 Aged 70-74    9911
+## 1912                Wolverhampton E08000031 Aged 75-79    8343
+## 1913                Wolverhampton E08000031 Aged 80-84    6458
+## 1914                Wolverhampton E08000031   Aged 85+    6045
+## 1915                    Worcester E07000237   All Ages  100842
+## 1916                    Worcester E07000237 Aged 65-69    5038
+## 1917                    Worcester E07000237 Aged 70-74    3718
+## 1918                    Worcester E07000237 Aged 75-79    3012
+## 1919                    Worcester E07000237 Aged 80-84    2248
+## 1920                    Worcester E07000237   Aged 85+    2128
+## 1921                     Worthing E07000229   All Ages  106863
+## 1922                     Worthing E07000229 Aged 65-69    6744
+## 1923                     Worthing E07000229 Aged 70-74    4894
+## 1924                     Worthing E07000229 Aged 75-79    4323
+## 1925                     Worthing E07000229 Aged 80-84    3532
+## 1926                     Worthing E07000229   Aged 85+    4199
+## 1927                     Wychavon E07000238   All Ages  119752
+## 1928                     Wychavon E07000238 Aged 65-69    8916
+## 1929                     Wychavon E07000238 Aged 70-74    6639
+## 1930                     Wychavon E07000238 Aged 75-79    5125
+## 1931                     Wychavon E07000238 Aged 80-84    3790
+## 1932                     Wychavon E07000238   Aged 85+    3723
+## 1933                      Wycombe E07000007   All Ages  174878
+## 1934                      Wycombe E07000007 Aged 65-69    9194
+## 1935                      Wycombe E07000007 Aged 70-74    7161
+## 1936                      Wycombe E07000007 Aged 75-79    5640
+## 1937                      Wycombe E07000007 Aged 80-84    4292
+## 1938                      Wycombe E07000007   Aged 85+    3755
+## 1939                         Wyre E07000128   All Ages  108742
+## 1940                         Wyre E07000128 Aged 65-69    8248
+## 1941                         Wyre E07000128 Aged 70-74    6820
+## 1942                         Wyre E07000128 Aged 75-79    5652
+## 1943                         Wyre E07000128 Aged 80-84    4130
+## 1944                         Wyre E07000128   Aged 85+    3848
+## 1945                  Wyre Forest E07000239   All Ages   98960
+## 1946                  Wyre Forest E07000239 Aged 65-69    7644
+## 1947                  Wyre Forest E07000239 Aged 70-74    5644
+## 1948                  Wyre Forest E07000239 Aged 75-79    4216
+## 1949                  Wyre Forest E07000239 Aged 80-84    2845
+## 1950                  Wyre Forest E07000239   Aged 85+    2787
+## 1951                         York E06000014   All Ages  204439
+## 1952                         York E06000014 Aged 65-69   11081
+## 1953                         York E06000014 Aged 70-74    8046
+## 1954                         York E06000014 Aged 75-79    7065
+## 1955                         York E06000014 Aged 80-84    5095
+## 1956                         York E06000014   Aged 85+    5172</code></pre>
+</div>
+<div id="exercise-2" class="section level2">
+<h2>Exercise</h2>
+<pre class="r"><code>new_df_long = new_data %&gt;% 
+  select(oslaua, `2014`:`2017`) %&gt;% 
+  gather(year, claimants, `2014`:`2017`)
+
+d1_long = d1 %&gt;% gather(age, number, `All Ages`: `Aged 85+`) %&gt;%
+  arrange(`Local Authority`)
+
+exercise = left_join(d1_long, new_df_long, by = &quot;oslaua&quot;)
+
+head(exercise)</code></pre>
+<pre><code>##   Local Authority    oslaua        age number year claimants
+## 1            Adur E07000223   All Ages  63176 2014     63176
+## 2            Adur E07000223   All Ages  63176 2015     63618
+## 3            Adur E07000223   All Ages  63176 2016     64123
+## 4            Adur E07000223   All Ages  63176 2017     64656
+## 5            Adur E07000223 Aged 65-69   4310 2014     63176
+## 6            Adur E07000223 Aged 65-69   4310 2015     63618</code></pre>
+<hr />
+<p>class: center, middle</p>
+</div>
+</div>
+<div id="thanks" class="section level1">
+<h1>Thanks!</h1>
+<p><span class="citation">[@EdudinGonzalo]</span>(<a href="https://twitter.com/EdudinGonzalo" class="uri">https://twitter.com/EdudinGonzalo</a>)</p>
+<p><code>e.gonzalo-almorox@newcastle.ac.uk</code></p>
+</div>
+
+                </section>
+            </article>
+
+            
+                <a class="twitter" href="https://twitter.com/intent/tweet?text=%2fabout%2fr-social-science%2fs2%2f - Quantitative%20social%20science%20with%20R by @your_twitter_id"><span class="icon-twitter"> tweet</span></a>
+
+<a class="facebook" href="#" onclick="
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+      'facebook-share-dialog',
+      'width=626,height=436');
+    return false;"><span class="icon-facebook-rect"> Share</span>
+</a>
+
+            
+
+            
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'your_disqus_short_name'; 
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+            
+
+            
+
+            <footer id="footer">
+    
+        <div id="social">
+
+	
+	
+    <a class="symbol" href="https://github.com/edugonzaloalmorox">
+        <i class="fa fa-github-square"></i>
+    </a>
+    
+    <a class="symbol" href="https://www.linkedin.com/in/eduardo-gonzalo-almorox-5b8b4955/">
+        <i class="fa fa-linkedin-square"></i>
+    </a>
+    
+    <a class="symbol" href="https://twitter.com/EdudinGonzalo">
+        <i class="fa fa-twitter-square"></i>
+    </a>
+    
+
+
+</div>
+
+    
+    <p class="small">
+    
+       © Copyright 2018 <i class="fa fa-heart" aria-hidden="true"></i> Edu Gonzalo Almorox
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+  
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'your_google_analytics_id', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+
+
+
+    </body>
+</html>

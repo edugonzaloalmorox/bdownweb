@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		 
+			
+  
+    <meta name="twitter:card" content="summary"/>
+    
+      <meta name="twitter:image" content="/images/avatar.png" />
+    
+  
+  
+  <meta name="twitter:title" content="Quantitative social science with R"/>
+  <meta name="twitter:description" content="exclude: true
+Outline .pull-left[1. What´s R?
+R-Studio
+ Start with R
+ Data structures ]
+  .pull-right[
+      ]  Introduction: R in a nutshell  What is R? programming language, environment, software…
+ Open source and free
+ Compatibility with other languages
+ Important learning curve (different packages and libraries)
+  What is RStudio? Integrated Development Environment that makes R programming more user friendly."/>
+  
+    <meta name="twitter:site" content="@your_twitter_id"/>
+  
+  
+  
+  
+    <meta name="twitter:creator" content="@Edu Gonzalo Almorox"/>
+  
+
+
+
+		
+		<meta name="author" content="Edu Gonzalo Almorox">
+		
+		<meta name="generator" content="Hugo 0.29" />
+		<title>Quantitative social science with R &middot; Edu Gonzalo Almorox</title>
+		<link rel="shortcut icon" href="/images/favicon.ico">
+		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/highlight.css">
+
+		
+		<link rel="stylesheet" href="/css/font-awesome.min.css">
+		
+
+		
+		<link href="/index.xml" rel="alternate" type="application/rss+xml" title="Edu Gonzalo Almorox" />
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='/posts'>Archive</a>
+	<a href='/tags'>Tags</a>
+	<a href='/about'>About Me</a>
+
+	
+
+	
+	<a class="cta" href="/index.xml">Subscribe</a>
+	
+</nav>
+
+
+        <section id="wrapper" class="post">
+            <article>
+                <header>
+                    <h1>
+                        Quantitative social science with R
+                    </h1>
+                    <h2 class="headline">
+                    Jan 1, 0001 00:00
+                    · 889 words
+                    · 5 minute read
+                      <span class="tags">
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                  
+                
+                <section id="post-body">
+                    <p>exclude: true</p>
+<hr />
+<div id="outline" class="section level2">
+<h2>Outline</h2>
+<p>.pull-left[1. What´s R?</p>
+<ol style="list-style-type: decimal">
+<li><p>R-Studio</p></li>
+<li><p>Start with R</p></li>
+<li><p>Data structures ]</p></li>
+</ol>
+<p>.pull-right[</p>
+<figure>
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAH8snN7QBf8yWVwvnQ4VuW8-WMVKVq0rmxk7Uy-wuODCjEEN_">
+<figcaption>
+<a href=""></a>
+</figcaption>
+</figure>
+</div>
+<div id="section" class="section level2">
+<h2>]</h2>
+</div>
+<div id="introduction-r-in-a-nutshell" class="section level2">
+<h2>Introduction: R in a nutshell</h2>
+<ul>
+<li><p>What is <a href="https://www.r-project.org">R</a>? <em>programming language</em>, <em>environment</em>, <em>software</em>…</p>
+<ul>
+<li><p>Open source and free</p></li>
+<li><p>Compatibility with other languages</p></li>
+<li><p>Important learning curve (different packages and libraries)</p></li>
+</ul></li>
+<li><p>What is <a href="https://www.rstudio.com">RStudio</a>? Integrated Development Environment that makes R programming more user friendly.</p></li>
+<li><p>What can you do with R?</p>
+<ul>
+<li><p>Data analysis</p></li>
+<li><p>Dynamic documents</p></li>
+<li><p>Apps</p></li>
+</ul></li>
+</ul>
+<hr />
+</div>
+<div id="is-r-a-good-investment" class="section level2">
+<h2>Is R a good investment?</h2>
+<p><img src="http://i0.wp.com/r4stats.com/wp-content/uploads/2012/04/Fig_2d_ScholarlyImpact.png" /> .center[Source: <a href="http://r4stats.com/articles/popularity/"><em>“The popularity of Data Analysis software”</em></a> Muenchen (2016)]</p>
+<hr />
+<p><img src="http://i0.wp.com/r4stats.com/wp-content/uploads/2012/04/Fig_2e_ScholarlyImpactSubset.png" /> .center[Source: <a href="http://r4stats.com/articles/popularity/"><em>“The popularity of Data Analysis software”</em></a> Muenchen (2016)]</p>
+<hr />
+<p><img src="http://i0.wp.com/datasciencepopularity.com/wp-content/uploads/2014/03/fig_1a_indeedjobs2014ge2501.png" /> .center[Source: <a href="http://r4stats.com/articles/popularity/"><em>“The popularity of Data Analysis software”</em></a> Muenchen (2016)]</p>
+<hr />
+</div>
+<div id="how-do-we-structure-a-data-analysis-project" class="section level2">
+<h2>How do we structure a data analysis project?</h2>
+<ul>
+<li>Steps in a data analysis project</li>
+</ul>
+<div class="figure">
+<img src="http://r4ds.had.co.nz/diagrams/data-science.png" />
+
+</div>
+<p>Source: <a href="http://r4ds.had.co.nz"><em>R for Data Science</em></a> (Wickham and Grolemund (2016))</p>
+</div>
+<div id="lets-get-our-head-around" class="section level2">
+<h2>Let´s get our head around…</h2>
+</div>
+<div id="section-1" class="section level2">
+<h2><img src="figures/fig_console.png" /></h2>
+</div>
+<div id="create-a-project" class="section level2">
+<h2>Create a project</h2>
+<ul>
+<li><p>Projects enable a better organization of the files and keeps a better control of the workflow (e.g. scripts, data, final documents, etc…)</p></li>
+<li><p>They improve the efficiency of the workflow.</p></li>
+<li><p>They make your life easier</p></li>
+<li><p><code>Project - New Project - New Directory -  Empty project - (select directory...)</code></p></li>
+</ul>
+</div>
+<div id="create-a-project-control-version-optional" class="section level2">
+<h2>Create a project: Control version (optional)</h2>
+<ul>
+<li><p>It enhances reproducibility and collaboration</p></li>
+<li><p>Keeps record and reduces errors</p></li>
+<li><p>Limits software dependency</p></li>
+<li><p>Back up big data projects</p></li>
+</ul>
+<p>.pull-left[</p>
+<p><img src="data:image/png;base64,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" /> ]</p>
+<p>.pull-right[</p>
+<p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMJH4fDnh9vqBtLL9VBHh6h8rn51fsfEycxwwn4AVSikekoffR" /> ]</p>
+<hr />
+</div>
+<div id="organisation-of-the-project" class="section level2">
+<h2>Organisation of the project</h2>
+<ul>
+<li><p>Create different folders with different types of files</p>
+<ul>
+<li><p>Data</p></li>
+<li><p>Scripts</p></li>
+<li><p>Outputs</p></li>
+</ul></li>
+</ul>
+<div class="figure">
+<img src="figures/fig_project4.png" />
+
+</div>
+<hr />
+<p>class: center, middle</p>
+</div>
+<div id="data-types-and-data-structures" class="section level2">
+<h2># Data types and data structures</h2>
+</div>
+<div id="data-types-and-structures" class="section level2">
+<h2>Data types and structures</h2>
+<ul>
+<li><p>In R every element is regarded as an object.</p></li>
+<li><p>Most general data structures are organised according to two main elements</p>
+<ul>
+<li><p>Dimensionality</p></li>
+<li><p>Type of the contents (homogeneous, heterogeneous)</p></li>
+</ul></li>
+<li><p>In most cases, it is necessary to carry out <strong>conversions of objects</strong> in order to meet our needs</p></li>
+</ul>
+<hr />
+</div>
+<div id="data-types" class="section level2">
+<h2>Data types</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Characteristics</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>character</code></td>
+<td>single letter (or number in some cases)</td>
+<td><code>&quot;a&quot;</code>, <code>&quot;s&quot;</code>,<code>&quot;34&quot;</code></td>
+</tr>
+<tr class="even">
+<td><code>numeric</code></td>
+<td>single number</td>
+<td><code>34</code>, <code>5</code>, <code>9.8</code></td>
+</tr>
+<tr class="odd">
+<td><code>logical</code></td>
+<td>logical output</td>
+<td><code>TRUE</code>, <code>FALSE</code></td>
+</tr>
+<tr class="even">
+<td><code>integer</code></td>
+<td>2 (Must add a L at end to denote integer)</td>
+<td><code>2L</code>, <code>5L</code></td>
+</tr>
+<tr class="odd">
+<td><code>complex</code></td>
+<td>complex numbers with real and imaginary parts</td>
+<td><code>1+4i</code></td>
+</tr>
+</tbody>
+</table>
+<div id="functions-to-check-some-features" class="section level3">
+<h3>Functions to check some features</h3>
+<ul>
+<li><p><code>class()</code> - what kind of object is it (high-level)?</p></li>
+<li><p><code>length()</code> - how long is it? What about two dimensional objects?</p></li>
+</ul>
+<hr />
+</div>
+</div>
+<div id="data-structures-vectors" class="section level2">
+<h2>Data structures: Vectors</h2>
+<p>This is the most basic data structure which can be of two types, atomic or list, depending on the type of data contained on it</p>
+<p>.pull-left[ * Atomic <code>vectors</code></p>
+<pre class="r"><code>v = c(1,2,3,4)
+v</code></pre>
+<pre><code>## [1] 1 2 3 4</code></pre>
+<pre class="r"><code>z = c(&quot;Paul&quot;, &quot;Sarah&quot;, &quot;Joe&quot;)
+z</code></pre>
+<pre><code>## [1] &quot;Paul&quot;  &quot;Sarah&quot; &quot;Joe&quot;</code></pre>
+<p>]</p>
+<p>.pull-right[</p>
+<ul>
+<li>Examine the vectors</li>
+</ul>
+<pre class="r"><code>class(v)</code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<pre class="r"><code>length(z)</code></pre>
+<pre><code>## [1] 3</code></pre>
+<pre class="r"><code>typeof(z)</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<p>]</p>
+</div>
+<div id="data-structures-matrices" class="section level2">
+<h2>Data structures: Matrices</h2>
+<p>These are atomic vectors that have a greater dimmension than 1.</p>
+<p>.pull-left[</p>
+<pre class="r"><code>m&lt;- matrix(1:6, nrow=2, ncol =3)
+m</code></pre>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    3    5
+## [2,]    2    4    6</code></pre>
+<p>]</p>
+<p>.pull-right[</p>
+<pre class="r"><code>x &lt;- 1:3
+y &lt;- 10:12
+
+m1  = rbind(x,y)
+m1</code></pre>
+<pre><code>##   [,1] [,2] [,3]
+## x    1    2    3
+## y   10   11   12</code></pre>
+<p>]</p>
+<hr />
+</div>
+<div id="data-structures-lists" class="section level2">
+<h2>Data structures: lists</h2>
+<p>.pull-left[ <code>lists</code> have various types of data…</p>
+<pre class="r"><code>x &lt;- list(1, &quot;a&quot;, TRUE)
+
+x</code></pre>
+<pre><code>## [[1]]
+## [1] 1
+## 
+## [[2]]
+## [1] &quot;a&quot;
+## 
+## [[3]]
+## [1] TRUE</code></pre>
+<p>]</p>
+<p>.pull-right[</p>
+<p>… and various dimensions</p>
+<pre class="r"><code>y = list(a = &quot;Mary&quot;,
+    b = 1:5,
+    c = c(&quot;Male&quot;, &quot;25&quot;, TRUE))
+
+y</code></pre>
+<pre><code>## $a
+## [1] &quot;Mary&quot;
+## 
+## $b
+## [1] 1 2 3 4 5
+## 
+## $c
+## [1] &quot;Male&quot; &quot;25&quot;   &quot;TRUE&quot;</code></pre>
+<p>]</p>
+<hr />
+</div>
+<div id="data-structures-data-frames" class="section level2">
+<h2>Data structures: Data frames</h2>
+<ul>
+<li><p><code>Data.frames</code> are the most common data structure for gathering information.</p>
+<ul>
+<li><p><strong>Variables</strong>: Collect different arguments associated with the information to be analysed</p></li>
+<li><p><strong>Observations</strong>: Units of analysis (individuals, firms, etc…)</p></li>
+</ul></li>
+<li><p>The structure of a <code>data.frame</code> consists of columns that contain labelled variables and rows that contain observations.</p></li>
+</ul>
+<hr />
+</div>
+<div id="example-of-a-messy-dataset" class="section level2">
+<h2>Example of a messy dataset</h2>
+<div class="figure">
+<img src="figures/fig_messy.png" />
+
+</div>
+<hr />
+</div>
+<div id="example-of-a-messy-dataset-1" class="section level2">
+<h2>Example of a messy dataset</h2>
+<div class="figure">
+<img src="figures/fig_messy1.png" />
+
+</div>
+</div>
+<div id="explore-the-data-frame" class="section level2">
+<h2>Explore the data frame</h2>
+<ul>
+<li>Look at the first and last rows</li>
+</ul>
+<pre class="r"><code>head(df_clean,1)</code></pre>
+<pre><code>##   name age gender     region id_code treated
+## 1 Mary  12      0 North East A-00345     yes</code></pre>
+<pre class="r"><code>tail(df_clean,2)</code></pre>
+<pre><code>##   name age gender        region   id_code treated
+## 2 John  25      1    North East A-1243009      no
+## 3 Tony  20      1 East Midlands A-0012456     yes</code></pre>
+</div>
+<div id="tibbles" class="section level2">
+<h2>Tibbles</h2>
+<p><a href="https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html">Tibbles</a> are a new form of expressing data frames.</p>
+<ul>
+<li><p>Are more efficient</p></li>
+<li><p>Printing: They print first ten rows and all the columns that fit on one screen - good when dealing with big data frames</p></li>
+<li><p>Easier subsetting</p></li>
+</ul>
+<pre class="r"><code>as_tibble(df)</code></pre>
+<pre><code>## # A tibble: 3 x 6
+##   Name    AGE GenDER Region        ID.code   Treated.
+##   &lt;fct&gt; &lt;dbl&gt; &lt;fct&gt;  &lt;fct&gt;         &lt;fct&gt;     &lt;fct&gt;   
+## 1 Mary    12. 0      North East    A-00345   yes     
+## 2 John    25. 1      North East    A-1243009 no      
+## 3 Tony    20. 1      East Midlands A-0012456 yes</code></pre>
+<p>.pull-left[ - One way with <code>data.frame()</code></p>
+<pre class="r"><code>id = rep(c(z, &quot;Beth&quot;,
+           &quot;Mike&quot;,
+           &quot;Martha&quot;), each = 5)
+
+time = rep(1:5, 6)
+
+
+friends = data.frame(id, time)
+
+head(friends)</code></pre>
+<pre><code>##      id time
+## 1  Paul    1
+## 2  Paul    2
+## 3  Paul    3
+## 4  Paul    4
+## 5  Paul    5
+## 6 Sarah    1</code></pre>
+<p>]</p>
+<p>.pull-right[ - Another way with <code>cbind()</code></p>
+<pre class="r"><code>id = rep(c(z, &quot;Beth&quot;,
+           &quot;Mike&quot;,
+           &quot;Martha&quot;), each = 5)
+
+time = rep(1:5, 6)
+
+
+friends = cbind(id, time)
+
+
+head(friends)</code></pre>
+<pre><code>##      id      time
+## [1,] &quot;Paul&quot;  &quot;1&quot; 
+## [2,] &quot;Paul&quot;  &quot;2&quot; 
+## [3,] &quot;Paul&quot;  &quot;3&quot; 
+## [4,] &quot;Paul&quot;  &quot;4&quot; 
+## [5,] &quot;Paul&quot;  &quot;5&quot; 
+## [6,] &quot;Sarah&quot; &quot;1&quot;</code></pre>
+<pre class="r"><code># Data frame 
+
+friends = as.data.frame(friends)
+head(friends, 2)</code></pre>
+<pre><code>##     id time
+## 1 Paul    1
+## 2 Paul    2</code></pre>
+</div>
+<div id="section-2" class="section level2">
+<h2>]</h2>
+<p>class: center, middle</p>
+</div>
+<div id="thanks" class="section level1">
+<h1>Thanks!</h1>
+<p><span class="citation">[@EdudinGonzalo]</span>(<a href="https://twitter.com/EdudinGonzalo" class="uri">https://twitter.com/EdudinGonzalo</a>)</p>
+<p><code>e.gonzalo-almorox@newcastle.ac.uk</code></p>
+</div>
+
+                </section>
+            </article>
+
+            
+                <a class="twitter" href="https://twitter.com/intent/tweet?text=%2fabout%2fr-social-science%2fs1%2f - Quantitative%20social%20science%20with%20R by @your_twitter_id"><span class="icon-twitter"> tweet</span></a>
+
+<a class="facebook" href="#" onclick="
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+      'facebook-share-dialog',
+      'width=626,height=436');
+    return false;"><span class="icon-facebook-rect"> Share</span>
+</a>
+
+            
+
+            
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'your_disqus_short_name'; 
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+            
+
+            
+
+            <footer id="footer">
+    
+        <div id="social">
+
+	
+	
+    <a class="symbol" href="https://github.com/edugonzaloalmorox">
+        <i class="fa fa-github-square"></i>
+    </a>
+    
+    <a class="symbol" href="https://www.linkedin.com/in/eduardo-gonzalo-almorox-5b8b4955/">
+        <i class="fa fa-linkedin-square"></i>
+    </a>
+    
+    <a class="symbol" href="https://twitter.com/EdudinGonzalo">
+        <i class="fa fa-twitter-square"></i>
+    </a>
+    
+
+
+</div>
+
+    
+    <p class="small">
+    
+       © Copyright 2018 <i class="fa fa-heart" aria-hidden="true"></i> Edu Gonzalo Almorox
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+  
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'your_google_analytics_id', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+
+
+
+    </body>
+</html>
