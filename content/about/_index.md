@@ -35,11 +35,7 @@ In my free time I ride bikes, sometimes [for a while](http://trackleaders.com/tr
 
 ### _Other Projects_
 
-[`R for social science`](https://github.com/edugonzaloalmorox/R-social-science)
-
-Workshop aimed at introducing R to social scientists. [First session](../images/R-social-science/s1.html) covers the main data structures in R. [Second session](../images/R-social-science/s2.html)  presents tools to import and manipulate data. [Third session](../images/R-social-science/s3.html) 
-introduces the main functions to visualise and analyse data with regression methods.
-
+[`R for social science`](https://github.com/edugonzaloalmorox/R-social-science): Workshop aimed at introducing R to social scientists. 
   
 
 
