@@ -1,0 +1,40 @@
+---
+title: Care home closures
+author: Edu Gonzalo
+date: '2018-05-06'
+slug: my-blog-test
+categories: []
+tags: []
+---
+
+The social care in England is living a crisis in the provision of long term care services. This has resulted in a number of closures. This post shows how the intensity of the process since 2010.
+
+### The data
+
+The Care Quality Commission releases monthly information on institutions that decide to close. I am interested in care homes but there is also information available regarding other regulated institutions such as hospitals. Firstly I filter the information referred only to care homes and select variables that will be interesting for the analysis. 
+
+```{r, echo= TRUE, include=TRUE, message=FALSE, warning=FALSE}
+library(rio)
+library(tidyverse)
+library(janitor)
+library(ggplot2)
+library(DT)
+library(knitr)
+
+# load data and make variables cleaner
+care_homes =  import("data/deregistrations-after-2010.xlsx", sheet = "Deactivated Locations", range = "A7:X35421")   %>%
+  clean_names() %>%
+  select(location_id, location_region, location_local_authority, location_hsca_end_date, care_home, location_postal_code, beds =  care_homes_beds_at_point_location_de_activated) %>%
+  filter(care_home  == "Y") %>%
+  mutate_at(vars(ends_with("_date")),funs(as.Date))
+
+datatable(head(care_homes,1000), rownames = FALSE,
+          options = list(pageLength = 5))
+
+
+```
+
+## Create relevant variables for visualisation
+
+My aim is to visualise the intensity of the closures. 
+
